@@ -14,6 +14,7 @@ struct ContentView: View {
                 if isTextShowing {
                     Text("Hello, world!")
                         .padding()
+                        .font(.title)
                 } else {
                     /*@START_MENU_TOKEN@*/EmptyView()/*@END_MENU_TOKEN@*/
                         .padding()
