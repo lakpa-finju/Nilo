@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var total = "100" //@State allows the value to be changed by textField UI
-    @State var tipPercent = 15.0
+    /*@State var selectedOption = 0
+    let options = ["Hillel", "Market Place","Third Year", "Cafe 77", "Tea House", "Breaf stop"]
+    */
     var body: some View {
             VStack {
                 HStack {
@@ -17,24 +18,21 @@ struct ContentView: View {
                         .imageScale(.large)
                     .foregroundColor(.accentColor)
                     .font(.title)
-                    Text("Tip Calculator")
+                    Text("Flex Give Away")
                         .font(.largeTitle)
                         .fontWeight(.bold)
-                }
-                HStack {
-                    Text("$")
-                    TextField("Amount", text: $total)
+                        .multilineTextAlignment(.trailing)
                 }
                 HStack{
-                    Slider(value: $tipPercent, in: 1...30, step: 1.0)
-                    Text("\(Int(tipPercent))")
-                    Text("%")
+                    /*Text("Select an Option: ")
+                    Picker(selection: $selectedOption, label: Text(options[selectedOption])){
+                        ForEach(0..<options.count){ index in
+                            Text(self.options[index]).tag(index)
+                            
+                        }
+                    }.pickerStyle(MenuPickerStyle())*/
                 }
-                if let totalNumber = Double(total){
-                    Text("Tip Amount: $\(totalNumber * tipPercent/100, specifier: "%0.2f")")
-                } else {
-                    Text("Please enter a numberic value.")
-                }
+                
             }
         }
     }
