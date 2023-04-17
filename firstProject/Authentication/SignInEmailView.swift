@@ -6,16 +6,38 @@
 //
 
 import SwiftUI
+
+
+@MainActor
 final class SignInEmailViewModel: ObservableObject{
     @Published var email = ""
     @Published var password = ""
     
+    //calling the sing in fuction created in authenticationManager
+    func signIn(){
+        //Checking for empty email and password need to do more validation
+        guard !email.isEmpty, !password.isEmpty else {
+            print("No email or password found.")
+            return
+        }
+        Task{
+            do {
+                let returnedUserData = try await AuthenticationManager.shared.createUser(email: email, password: password)
+                print("Success")
+                print(returnedUserData)
+            }catch{
+                print("\(error)")
+            }
+        }
+        
+        
+    }
     
 }
 
 
 struct SignInEmailView: View {
-    @State private var viewModel = SignInEmailViewModel()
+    @StateObject private var viewModel = SignInEmailViewModel()
     var body: some View {
         VStack{
             //THis is Email field
@@ -31,7 +53,7 @@ struct SignInEmailView: View {
                 .cornerRadius(10)
             
             Button{
-                
+                viewModel.signIn()
             }label: {
                 Text("Sing In")
                     .font(.headline)
