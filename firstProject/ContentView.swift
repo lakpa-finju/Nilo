@@ -8,19 +8,32 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var isTextShowing = true
+    @State var total = "100" //@State allows the value to be changed by textField UI
+    @State var tipPercent = 15.0
     var body: some View {
             VStack {
-                if isTextShowing {
-                    Text("Hello, world! XCode12 Branch ")
-                        .padding()
-                        .font(.title)
-                } else {
-                    /*@START_MENU_TOKEN@*/EmptyView()/*@END_MENU_TOKEN@*/
-                        .padding()
+                HStack {
+                    Image(systemName: "dollarsign.circle.fill")
+                        .imageScale(.large)
+                    .foregroundColor(.accentColor)
+                    .font(.title)
+                    Text("Tip Calculator")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
                 }
-                Button(/*@START_MENU_TOKEN@*/"Button"/*@END_MENU_TOKEN@*/) {
-                    isTextShowing.toggle()
+                HStack {
+                    Text("$")
+                    TextField("Amount", text: $total)
+                }
+                HStack{
+                    Slider(value: $tipPercent, in: 1...30, step: 1.0)
+                    Text("\(Int(tipPercent))")
+                    Text("%")
+                }
+                if let totalNumber = Double(total){
+                    Text("Tip Amount: $\(totalNumber * tipPercent/100, specifier: "%0.2f")")
+                } else {
+                    Text("Please enter a numberic value.")
                 }
             }
         }
