@@ -11,17 +11,23 @@ import Firebase
 
 @main
 struct firstProjectApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    //@UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    init(){
+        FirebaseApp.configure()
+    }
     var body: some Scene {
-        WindowGroup {
-            NavigationStack{
-                RootView()
-            }
+      
+     WindowGroup {
+         ContentView()
+            /*NavigationStack{
+                //RootView()
+            }*/
         }
     }
     
     
 }
+/*
 class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
@@ -30,3 +36,4 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     return true
   }
 }
+*/
