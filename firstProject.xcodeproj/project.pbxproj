@@ -19,6 +19,7 @@
 		25E1B37A29EDA8D600CD9D69 /* SignInEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E1B37929EDA8D600CD9D69 /* SignInEmailView.swift */; };
 		25E1B37C29EDABC800CD9D69 /* AuthenticationManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E1B37B29EDABC800CD9D69 /* AuthenticationManage.swift */; };
 		25E1B37E29EDB49E00CD9D69 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E1B37D29EDB49E00CD9D69 /* RootView.swift */; };
+		25E1B38029EDB93B00CD9D69 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E1B37F29EDB93B00CD9D69 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		25E1B37929EDA8D600CD9D69 /* SignInEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEmailView.swift; sourceTree = "<group>"; };
 		25E1B37B29EDABC800CD9D69 /* AuthenticationManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManage.swift; sourceTree = "<group>"; };
 		25E1B37D29EDB49E00CD9D69 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		25E1B37F29EDB93B00CD9D69 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 				25E1B37D29EDB49E00CD9D69 /* RootView.swift */,
 				25E1B37729EDA71100CD9D69 /* AuthenticationView.swift */,
 				25E1B37929EDA8D600CD9D69 /* SignInEmailView.swift */,
+				25E1B37F29EDB93B00CD9D69 /* SettingsView.swift */,
 				25E1B37B29EDABC800CD9D69 /* AuthenticationManage.swift */,
 			);
 			path = Authentication;
@@ -183,6 +186,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25E1B38029EDB93B00CD9D69 /* SettingsView.swift in Sources */,
 				25E1B33929EC629300CD9D69 /* ContentView.swift in Sources */,
 				25E1B33729EC629300CD9D69 /* firstProjectApp.swift in Sources */,
 				25E1B37E29EDB49E00CD9D69 /* RootView.swift in Sources */,
