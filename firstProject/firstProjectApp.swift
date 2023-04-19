@@ -12,13 +12,14 @@ import Firebase
 @main
 struct firstProjectApp: App {
     //@UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @StateObject var dataManager = DataManager()
     init(){
         FirebaseApp.configure()
     }
     var body: some Scene {
       
      WindowGroup {
-         ContentView()
+         ListView().environmentObject(dataManager)
             /*NavigationStack{
                 //RootView()
             }*/

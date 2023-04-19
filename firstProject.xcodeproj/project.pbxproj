@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		2524F55629EEE7AD009D4BCF /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2524F55529EEE7AD009D4BCF /* FirebaseFirestore */; };
 		2524F55829EEEE6A009D4BCF /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2524F55729EEEE6A009D4BCF /* ListView.swift */; };
+		2524F55C29EEEEF1009D4BCF /* Dog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2524F55B29EEEEF1009D4BCF /* Dog.swift */; };
+		2524F55E29EEF152009D4BCF /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2524F55D29EEF152009D4BCF /* DataManager.swift */; };
+		2524F56029EEF8BB009D4BCF /* NewDogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2524F55F29EEF8BB009D4BCF /* NewDogView.swift */; };
 		25E1B33729EC629300CD9D69 /* firstProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E1B33629EC629300CD9D69 /* firstProjectApp.swift */; };
 		25E1B33929EC629300CD9D69 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E1B33829EC629300CD9D69 /* ContentView.swift */; };
 		25E1B33B29EC629600CD9D69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25E1B33A29EC629600CD9D69 /* Assets.xcassets */; };
@@ -21,6 +24,9 @@
 
 /* Begin PBXFileReference section */
 		2524F55729EEEE6A009D4BCF /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		2524F55B29EEEEF1009D4BCF /* Dog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dog.swift; sourceTree = "<group>"; };
+		2524F55D29EEF152009D4BCF /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		2524F55F29EEF8BB009D4BCF /* NewDogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDogView.swift; sourceTree = "<group>"; };
 		25E1B33329EC629300CD9D69 /* firstProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = firstProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25E1B33629EC629300CD9D69 /* firstProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = firstProjectApp.swift; sourceTree = "<group>"; };
 		25E1B33829EC629300CD9D69 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -68,6 +74,9 @@
 				25E1B33629EC629300CD9D69 /* firstProjectApp.swift */,
 				25E1B33829EC629300CD9D69 /* ContentView.swift */,
 				2524F55729EEEE6A009D4BCF /* ListView.swift */,
+				2524F55F29EEF8BB009D4BCF /* NewDogView.swift */,
+				2524F55B29EEEEF1009D4BCF /* Dog.swift */,
+				2524F55D29EEF152009D4BCF /* DataManager.swift */,
 				25E1B33A29EC629600CD9D69 /* Assets.xcassets */,
 				25E1B33C29EC629600CD9D69 /* Preview Content */,
 			);
@@ -169,8 +178,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2524F56029EEF8BB009D4BCF /* NewDogView.swift in Sources */,
 				25E1B33929EC629300CD9D69 /* ContentView.swift in Sources */,
+				2524F55E29EEF152009D4BCF /* DataManager.swift in Sources */,
 				25E1B33729EC629300CD9D69 /* firstProjectApp.swift in Sources */,
+				2524F55C29EEEEF1009D4BCF /* Dog.swift in Sources */,
 				2524F55829EEEE6A009D4BCF /* ListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
