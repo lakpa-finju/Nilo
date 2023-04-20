@@ -10,6 +10,7 @@ import SwiftUI
 struct MarketplaceView: View {
     @EnvironmentObject var userManager: UserManager
     @State private var showPopup = false
+    
     var body: some View {
         VStack{
             Text("Marketplace").font(.system(.title))
@@ -18,27 +19,30 @@ struct MarketplaceView: View {
                     
                     HStack{
                         Text(user.name)
-                        Text("is eating at " + user.time)
+                        Text("is eating at " + user.time)// make this a button to show futher information. 
                         
                     }.font(.system(.body))
-                        .foregroundColor(.black)
-                        .toolbar{
-                            ToolbarItem(placement: .navigationBarTrailing, content: {
-                                Button {
-                                    showPopup.toggle()
-                                } label: {
-                                    Image(systemName: "plus")
-                                }
-
-                            })
-                        }
-                        .sheet(isPresented: $showPopup) {
-                            //new user view
-                            NewSwipeView()
-                        }
+                     
                 }
             }
-        }.offset(y:-40)
+        }
+        .offset(y:-40)
+        .toolbar{
+            ToolbarItem(placement: .navigationBarTrailing, content: {
+                Button {
+                    showPopup.toggle()
+                } label: {
+                    Image(systemName: "plus")
+                }
+
+            })
+        }
+        .sheet(isPresented: $showPopup) {
+            //new user view
+            NewSwipeView()
+            
+        }
+        
     }
 }
 

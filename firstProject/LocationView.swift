@@ -71,6 +71,7 @@ struct LocationView: View {
             
             
         }
+        .offset(y:-70)
         .navigationTitle("Locations")
         .toolbar{
             ToolbarItem(placement: .navigationBarTrailing, content: {

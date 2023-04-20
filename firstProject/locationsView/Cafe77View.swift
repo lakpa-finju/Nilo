@@ -9,6 +9,8 @@ import SwiftUI
 
 struct Cafe77View: View {
     @EnvironmentObject var userManager: UserManager
+    @State private var showPopup = false
+    
     var body: some View {
 
         VStack{
@@ -26,6 +28,20 @@ struct Cafe77View: View {
             }
         }
         .offset(y:-40)
+        .toolbar{
+            ToolbarItem(placement: .navigationBarTrailing, content: {
+                Button {
+                    showPopup.toggle()
+                } label: {
+                    Image(systemName: "plus")
+                }
+
+            })
+        }
+        .sheet(isPresented: $showPopup) {
+            //new user view
+            NewSwipeView()
+        }
     }
         
 

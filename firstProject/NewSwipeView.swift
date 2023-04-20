@@ -14,19 +14,23 @@ struct NewSwipeView: View {
     @State private var location = "Marketplace"
     @State private var time = ""
     @State private var message = ""
+    
     var locations = ["Marketplace", "Cafe 77", "Fireside", "Foodside", "Hillel", "Brief Stop"]
     
     var body: some View {
         VStack {
             textFieldsView
             Button {
-                //add dog
+                //add user
                 let user = User(id: "W&L", name: name, location: location, numberOfSwipe: numberOfSwipe, time: time, message: message)
                 userManager.addUser(user: user)
+                
+                
             } label: {
                 Text("Save")
                     .foregroundColor(.black)
             }
+            
         }
         
     }

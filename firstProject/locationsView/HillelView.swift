@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HillelView: View {
     @EnvironmentObject var userManager: UserManager
+    @State private var showPopup = false
     
     var body: some View {
         VStack{
@@ -27,6 +28,20 @@ struct HillelView: View {
 
         }
         .offset(y:-40)
+        .toolbar{
+            ToolbarItem(placement: .navigationBarTrailing, content: {
+                Button {
+                    showPopup.toggle()
+                } label: {
+                    Image(systemName: "plus")
+                }
+
+            })
+        }
+        .sheet(isPresented: $showPopup) {
+            //new user view
+            NewSwipeView()
+        }
     }
 }
 
