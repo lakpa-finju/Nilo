@@ -10,17 +10,22 @@ import SwiftUI
 struct FoodsideView: View {
     @EnvironmentObject var userManager: UserManager
     var body: some View {
-        List(userManager.users, id:\.id){user in
-            if user.location == "Foodside" {
-            
-                HStack{
-                    Text(user.name)
-                    Text("is eating at " + user.time)
-                    
-                }.font(.system(.body))
-                    .foregroundColor(.black)
+        VStack{
+            Text("Foodside").font(.system(.title))
+            List(userManager.users, id:\.id){user in
+                if user.location == "Foodside" {
+                
+                    HStack{
+                        Text(user.name)
+                        Text("is eating at " + user.time)
+                        
+                    }.font(.system(.body))
+                        .foregroundColor(.black)
+                }
             }
         }
+        .offset(y:-40)
+      
     }
 }
 

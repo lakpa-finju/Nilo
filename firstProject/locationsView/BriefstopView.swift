@@ -10,17 +10,21 @@ import SwiftUI
 struct BriefstopView: View {
     @EnvironmentObject var userManager: UserManager
     var body: some View {
-        List(userManager.users, id:\.id){user in
-            if user.location == "Brief Stop" {
-            
-                HStack{
-                    Text(user.name)
-                    Text("is eating at " + user.time)
-                    
-                }.font(.system(.body))
-                    .foregroundColor(.black)
+        VStack{
+            Text("Brief Stop").font(.system(.title))
+            List(userManager.users, id:\.id){user in
+                if user.location == "Brief Stop" {
+                
+                    HStack{
+                        Text(user.name)
+                        Text("is eating at " + user.time)
+                        
+                    }.font(.system(.body))
+                        .foregroundColor(.black)
+                }
             }
-        }
+        }.offset(y:-40)
+      
     }
 }
 

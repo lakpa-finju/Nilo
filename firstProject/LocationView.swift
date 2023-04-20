@@ -51,6 +51,7 @@ struct LocationView: View {
                         .foregroundColor(.blue)
                 }
         
+                //For Foodside
                 NavigationLink{
                     FoodsideView()
                 }label: {
@@ -59,6 +60,7 @@ struct LocationView: View {
                         .foregroundColor(.blue)
                 }
             
+                //For Brief Stop
                 NavigationLink{
                     BriefstopView()
                 }label: {
@@ -67,7 +69,6 @@ struct LocationView: View {
                         .foregroundColor(.blue)
                 }
             
-        
             
         }
         .navigationTitle("Locations")

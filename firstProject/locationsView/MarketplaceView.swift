@@ -9,19 +9,36 @@ import SwiftUI
 
 struct MarketplaceView: View {
     @EnvironmentObject var userManager: UserManager
-    
+    @State private var showPopup = false
     var body: some View {
-        List(userManager.users, id:\.id){user in
-            if user.location == "Marketplace" {
-                
-                HStack{
-                    Text(user.name)
-                    Text("is eating at " + user.time)
+        VStack{
+            Text("Marketplace").font(.system(.title))
+            List(userManager.users, id:\.id){user in
+                if user.location == "Marketplace" {
                     
-                }.font(.system(.body))
-                    .foregroundColor(.black)
+                    HStack{
+                        Text(user.name)
+                        Text("is eating at " + user.time)
+                        
+                    }.font(.system(.body))
+                        .foregroundColor(.black)
+                        .toolbar{
+                            ToolbarItem(placement: .navigationBarTrailing, content: {
+                                Button {
+                                    showPopup.toggle()
+                                } label: {
+                                    Image(systemName: "plus")
+                                }
+
+                            })
+                        }
+                        .sheet(isPresented: $showPopup) {
+                            //new user view
+                            NewSwipeView()
+                        }
+                }
             }
-        }
+        }.offset(y:-40)
     }
 }
 
