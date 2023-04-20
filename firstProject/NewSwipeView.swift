@@ -18,6 +18,7 @@ struct NewSwipeView: View {
     var locations = ["Marketplace", "Cafe 77", "Fireside", "Foodside", "Hillel", "Brief Stop"]
     
     var body: some View {
+        
         VStack {
             textFieldsView
             Button {
@@ -28,69 +29,158 @@ struct NewSwipeView: View {
                 
             } label: {
                 Text("Save")
-                    .foregroundColor(.black)
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.blue)
+                    .cornerRadius(15)
+                .padding(.horizontal)
+                
             }
             
         }
+        .padding()
+        .background(Color(UIColor.systemBackground))
         
     }
     
     
     //This is the entire body view with text fileds and picker
-    var textFieldsView: some View{
-            VStack (alignment:.leading, spacing: 1){
+    var textFieldsView: some View {
+        VStack(alignment: .leading, spacing: 20) {
+            
+            //For name
+            HStack {
+                Text("Name")
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundColor(.black)
+                    .frame(width: 80, alignment: .leading)
                 
-                //For name
-                HStack {
-                    Text("Name: ").font(.system(.body)).foregroundColor(.black)
-                    TextField("Enter your name here", text: $name)
-                        .foregroundColor(.black)
-                }
-                
-                
-                //for location
-                HStack {
-                    Text("Location:").font(.system(.body)).foregroundColor(.black)
-                    Picker("location", selection: $location) {
-                        ForEach(locations, id:\.self){
-                            Text($0)
-                        }
-                    }.foregroundColor(.black)
-                }
-                
-                
-                
-                // for number of swipe
-                HStack {
-                    Text("Number of swipe:").font(.system(.body)).foregroundColor(.black)
-                    Picker("numberOfSwipe", selection: $numberOfSwipe) {
-                        ForEach(1..<21){ number in
-                            Text("\(number)")
-                        }
-                    }.foregroundColor(.black)
-                }
-                
-                
-                
-                //for time
-                HStack{
-                    Text("Time: ").font(.system(.body)).foregroundColor(.black)
-                    TextField("when are you panning to eat", text: $time)
-                }
-                
-                
-                //for message
-                HStack{
-                    Text("Any message : ")
-                        .font(.system(.body))
-                        .foregroundColor(.black)
-                    TextField("anything else (Optional)", text: $message)
-                }
-                
+                TextField("Enter your name here", text: $name)
+                    .font(.system(size: 18))
+                    .foregroundColor(.white)
             }
-    
+            
+            //for location
+            HStack {
+                Text("Location")
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundColor(.black)
+                    .frame(width: 80, alignment: .leading)
+                
+                Picker("Location", selection: $location) {
+                    ForEach(locations, id:\.self) {
+                        Text($0)
+                    }
+                }
+                .font(.system(size: 18))
+                .foregroundColor(.black)
+            }
+            
+            //for swipes
+            HStack {
+                Text("Number of swipes")
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundColor(.black)
+                    .frame(width: 80, alignment: .leading)
+                
+                Picker("Number of swipes", selection: $numberOfSwipe) {
+                    ForEach(1..<21) { number in
+                        Text("\(number)")
+                    }
+                }
+                .font(.system(size: 18))
+                .foregroundColor(.white)
+            }
+            
+            //for time
+            HStack {
+                Text("Time")
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundColor(.black)
+                    .frame(width: 80, alignment: .leading)
+                
+                TextField("When are you planning to eat", text: $time)
+                    .font(.system(size: 18))
+                    .foregroundColor(.white)
+            }
+            
+            
+            //for message
+            HStack {
+                Text("Message")
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundColor(.black)
+                    .frame(width: 80, alignment: .leading)
+                
+                TextField("Anything else (Optional)", text: $message)
+                    .font(.system(size: 18))
+                    .foregroundColor(.white)
+            }
         }
-
+        .padding()
+        .background(Color("FormBackground"))
+        .cornerRadius(10)
+        .shadow(color: Color("FormShadow"), radius: 10, x: 0, y: 0)
+    }
+    /*
+    var textFieldsView: some View{
+        VStack(alignment: .leading, spacing: 20) {
+            HStack {
+                Text("Name: ")
+                    .font(.system(size: 18, weight: .medium))
+                
+                TextField("Enter your name here", text: $name)
+                    .font(.system(size: 18))
+            }
+            
+            HStack {
+                Text("Location:")
+                    .font(.system(size: 18, weight: .medium))
+                
+                Picker("Location", selection: $location) {
+                    ForEach(locations, id:\.self) {
+                        Text($0)
+                    }
+                }
+                .font(.system(size: 18))
+            }
+            
+            HStack {
+                Text("Number of swipes:")
+                    .font(.system(size: 18, weight: .medium))
+                
+                Picker("Number of swipes", selection: $numberOfSwipe) {
+                    ForEach(1..<21) { number in
+                        Text("\(number)")
+                    }
+                }
+                .font(.system(size: 18))
+            }
+            
+            HStack {
+                Text("Time: ")
+                    .font(.system(size: 18, weight: .medium))
+                
+                TextField("When are you planning to eat", text: $time)
+                    .font(.system(size: 18))
+            }
+            
+            HStack {
+                Text("Any message:")
+                    .font(.system(size: 18, weight: .medium))
+                
+                TextField("Anything else (Optional)", text: $message)
+                    .font(.system(size: 18))
+            }
+        }
+        .padding()
+        .background(Color.white)
+        .cornerRadius(10)
+        .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 0)
+    }*/
+    
 }
 
 struct NewSwipeView_Previews: PreviewProvider {

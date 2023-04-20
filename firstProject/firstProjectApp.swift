@@ -13,6 +13,7 @@ import Firebase
 struct firstProjectApp: App {
     //@UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject var dataManager = DataManager()
+    @StateObject var userManager = UserManager()
     
     
     init(){
@@ -24,7 +25,7 @@ struct firstProjectApp: App {
         
         WindowGroup {
             //RootView()
-            LoginView()
+            LoginView().environmentObject(userManager)
             //ContentView()
             //ListView().environmentObject(dataManager)
             
