@@ -30,18 +30,16 @@ struct Cafe77View: View {
         .offset(y:-40)
         .toolbar{
             ToolbarItem(placement: .navigationBarTrailing, content: {
-                Button {
-                    showPopup.toggle()
-                } label: {
+                NavigationLink{
+                    NewSwipeView()
+                }label: {
+                    Text("Offer Swipe(s)")
                     Image(systemName: "plus")
                 }
 
             })
         }
-        .sheet(isPresented: $showPopup) {
-            //new user view
-            NewSwipeView()
-        }
+        
     }
         
 

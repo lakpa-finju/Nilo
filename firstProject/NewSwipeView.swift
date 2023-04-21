@@ -14,6 +14,7 @@ struct NewSwipeView: View {
     @State private var location = "Marketplace"
     @State private var time = ""
     @State private var message = ""
+    @State private var isSaved = false
     
     var locations = ["Marketplace", "Cafe 77", "Fireside", "Foodside", "Hillel", "Brief Stop"]
     
@@ -26,6 +27,14 @@ struct NewSwipeView: View {
                 let user = User(id: "W&L", name: name, location: location, numberOfSwipe: numberOfSwipe, time: time, message: message)
                 userManager.addUser(user: user)
                 
+                //Reset state variables
+                name = ""
+                numberOfSwipe = 0
+                location = "Marketplace"
+                time = ""
+                message = ""
+                
+                isSaved.toggle() //alters the boolean variable value
                 
             } label: {
                 Text("Save")
@@ -34,14 +43,28 @@ struct NewSwipeView: View {
                     .padding()
                     .frame(maxWidth: .infinity)
                     .background(Color.blue)
-                    .cornerRadius(15)
-                .padding(.horizontal)
+                    .cornerRadius(50)
+                    .padding(.horizontal)
                 
             }
-            
+            .padding()
+            .disabled(name.isEmpty && time.isEmpty)
+            /* look into solving this but not a huge issue
+            //Done link to go back to the locationView
+            NavigationLink{ LocationView()}label: {
+                Text("Done")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.blue)
+                    .cornerRadius(100)
+                    .padding(.horizontal)
+            }*/
         }
         .padding()
         .background(Color(UIColor.systemBackground))
+        
         
     }
     
@@ -59,7 +82,7 @@ struct NewSwipeView: View {
                 
                 TextField("Enter your name here", text: $name)
                     .font(.system(size: 18))
-                    .foregroundColor(.white)
+                    .foregroundColor(.black)
             }
             
             //for location
@@ -103,7 +126,7 @@ struct NewSwipeView: View {
                 
                 TextField("When are you planning to eat", text: $time)
                     .font(.system(size: 18))
-                    .foregroundColor(.white)
+                    .foregroundColor(.black)
             }
             
             
@@ -116,75 +139,19 @@ struct NewSwipeView: View {
                 
                 TextField("Anything else (Optional)", text: $message)
                     .font(.system(size: 18))
-                    .foregroundColor(.white)
+                    .foregroundColor(.black)
             }
         }
         .padding()
-        .background(Color("FormBackground"))
+        .background(Color(.white))
         .cornerRadius(10)
-        .shadow(color: Color("FormShadow"), radius: 10, x: 0, y: 0)
+        
     }
-    /*
-    var textFieldsView: some View{
-        VStack(alignment: .leading, spacing: 20) {
-            HStack {
-                Text("Name: ")
-                    .font(.system(size: 18, weight: .medium))
-                
-                TextField("Enter your name here", text: $name)
-                    .font(.system(size: 18))
-            }
-            
-            HStack {
-                Text("Location:")
-                    .font(.system(size: 18, weight: .medium))
-                
-                Picker("Location", selection: $location) {
-                    ForEach(locations, id:\.self) {
-                        Text($0)
-                    }
-                }
-                .font(.system(size: 18))
-            }
-            
-            HStack {
-                Text("Number of swipes:")
-                    .font(.system(size: 18, weight: .medium))
-                
-                Picker("Number of swipes", selection: $numberOfSwipe) {
-                    ForEach(1..<21) { number in
-                        Text("\(number)")
-                    }
-                }
-                .font(.system(size: 18))
-            }
-            
-            HStack {
-                Text("Time: ")
-                    .font(.system(size: 18, weight: .medium))
-                
-                TextField("When are you planning to eat", text: $time)
-                    .font(.system(size: 18))
-            }
-            
-            HStack {
-                Text("Any message:")
-                    .font(.system(size: 18, weight: .medium))
-                
-                TextField("Anything else (Optional)", text: $message)
-                    .font(.system(size: 18))
-            }
-        }
-        .padding()
-        .background(Color.white)
-        .cornerRadius(10)
-        .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 0)
-    }*/
     
 }
 
 struct NewSwipeView_Previews: PreviewProvider {
     static var previews: some View {
-        NewSwipeView()
+        NewSwipeView().environmentObject(UserManager())
     }
 }
