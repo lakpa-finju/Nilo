@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Firebase
+import FirebaseAuth
 //importing foundation for time
 //import Foundation
 
@@ -16,6 +17,7 @@ class UserManager: ObservableObject {
     init() {
         fetchUsers()
     }
+
     
     //function to get user from the database
     func fetchUsers(){
@@ -31,14 +33,16 @@ class UserManager: ObservableObject {
             if let snapshot = snapshot {
                 for document in snapshot.documents{
                     let data = document.data()
-                    let id = document.documentID
+                    let id = data["Id"] as? String ?? ""
                     let name = data["Name"] as? String ?? ""
                     let location = data["Location"] as? String ?? ""
-                    let numberOfSwipe = data["Number of swipe"] as? Int ?? 0
-                    let time = data["Time"]
-                    let message = data["Message"]
+                    let numberOfSwipe = data["Number of swipes"] as? Int ?? 0
+                    let time = data["Time"] as? String ?? ""
+                    let message = data["Message"] as? String ?? ""
+                    let phoneNo = data["PhoneNo"] as? String ?? ""
+                    let dateCreated = data["Date created"] as? Date ?? Date()
                     
-                    let user = User(id: id, name: name, location: location, numberOfSwipe: numberOfSwipe, time: time as! String, message: message as! String)
+                    let user = User(id: id, name: name, location: location, numberOfSwipes: numberOfSwipe, time: time , message: message , phoneNo: phoneNo , dateCreated: dateCreated )
                     self.users.append(user)
                 }
             }
@@ -47,16 +51,9 @@ class UserManager: ObservableObject {
     
     //function to get add user to the database
     func addUser(user: User){
-        //creating a short date fromatter i.e 12/10/21 5:00 pm
-        /*let date = Date()
-        let df = DateFormatter()
-        df.dateStyle = DateFormatter.Style.medium
-        df.timeStyle = DateFormatter.Style.short
-         let time = df.string(from: date) //this is not tested
-        */
         let db = Firestore.firestore()
         let ref = db.collection("Users").document(user.name)
-        ref.setData(["Name": user.name, "Location":user.location, "Number of swipe":user.numberOfSwipe, "Time": user.time, "Message": user.message]){
+        ref.setData(["Id":user.id,"Name": user.name, "Location":user.location, "Number of swipes":user.numberOfSwipes, "Time": user.time, "Message": user.message, "PhoneNo": user.phoneNo, "Date created": user.dateCreated]){
             error in
             if let error = error{
                 print(error.localizedDescription)
@@ -65,5 +62,53 @@ class UserManager: ObservableObject {
         
     }
     
+    // get the loggedin user name
+    func getUserName() -> String{
+        var name: String = "No Name"
+        //getting the loggedin User
+        let user = Auth.auth().currentUser
+        if let user = user {
+            for info in user.multiFactor.enrolledFactors{
+                name = info.displayName ?? "[DisplayName]"
+            }
+            
+        }
+        return name
+    }
+    
+    // get the loggedin user email
+    func getUserEmail() -> String{
+        var email: String = ""
+        //getting the loggedin User
+        let user = Auth.auth().currentUser
+        if let user = user {
+            email = user.email ?? "No Email"
+        }
+        return email
+    }
+    
+    // get the loggedin user id
+    func getUserId() -> String{
+        var userId: String = ""
+        //getting the loggedin User
+        let user = Auth.auth().currentUser
+        if let user = user {
+            userId = user.uid 
+        }
+        return userId
+    }
+    
+    //get time for record added.
+    func getTime() -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM d, yyyy 'at' h:mm:ss a zzz"
+        let stringTime = dateFormatter.string(from: Date()) // Example output: "April 21, 2023 at 1:47:30 PM UTC-04:00"
+        guard let time = dateFormatter.date(from: stringTime) else { return Date() }
+        return time
+        
+    }
+    
+     
+   
     
 }

@@ -11,6 +11,7 @@ struct SignupView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var userIsLoggedIn = false
+    @State private var name = ""
     @StateObject private var userManager = UserManager()
     
     var body: some View {
@@ -37,6 +38,23 @@ struct SignupView: View {
                     .foregroundColor(.black)
                     .font(.system(size: 40, weight: .bold,design: .rounded))
                     .offset(x:-100,y: -100)
+                
+                //Name palceholder
+                TextField("Name",text: $name)
+                    .foregroundColor(.black)
+                    .textFieldStyle(.plain)
+                    .placeholder(when: name.isEmpty){
+                        Text("Name")
+                            .foregroundColor(.black)
+                            .bold()
+                    }
+                
+                //This is for line below Name
+                Rectangle()
+                    .frame(width: 350,height: 1)
+                    .foregroundColor(.black)
+                
+                //Email placeholder
                 TextField("Email",text: $email)
                     .foregroundColor(.black)
                     .textFieldStyle(.plain)
@@ -65,7 +83,7 @@ struct SignupView: View {
                 
                 //Creating Button for Sign up
                 Button{
-                    //sign in
+                    //sign up
                     register()
                 } label: {
                     Text("Sign Up")
@@ -79,13 +97,14 @@ struct SignupView: View {
                 }
                 .padding(.top)
                 .offset(y:100)
+                .disabled(name.isEmpty || email.isEmpty || password.isEmpty)
                 
             }
             .frame(width: 350)
             .onAppear{
                 Auth.auth().addStateDidChangeListener { auth, user in
                     if user != nil {
-                        userIsLoggedIn.toggle()
+                        //userIsLoggedIn.toggle()
                     }
                 }
             }
@@ -95,12 +114,32 @@ struct SignupView: View {
     
     //sign up function
     func register(){
+        /*
+        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+            guard let user = authResult?.user, error == nil else {
+                print("Error creating user: \(error!.localizedDescription)")
+                return
+            }
+            let changeRequest = user.createProfileChangeRequest()
+            changeRequest.displayName = name // user's name entered during sign up
+            changeRequest.commitChanges { error in
+                if let error = error {
+                    print("Error setting user's display name: \(error.localizedDescription)")
+                } else {
+                    print("User's display name set successfully")
+                }
+            }
+        }
+        userIsLoggedIn.toggle()
+
+        */
         Auth.auth().createUser(withEmail: email, password: password){ result, error in
             if error != nil {
                 print(error!.localizedDescription)//force unwrapping cos we checked if it is nill
             }
             userIsLoggedIn.toggle()
         }
+        
     }
 
 

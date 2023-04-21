@@ -10,11 +10,13 @@ import SwiftUI
 struct NewSwipeView: View {
     @EnvironmentObject var userManager: UserManager
     @State private var name = ""
-    @State private var numberOfSwipe = 0
+    @State private var numberOfSwipes = 1
     @State private var location = "Marketplace"
     @State private var time = ""
     @State private var message = ""
+    @State private var phoneNo = ""
     @State private var isSaved = false
+    
     
     var locations = ["Marketplace", "Cafe 77", "Fireside", "Foodside", "Hillel", "Brief Stop"]
     
@@ -30,16 +32,18 @@ struct NewSwipeView: View {
             
             Button {
                 //add user
-                let user = User(id: "W&L", name: name, location: location, numberOfSwipe: numberOfSwipe, time: time, message: message)
+                let user = User(id: userManager.getUserId(), name: name, location: location, numberOfSwipes: numberOfSwipes, time: time, message: message, phoneNo: phoneNo, dateCreated: userManager.getTime())
+                
+                //adding user to the database
                 userManager.addUser(user: user)
                 
                 //Reset state variables
-                name = ""
-                numberOfSwipe = 0
+                //name = ""
+                numberOfSwipes = 1
                 location = "Marketplace"
                 time = ""
                 message = ""
-                
+                phoneNo = ""
                 isSaved.toggle() //alters the boolean variable value
                 
             } label: {
@@ -54,7 +58,7 @@ struct NewSwipeView: View {
                 
             }
             .padding()
-            .disabled(name.isEmpty && time.isEmpty)
+            .disabled(time.isEmpty)
         }
         .padding()
         .background(Color(UIColor.systemBackground))
@@ -102,8 +106,8 @@ struct NewSwipeView: View {
                     .foregroundColor(.black)
                     .frame(width: 80, alignment: .leading)
                 
-                Picker("Number of swipes", selection: $numberOfSwipe) {
-                    ForEach(1..<21) { number in
+                Picker("Number of swipes", selection: $numberOfSwipes) {
+                    ForEach(0..<21) { number in
                         Text("\(number)")
                     }
                 }
@@ -132,6 +136,18 @@ struct NewSwipeView: View {
                     .frame(width: 80, alignment: .leading)
                 
                 TextField("Anything else (Optional)", text: $message)
+                    .font(.system(size: 18))
+                    .foregroundColor(.black)
+            }
+            
+            //for Phone Number
+            HStack {
+                Text("Phone no")
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundColor(.black)
+                    .frame(width: 80, alignment: .leading)
+                
+                TextField("Contact Number (Optional)", text: $phoneNo)
                     .font(.system(size: 18))
                     .foregroundColor(.black)
             }

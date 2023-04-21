@@ -11,8 +11,10 @@ struct User: Identifiable{
     var id: String
     var name: String
     var location: String
-    var numberOfSwipe: Int
+    var numberOfSwipes: Int
     var time: String
     var message: String
+    var phoneNo: String
+    var dateCreated: Date
     
 }

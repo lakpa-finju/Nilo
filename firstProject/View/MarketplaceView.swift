@@ -21,11 +21,16 @@ struct MarketplaceView: View {
                     HStack{
                         Text(user.name)
                         Text("is eating at " + user.time)// make this a button to show futher information.
+                        Text("Swipes: \(user.numberOfSwipes)")
+                        
+                        
                         
                     }.font(.system(.body))
                     
+                    
                 }
             }
+            
         }
         .offset(y:-10)
         .toolbar{
@@ -39,7 +44,6 @@ struct MarketplaceView: View {
                 
             })
         }
-        
     
     }
 }

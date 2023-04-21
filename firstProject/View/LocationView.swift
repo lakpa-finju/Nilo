@@ -34,9 +34,6 @@ struct LocationView: View {
                             .padding()
                             .background(Color.blue)
                             .cornerRadius(10)
-                        
-                        
-                        
                     }
                     
                     //for Cafe 77

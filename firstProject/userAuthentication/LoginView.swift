@@ -86,6 +86,7 @@ struct LoginView: View {
                 }
                 .padding(.top)
                 .offset(y:100)
+                .disabled(email.isEmpty || password.isEmpty)
                 
                 //create a navigation link to go to singupView
                 NavigationLink{
@@ -104,7 +105,7 @@ struct LoginView: View {
             .onAppear{
                 Auth.auth().addStateDidChangeListener { auth, user in
                     if user != nil {
-                       userIsLoggedIn.toggle()
+                       //userIsLoggedIn.toggle()
                     }
                 }
             }
