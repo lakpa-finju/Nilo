@@ -21,7 +21,13 @@ struct NewSwipeView: View {
     var body: some View {
         
         VStack {
+            Text("Offer Swipe")
+                .font(.system(.title))
+                .bold()
+                .offset(y:-20)
+
             textFieldsView
+            
             Button {
                 //add user
                 let user = User(id: "W&L", name: name, location: location, numberOfSwipe: numberOfSwipe, time: time, message: message)
@@ -49,18 +55,6 @@ struct NewSwipeView: View {
             }
             .padding()
             .disabled(name.isEmpty && time.isEmpty)
-            /* look into solving this but not a huge issue
-            //Done link to go back to the locationView
-            NavigationLink{ LocationView()}label: {
-                Text("Done")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.blue)
-                    .cornerRadius(100)
-                    .padding(.horizontal)
-            }*/
         }
         .padding()
         .background(Color(UIColor.systemBackground))
