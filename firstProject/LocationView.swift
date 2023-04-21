@@ -18,10 +18,10 @@ struct LocationView: View {
                 //this is for background
                 Color.white
                 RoundedRectangle(cornerRadius: 30,style: .continuous)
-                    .foregroundStyle(.linearGradient(colors: [.white,.blue], startPoint: .topLeading, endPoint: .bottomTrailing))
-                    .frame(width: 1000, height: 400)
+                    .foregroundStyle(.linearGradient(colors: [.blue,.green], startPoint: .topLeading, endPoint: .bottomTrailing))
+                    .frame(width: 1000, height: 800)
                     .rotationEffect(.degrees(135))
-                    .offset(y:-35)
+                    .offset(x:70,y:-400)
                 
                 VStack(alignment: .center, spacing: 10){
                     //for Marketplace
@@ -29,10 +29,14 @@ struct LocationView: View {
                         MarketplaceView()
                     }label: {
                         Text("Marketplace")
-                            .bold()
-                            .foregroundColor(.black)
-                            .font(.title)
-                            
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.blue)
+                            .cornerRadius(10)
+                        
+                        
+                        
                     }
                     
                     //for Cafe 77
@@ -40,19 +44,12 @@ struct LocationView: View {
                         Cafe77View()
                     }label: {
                         Text("Cafe 77")
-                            .font(.system(size: 24, weight: .bold))
+                            .font(.headline)
                             .foregroundColor(.white)
-                            .padding(.vertical, 12)
-                            .frame(maxWidth: .infinity)
-                            .background(
-                                LinearGradient(
-                                    gradient: Gradient(colors: [Color.blue.opacity(0.8), Color.blue]),
-                                    startPoint: .leading,
-                                    endPoint: .trailing
-                                )
-                            )
-                            .cornerRadius(25)
-                            .padding(.horizontal, 24)
+                            .padding()
+                            .background(Color.blue)
+                            .cornerRadius(10)
+                        
                     }
                     
                     //for Hillel
@@ -60,19 +57,11 @@ struct LocationView: View {
                         HillelView()
                     }label: {
                         Text("Hillel")
-                            .font(.system(size: 24, weight: .bold))
+                            .font(.headline)
                             .foregroundColor(.white)
-                            .padding(.vertical, 12)
-                            .frame(maxWidth: .infinity)
-                            .background(
-                                LinearGradient(
-                                    gradient: Gradient(colors: [Color.blue.opacity(0.8), Color.blue]),
-                                    startPoint: .leading,
-                                    endPoint: .trailing
-                                )
-                            )
-                            .cornerRadius(25)
-                            .padding(.horizontal, 24)
+                            .padding()
+                            .background(Color.blue)
+                            .cornerRadius(10)
                     }
                     
                     //for Fireside
@@ -80,19 +69,11 @@ struct LocationView: View {
                         FiresideView()
                     }label: {
                         Text("Fireside")
-                            .font(.system(size: 24, weight: .bold))
+                            .font(.headline)
                             .foregroundColor(.white)
-                            .padding(.vertical, 12)
-                            .frame(maxWidth: .infinity)
-                            .background(
-                                LinearGradient(
-                                    gradient: Gradient(colors: [Color.blue.opacity(0.8), Color.blue]),
-                                    startPoint: .leading,
-                                    endPoint: .trailing
-                                )
-                            )
-                            .cornerRadius(25)
-                            .padding(.horizontal, 24)
+                            .padding()
+                            .background(Color.blue)
+                            .cornerRadius(10)
                     }
                     
                     //For Foodside
@@ -100,19 +81,11 @@ struct LocationView: View {
                         FoodsideView()
                     }label: {
                         Text("Foodside")
-                            .font(.system(size: 24, weight: .bold))
+                            .font(.headline)
                             .foregroundColor(.white)
-                            .padding(.vertical, 12)
-                            .frame(maxWidth: .infinity)
-                            .background(
-                                LinearGradient(
-                                    gradient: Gradient(colors: [Color.blue.opacity(0.8), Color.blue]),
-                                    startPoint: .leading,
-                                    endPoint: .trailing
-                                )
-                            )
-                            .cornerRadius(25)
-                            .padding(.horizontal, 24)
+                            .padding()
+                            .background(Color.blue)
+                            .cornerRadius(10)
                     }
                     
                     //For Brief Stop
@@ -120,21 +93,22 @@ struct LocationView: View {
                         BriefstopView()
                     }label: {
                         Text("Brief Stop")
-                            .font(.system(size: 24, weight: .bold))
+                            .font(.headline)
                             .foregroundColor(.white)
-                            .padding(.vertical, 12)
-                            .frame(maxWidth: .infinity)
-                            .background(
-                                LinearGradient(
-                                    gradient: Gradient(colors: [Color.blue.opacity(0.8), Color.blue]),
-                                    startPoint: .leading,
-                                    endPoint: .trailing
-                                )
-                            )
-                            .cornerRadius(25)
-                            .padding(.horizontal, 24)
+                            .padding()
+                            .background(Color.blue)
+                            .cornerRadius(10)
                     }
                     
+                    //Foot note
+                    HStack {
+                        Spacer()
+                        Text("© 2023 - Created by Lakpa F. Sherpa")
+                            .font(.footnote)
+                            .foregroundColor(.black)
+                            .offset(y:220)
+                        Spacer()
+                    }
                     
                 }
                 .offset(y:-70)
@@ -151,10 +125,12 @@ struct LocationView: View {
                         
                     })
                 }
+                
             }
-         
+            
             
         }
+        .accentColor(Color(.label))
     }
     
 }
