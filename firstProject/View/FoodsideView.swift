@@ -19,7 +19,7 @@ struct FoodsideView: View {
             
             GeometryReader { geometry in
                 ScrollView(.vertical, showsIndicators: true) {
-                    VStack(spacing: 20) {
+                    VStack(spacing: 10) {
                         ForEach(eventManager.events) { event in
                             if (event.location == "Foodside" && event.numberOfSwipes > 0){
                                 VStack(spacing: 10) {
@@ -40,9 +40,9 @@ struct FoodsideView: View {
                                             .cornerRadius(10)
                                     })                                }
                                 HStack {
-                                    Text("Available Seats: \(event.numberOfSwipes)")
+                                    Text("Available swipe(s): \(event.numberOfSwipes)")
                                     Spacer()
-                                    Text("Reserved Seats: \(event.reserved)")
+                                    Text("Reserved : \(event.reserved)")
                                 }
                             }
                                 .frame(maxWidth: .infinity)
