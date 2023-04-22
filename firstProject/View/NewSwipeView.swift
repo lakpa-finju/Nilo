@@ -70,7 +70,7 @@ struct NewSwipeView: View {
     //This is the entire body view with text fileds and picker
     var textFieldsView: some View {
         VStack(alignment: .leading, spacing: 20) {
-            
+            /*
             //For name
             HStack {
                 Text("Name")
@@ -82,7 +82,7 @@ struct NewSwipeView: View {
                     .font(.system(size: 18))
                     .foregroundColor(.black)
             }
-            
+            */
             //for location
             HStack {
                 Text("Location")
