@@ -44,7 +44,7 @@ struct MarketplaceView: View {
                                 HStack {
                                     Text("Available swipe(s): \(event.numberOfSwipes)")
                                     Spacer()
-                                    Text("Reserved : \(event.reserved)")
+                                    Text("Reserved: \(event.reserved)")
                                 }
                             }
                                 .frame(maxWidth: .infinity)
