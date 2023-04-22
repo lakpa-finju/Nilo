@@ -13,13 +13,11 @@ import FirebaseAuth
 
 class EventManager: ObservableObject {
     @Published var events:[Event] = []
-    @State private var reservations:Int = 0
-    @State private var numberOfSwipes:Int = 0
     
     init() {
         let db = Firestore.firestore()
-        let ref = db.collection("Events").addSnapshotListener { snapshot, error in
-            guard let document = snapshot?.documents else{
+        _ = db.collection("Events").addSnapshotListener { snapshot, error in
+            guard (snapshot?.documents) != nil else{
                 print("Error fetching the document \(error?.localizedDescription ?? "from database")")
                 return
             }

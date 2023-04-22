@@ -16,7 +16,7 @@ struct FoodsideView: View {
         VStack{
             Text("Foodside").font(.system(.title))
             List(eventManager.events, id:\.id){event in
-                if event.location == "Foodside" {
+                if (event.location == "Foodside" && event.numberOfSwipes > 0){
                     VStack {
                         HStack {
                             Text("\(event.name) is eating at \(event.time)")

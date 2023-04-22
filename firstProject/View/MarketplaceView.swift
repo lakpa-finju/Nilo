@@ -17,7 +17,7 @@ struct MarketplaceView: View {
         VStack{
             Text("Marketplace").font(.system(.title))
             List(eventManager.events, id:\.id){event in
-                if event.location == "Marketplace" {
+                if (event.location == "Marketplace" && event.numberOfSwipes > 0) {
                     VStack {
                         HStack {
                             Text("\(event.name) is eating at \(event.time)")

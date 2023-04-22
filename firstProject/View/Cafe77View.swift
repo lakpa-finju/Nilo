@@ -17,7 +17,7 @@ struct Cafe77View: View {
         VStack{
             Text("Cafe 77").font(.system(.title))
             List(eventManager.events, id:\.id){event in
-                if event.location == "Cafe 77" {
+                if (event.location == "Cafe 77" && event.numberOfSwipes > 0){
                     VStack {
                         HStack {
                             Text("\(event.name) is eating at \(event.time)")

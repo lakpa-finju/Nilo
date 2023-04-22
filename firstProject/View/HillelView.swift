@@ -16,7 +16,7 @@ struct HillelView: View {
         VStack{
             Text("Hillel").font(.system(.title))
             List(eventManager.events, id:\.id){event in
-                if event.location == "Hillel" {
+                if (event.location == "Hillel" && event.numberOfSwipes > 0){
                     VStack {
                         HStack {
                             Text("\(event.name) is eating at \(event.time)")

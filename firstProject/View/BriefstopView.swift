@@ -16,7 +16,7 @@ struct BriefstopView: View {
         VStack{
             Text("Brief Stop").font(.system(.title))
             List(eventManager.events, id:\.id){event in
-                if event.location == "Brief Stop" {
+                if (event.location == "Brief Stop" && event.numberOfSwipes > 0) {
                     VStack {
                         HStack {
                             Text("\(event.name) is eating at \(event.time)")

@@ -16,7 +16,7 @@ struct FiresideView: View {
         VStack{
             Text("Fireside").font(.system(.title))
             List(eventManager.events, id:\.id){event in
-                if event.location == "Fireside" {
+                if (event.location == "Fireside" && event.numberOfSwipes>0){
                     VStack {
                         HStack {
                             Text("\(event.name) is eating at \(event.time)")
