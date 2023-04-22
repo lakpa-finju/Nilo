@@ -53,18 +53,19 @@ struct MarketplaceView: View {
                                 .cornerRadius(10)
                         }
                         }
-                        .toolbar{
-                            ToolbarItem(placement: .navigationBarTrailing, content: {
-                                NavigationLink{
-                                    NewSwipeView()
-                                }label: {
-                                    Text("Offer Swipe(s)")
-                                    Image(systemName: "plus")
-                                }
-                            })
-                        }
+                        
                     }
                     .padding()
+                    .toolbar{
+                        ToolbarItem(placement: .navigationBarTrailing, content: {
+                            NavigationLink{
+                                NewSwipeView()
+                            }label: {
+                                Text("Offer Swipe(s)")
+                                Image(systemName: "plus")
+                            }
+                        })
+                    }
                     
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)
