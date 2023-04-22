@@ -12,13 +12,15 @@ struct LoginView: View {
     @State private var password = ""
     @State private var userIsLoggedIn = false
     @StateObject private var dataManager = DataManager()
-    @StateObject private var eventManager = EventManager()
+    @EnvironmentObject private var eventManager : EventManager
+    @EnvironmentObject private var reservationsManager : ReservationsManager
     var body: some View {
         NavigationStack{
             //if user is logged in the send to locationView else login
             if userIsLoggedIn{
                 //ListView().environmentObject(dataManager)
                 LocationView().environmentObject(eventManager)
+                    .environmentObject(reservationsManager)
             } else{
                 //content
                 content
@@ -105,7 +107,7 @@ struct LoginView: View {
             .onAppear{
                 Auth.auth().addStateDidChangeListener { auth, user in
                     if user != nil {
-                      // userIsLoggedIn.toggle()
+                       //userIsLoggedIn.toggle()
                     }
                 }
             }

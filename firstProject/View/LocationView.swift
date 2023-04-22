@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LocationView: View {
     @EnvironmentObject var eventManager : EventManager
-    @StateObject var reservationManager = ReservationsManager()
+    @EnvironmentObject var reservationManager : ReservationsManager
     @State private var showPopup = false
     var locations = ["Marketplace", "Cafe 77", "Fireside", "Foodside", "Hillel", "Brief Stop"]
     
@@ -28,7 +28,9 @@ struct LocationView: View {
                     //for Marketplace
                     NavigationLink{
                         MarketplaceView()
+                            .environmentObject(eventManager)
                             .environmentObject(reservationManager)
+                            
                     }label: {
                         Text("Marketplace")
                             .font(.headline)

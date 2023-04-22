@@ -28,6 +28,7 @@ struct MarketplaceView: View {
                             Button(action: {
                                 reservationManager.reserveSpot(for: event)
                                     
+                                    
                                 //reserveSpot(for: event)
                             }, label: {
                                 Text("Reserve")

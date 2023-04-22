@@ -14,6 +14,7 @@ struct firstProjectApp: App {
     //@UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject var dataManager = DataManager()
     @StateObject var eventManager = EventManager()
+    @StateObject var reservationsManager = ReservationsManager()
     
 
     
@@ -29,7 +30,7 @@ struct firstProjectApp: App {
             //RootView()
             LoginView()
                 .environmentObject(eventManager)
-               // .environmentObject(reservationsManager)
+              .environmentObject(reservationsManager)
             //ContentView()
             //ListView().environmentObject(dataManager)
             

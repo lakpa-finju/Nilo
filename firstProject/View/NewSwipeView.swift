@@ -38,11 +38,11 @@ struct NewSwipeView: View {
                 eventManager.addevent(event: event)
                 
                 //Reset state variables
-                //name = ""
+                name = ""
                 numberOfSwipes = 1
                 location = "Marketplace"
                 time = ""
-                message = ""
+                message = "Thanks your post is published"
                 phoneNo = ""
                 isSaved.toggle() //alters the boolean variable value
                 
