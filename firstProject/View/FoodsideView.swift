@@ -9,6 +9,7 @@ import SwiftUI
 
 struct FoodsideView: View {
     @EnvironmentObject var eventManager: EventManager
+    @EnvironmentObject var reservationManager: ReservationsManager
     @State private var showPopup = false
     
     var body: some View {
@@ -16,13 +17,31 @@ struct FoodsideView: View {
             Text("Foodside").font(.system(.title))
             List(eventManager.events, id:\.id){event in
                 if event.location == "Foodside" {
-                
-                    HStack{
-                        Text(event.name)
-                        Text("is eating at " + event.time)
-                        
-                    }.font(.system(.body))
-                        .foregroundColor(.black)
+                    VStack {
+                        HStack {
+                            Text("\(event.name) is eating at \(event.time)")
+                                .font(.system(.body))
+                                .foregroundColor(Color.black)
+                                .bold()
+                            Spacer()
+                            Button(action: {
+                                reservationManager.reserveSpot(for: event)
+                                
+                            }, label: {
+                                Text("Reserve")
+                                    .foregroundColor(Color.white)
+                                    .padding(.all, 10)
+                                    .background(Color.blue)
+                                    .cornerRadius(10)
+                            })
+                        }
+                        HStack {
+                            Text("Available Seats: \(event.numberOfSwipes)")
+                            Spacer()
+                            Text("Reserved Seats: \(event.reserved)")
+                        }
+                    }
+
                 }
             }
         }
@@ -45,5 +64,6 @@ struct FoodsideView: View {
 struct FoodsideView_Previews: PreviewProvider {
     static var previews: some View {
         FoodsideView().environmentObject(EventManager())
+            .environmentObject(ReservationsManager())
     }
 }
