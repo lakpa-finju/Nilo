@@ -138,6 +138,7 @@ struct LocationView: View {
                     ToolbarItem(placement: .navigationBarLeading, content: {
                         NavigationLink{
                             UserProfileView()
+                                .environmentObject(EventManager())
                         }label: {
                             //Text("Your profile")
                             //Image(systemName: "plus")

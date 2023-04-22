@@ -7,19 +7,20 @@
 
 import SwiftUI
 struct UserProfileView: View {
+    @EnvironmentObject var eventManger: EventManager
     var body: some View {
         VStack(spacing: 20) {
             Image(systemName: "person.circle.fill")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 120, height: 120)
+                .frame(width: 100, height: 100)
                 .foregroundColor(.gray)
                 .padding()
                 .background(Color.white)
                 .clipShape(Circle())
-                .overlay(Circle().stroke(Color.gray, lineWidth: 2))
-            
-            Text("John Doe")
+                .overlay(Circle().stroke(Color.gray, lineWidth: 4))
+
+            Text(eventManger.getUserName())
                 .font(.title)
             
             NavigationLink(destination: ChangeEmailView()) {
@@ -64,6 +65,6 @@ struct ReservationsView: View {
 
 struct UserProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        UserProfileView()
+        UserProfileView().environmentObject(EventManager())
     }
 }
