@@ -107,7 +107,7 @@ struct LoginView: View {
             .onAppear{
                 Auth.auth().addStateDidChangeListener { auth, user in
                     if user != nil {
-                       //userIsLoggedIn.toggle()
+                       userIsLoggedIn.toggle()
                     }
                 }
             }

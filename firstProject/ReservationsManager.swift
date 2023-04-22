@@ -72,20 +72,12 @@ class ReservationsManager: ObservableObject{
         //add the reservation to the database
         self.addReservation(reservation: reservation)
         
+        //updated event 
         let updatedEvent = Event(id: event.id, name: event.name, location: event.location, numberOfSwipes: event.numberOfSwipes-1, time: event.time, message: event.message, phoneNo: event.message, dateCreated: event.dateCreated, reserved: event.reserved+1)
+        
         //update in the database
         let eventManager = EventManager()
         eventManager.updateEvent(event: updatedEvent)
-        /*
-        // Update the event in Firestore
-        Firestore.firestore().collection("Events").document(event.name).setData(["Id":event.id,"Name": event.name, "Location":event.location, "Number of swipes":event.numberOfSwipes - 1, "Time": event.time, "Message": event.message, "PhoneNo": event.phoneNo, "createdTime": event.dateCreated, "Reserved":event.reserved + 1]) { error in
-            if let error = error {
-                print("Error updating event: \(error.localizedDescription)")
-            } else {
-                print("Event updated successfully.")
-            }
-         
-        } */
     }
 }
 

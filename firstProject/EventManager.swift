@@ -13,9 +13,19 @@ import FirebaseAuth
 
 class EventManager: ObservableObject {
     @Published var events:[Event] = []
+    @State private var reservations:Int = 0
+    @State private var numberOfSwipes:Int = 0
     
     init() {
-        fetchEvents()
+        let db = Firestore.firestore()
+        let ref = db.collection("Events").addSnapshotListener { snapshot, error in
+            guard let document = snapshot?.documents else{
+                print("Error fetching the document \(error?.localizedDescription ?? "from database")")
+                return
+            }
+            self.fetchEvents()
+        }
+        
     }
 
     
@@ -41,7 +51,7 @@ class EventManager: ObservableObject {
                     let message = data["Message"] as? String ?? ""
                     let phoneNo = data["PhoneNo"] as? String ?? ""
                     let dateCreated = data["createdTime"] as? Date ?? Date()
-                    let reserved = data["reserved"] as? Int ?? 0
+                    let reserved = data["Reserved"] as? Int ?? 0
                     
                     let event = Event(id: id, name: name, location: location, numberOfSwipes: numberOfSwipes, time: time, message: message, phoneNo: phoneNo, dateCreated: dateCreated, reserved: reserved)
                     self.events.append(event)
@@ -75,6 +85,10 @@ class EventManager: ObservableObject {
                 print("Error updating event: \(error.localizedDescription)")
             } else {
                 print("Event updated successfully.")
+                // Update the UI after the update to the database is completed successfully
+                DispatchQueue.main.async {
+                    self.objectWillChange.send()
+                }
             }
         }
         

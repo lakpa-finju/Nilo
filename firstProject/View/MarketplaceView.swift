@@ -27,9 +27,7 @@ struct MarketplaceView: View {
                             Spacer()
                             Button(action: {
                                 reservationManager.reserveSpot(for: event)
-                                    
-                                    
-                                //reserveSpot(for: event)
+                                
                             }, label: {
                                 Text("Reserve")
                                     .foregroundColor(Color.white)
