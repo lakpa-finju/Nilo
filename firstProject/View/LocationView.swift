@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct LocationView: View {
-    @EnvironmentObject var userManager : UserManager
+    @EnvironmentObject var eventManager : EventManager
+    @EnvironmentObject var reservationsManager: ReservationsManager
     @State private var showPopup = false
     var locations = ["Marketplace", "Cafe 77", "Fireside", "Foodside", "Hillel", "Brief Stop"]
     
@@ -134,6 +135,7 @@ struct LocationView: View {
 
 struct LocationView_Previews: PreviewProvider {
     static var previews: some View {
-        LocationView().environmentObject(UserManager())
+        LocationView().environmentObject(EventManager())
+            .environmentObject(ReservationsManager())
     }
 }

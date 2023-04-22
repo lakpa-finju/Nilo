@@ -13,8 +13,8 @@
 		2524F55E29EEF152009D4BCF /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2524F55D29EEF152009D4BCF /* DataManager.swift */; };
 		2524F56029EEF8BB009D4BCF /* NewDogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2524F55F29EEF8BB009D4BCF /* NewDogView.swift */; };
 		2524F58B29F09340009D4BCF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2524F58A29F09340009D4BCF /* LoginView.swift */; };
-		2524F58E29F18C2F009D4BCF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2524F58D29F18C2F009D4BCF /* User.swift */; };
-		2524F59029F18D79009D4BCF /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2524F58F29F18D79009D4BCF /* UserManager.swift */; };
+		2524F58E29F18C2F009D4BCF /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2524F58D29F18C2F009D4BCF /* Event.swift */; };
+		2524F59029F18D79009D4BCF /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2524F58F29F18D79009D4BCF /* EventManager.swift */; };
 		2524F59229F196DC009D4BCF /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2524F59129F196DC009D4BCF /* LocationView.swift */; };
 		2524F59429F19D30009D4BCF /* NewSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2524F59329F19D30009D4BCF /* NewSwipeView.swift */; };
 		2524F59729F1C2BA009D4BCF /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2524F59629F1C2BA009D4BCF /* SignupView.swift */; };
@@ -25,7 +25,7 @@
 		2524F5A329F1DDEA009D4BCF /* FoodsideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2524F5A229F1DDEA009D4BCF /* FoodsideView.swift */; };
 		2524F5A529F1DE6E009D4BCF /* BriefstopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2524F5A429F1DE6E009D4BCF /* BriefstopView.swift */; };
 		2524F5A929F2E123009D4BCF /* Reservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2524F5A829F2E123009D4BCF /* Reservation.swift */; };
-		2524F5AB29F2E1DE009D4BCF /* ReservationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2524F5AA29F2E1DE009D4BCF /* ReservationManager.swift */; };
+		2524F5AB29F2E1DE009D4BCF /* ReservationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2524F5AA29F2E1DE009D4BCF /* ReservationsManager.swift */; };
 		2524F5AD29F2E4B1009D4BCF /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2524F5AC29F2E4B1009D4BCF /* UserProfileView.swift */; };
 		25E1B33729EC629300CD9D69 /* firstProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E1B33629EC629300CD9D69 /* firstProjectApp.swift */; };
 		25E1B33929EC629300CD9D69 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E1B33829EC629300CD9D69 /* ContentView.swift */; };
@@ -43,8 +43,8 @@
 		2524F55D29EEF152009D4BCF /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		2524F55F29EEF8BB009D4BCF /* NewDogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDogView.swift; sourceTree = "<group>"; };
 		2524F58A29F09340009D4BCF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		2524F58D29F18C2F009D4BCF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		2524F58F29F18D79009D4BCF /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		2524F58D29F18C2F009D4BCF /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		2524F58F29F18D79009D4BCF /* EventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
 		2524F59129F196DC009D4BCF /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		2524F59329F19D30009D4BCF /* NewSwipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSwipeView.swift; sourceTree = "<group>"; };
 		2524F59629F1C2BA009D4BCF /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
@@ -55,7 +55,7 @@
 		2524F5A229F1DDEA009D4BCF /* FoodsideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodsideView.swift; sourceTree = "<group>"; };
 		2524F5A429F1DE6E009D4BCF /* BriefstopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BriefstopView.swift; sourceTree = "<group>"; };
 		2524F5A829F2E123009D4BCF /* Reservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reservation.swift; sourceTree = "<group>"; };
-		2524F5AA29F2E1DE009D4BCF /* ReservationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationManager.swift; sourceTree = "<group>"; };
+		2524F5AA29F2E1DE009D4BCF /* ReservationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationsManager.swift; sourceTree = "<group>"; };
 		2524F5AC29F2E4B1009D4BCF /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		25E1B33329EC629300CD9D69 /* firstProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = firstProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25E1B33629EC629300CD9D69 /* firstProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = firstProjectApp.swift; sourceTree = "<group>"; };
@@ -141,11 +141,11 @@
 				2524F58C29F18A03009D4BCF /* From Tutorial */,
 				2524F59829F1C820009D4BCF /* userAuthentication */,
 				2524F59D29F1DC81009D4BCF /* View */,
-				2524F58F29F18D79009D4BCF /* UserManager.swift */,
-				2524F58D29F18C2F009D4BCF /* User.swift */,
+				2524F58F29F18D79009D4BCF /* EventManager.swift */,
+				2524F58D29F18C2F009D4BCF /* Event.swift */,
 				2524F5A829F2E123009D4BCF /* Reservation.swift */,
 				2524F5AC29F2E4B1009D4BCF /* UserProfileView.swift */,
-				2524F5AA29F2E1DE009D4BCF /* ReservationManager.swift */,
+				2524F5AA29F2E1DE009D4BCF /* ReservationsManager.swift */,
 				25E1B33A29EC629600CD9D69 /* Assets.xcassets */,
 				25E1B33C29EC629600CD9D69 /* Preview Content */,
 			);
@@ -248,7 +248,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2524F59729F1C2BA009D4BCF /* SignupView.swift in Sources */,
-				2524F59029F18D79009D4BCF /* UserManager.swift in Sources */,
+				2524F59029F18D79009D4BCF /* EventManager.swift in Sources */,
 				2524F5A929F2E123009D4BCF /* Reservation.swift in Sources */,
 				2524F56029EEF8BB009D4BCF /* NewDogView.swift in Sources */,
 				2524F5A129F1DD66009D4BCF /* FiresideView.swift in Sources */,
@@ -256,11 +256,11 @@
 				2524F58B29F09340009D4BCF /* LoginView.swift in Sources */,
 				2524F5AD29F2E4B1009D4BCF /* UserProfileView.swift in Sources */,
 				25E1B33929EC629300CD9D69 /* ContentView.swift in Sources */,
-				2524F5AB29F2E1DE009D4BCF /* ReservationManager.swift in Sources */,
+				2524F5AB29F2E1DE009D4BCF /* ReservationsManager.swift in Sources */,
 				2524F55E29EEF152009D4BCF /* DataManager.swift in Sources */,
 				2524F59429F19D30009D4BCF /* NewSwipeView.swift in Sources */,
 				2524F5A529F1DE6E009D4BCF /* BriefstopView.swift in Sources */,
-				2524F58E29F18C2F009D4BCF /* User.swift in Sources */,
+				2524F58E29F18C2F009D4BCF /* Event.swift in Sources */,
 				2524F59C29F1DBC2009D4BCF /* Cafe77View.swift in Sources */,
 				25E1B33729EC629300CD9D69 /* firstProjectApp.swift in Sources */,
 				2524F5A329F1DDEA009D4BCF /* FoodsideView.swift in Sources */,

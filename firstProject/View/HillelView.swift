@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct HillelView: View {
-    @EnvironmentObject var userManager: UserManager
+    @EnvironmentObject var eventManager: EventManager
     @State private var showPopup = false
     
     var body: some View {
         VStack{
             Text("Hillel").font(.system(.title))
-            List(userManager.users, id:\.id){user in
-                if user.location == "Hillel" {
+            List(eventManager.events, id:\.id){event in
+                if event.location == "Hillel" {
                     
                     HStack{
-                        Text(user.name)
-                        Text("is eating at " + user.time)
+                        Text(event.name)
+                        Text("is eating at " + event.time)
                         
                     }.font(.system(.body))
                         .foregroundColor(.black)
@@ -43,6 +43,6 @@ struct HillelView: View {
 
 struct HillelView_Previews: PreviewProvider {
     static var previews: some View {
-        HillelView().environmentObject(UserManager())
+        HillelView().environmentObject(EventManager())
     }
 }

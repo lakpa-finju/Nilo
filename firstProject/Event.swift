@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct User: Identifiable{
+struct Event: Identifiable{
     var id: String
     var name: String
     var location: String
@@ -16,5 +16,6 @@ struct User: Identifiable{
     var message: String
     var phoneNo: String
     var dateCreated: Date
+    var reserved: Int
     
 }

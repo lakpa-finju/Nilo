@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct NewSwipeView: View {
-    @EnvironmentObject var userManager: UserManager
+    @EnvironmentObject var eventManager: EventManager
     @State private var name = ""
     @State private var numberOfSwipes = 1
     @State private var location = "Marketplace"
@@ -32,10 +32,10 @@ struct NewSwipeView: View {
             
             Button {
                 //add user
-                let user = User(id: userManager.getUserId(), name: name, location: location, numberOfSwipes: numberOfSwipes, time: time, message: message, phoneNo: phoneNo, dateCreated: userManager.getTime())
-                
+                let event = Event(id: "EventManagerclass", name: name, location: location, numberOfSwipes: numberOfSwipes, time: time, message: message, phoneNo: phoneNo, dateCreated: eventManager.getTime(), reserved: 0)
+                                
                 //adding user to the database
-                userManager.addUser(user: user)
+                eventManager.addevent(event: event)
                 
                 //Reset state variables
                 //name = ""
@@ -162,6 +162,6 @@ struct NewSwipeView: View {
 
 struct NewSwipeView_Previews: PreviewProvider {
     static var previews: some View {
-        NewSwipeView().environmentObject(UserManager())
+        NewSwipeView().environmentObject(EventManager())
     }
 }

@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct UserProfileView: View {
-    @EnvironmentObject var userManager: UserManager
-    
+    @EnvironmentObject var userManager: EventManager
+    @State var reservations:[String:Any]
     var body: some View {
        
         Text("You are authenic")
@@ -19,6 +19,6 @@ struct UserProfileView: View {
 
 struct UserProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        UserProfileView().environmentObject(UserManager())
+        UserProfileView( reservations: ["dog" : Event.self]).environmentObject(EventManager())
     }
 }

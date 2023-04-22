@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct FiresideView: View {
-    @EnvironmentObject var userManager: UserManager
+    @EnvironmentObject var eventManager: EventManager
     @State private var showPopup = false
     
     var body: some View {
         VStack{
             Text("Fireside").font(.system(.title))
-            List(userManager.users, id:\.id){user in
-                if user.location == "Fireside" {
+            List(eventManager.events, id:\.id){event in
+                if event.location == "Fireside" {
                     
                     HStack{
-                        Text(user.name)
-                        Text("is eating at " + user.time)
+                        Text(event.name)
+                        Text("is eating at " + event.time)
                         
                     }.font(.system(.body))
                         .foregroundColor(.black)
@@ -43,6 +43,6 @@ struct FiresideView: View {
 
 struct FiresideView_Previews: PreviewProvider {
     static var previews: some View {
-        FiresideView().environmentObject(UserManager())
+        FiresideView().environmentObject(EventManager())
     }
 }

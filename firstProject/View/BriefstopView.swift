@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct BriefstopView: View {
-    @EnvironmentObject var userManager: UserManager
+    @EnvironmentObject var eventManager: EventManager
     @State private var showPopup = false
     
     var body: some View {
         VStack{
             Text("Brief Stop").font(.system(.title))
-            List(userManager.users, id:\.id){user in
-                if user.location == "Brief Stop" {
+            List(eventManager.events, id:\.id){event in
+                if event.location == "Brief Stop" {
                 
                     HStack{
-                        Text(user.name)
-                        Text("is eating at " + user.time)
+                        Text(event.name)
+                        Text("is eating at " + event.time)
                         
                     }.font(.system(.body))
                         .foregroundColor(.black)
@@ -44,6 +44,6 @@ struct BriefstopView: View {
 
 struct BriefstopView_Previews: PreviewProvider {
     static var previews: some View {
-        BriefstopView().environmentObject(UserManager())
+        BriefstopView().environmentObject(EventManager())
     }
 }

@@ -12,12 +12,12 @@ struct SignupView: View {
     @State private var password = ""
     @State private var userIsLoggedIn = false
     @State private var name = ""
-    @StateObject private var userManager = UserManager()
+    @StateObject private var eventManager = EventManager()
     
     var body: some View {
             //if user is logged in send to locationView else sign in
             if userIsLoggedIn{
-                LocationView().environmentObject(userManager)
+                LocationView().environmentObject(eventManager)
             } else{
                 //content
                 content
@@ -104,7 +104,7 @@ struct SignupView: View {
             .onAppear{
                 Auth.auth().addStateDidChangeListener { auth, user in
                     if user != nil {
-                        //userIsLoggedIn.toggle()
+                        userIsLoggedIn.toggle()
                     }
                 }
             }
@@ -132,13 +132,14 @@ struct SignupView: View {
         }
         userIsLoggedIn.toggle()
 
-        */
+         */
         Auth.auth().createUser(withEmail: email, password: password){ result, error in
             if error != nil {
                 print(error!.localizedDescription)//force unwrapping cos we checked if it is nill
             }
             userIsLoggedIn.toggle()
         }
+        
         
     }
 
