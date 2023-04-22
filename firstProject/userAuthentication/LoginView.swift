@@ -105,7 +105,7 @@ struct LoginView: View {
             .onAppear{
                 Auth.auth().addStateDidChangeListener { auth, user in
                     if user != nil {
-                       userIsLoggedIn.toggle()
+                      // userIsLoggedIn.toggle()
                     }
                 }
             }
@@ -115,9 +115,10 @@ struct LoginView: View {
     
     //log in
     func login(){
-        Auth.auth().signIn(withEmail: email, password: password){ result, error in
-            if error != nil{
-                print(error!.localizedDescription)
+        Auth.auth().signIn(withEmail: email, password: password){ authResult, error in
+            guard  authResult?.user != nil, error == nil else {
+                print("Error creating user: \(error!.localizedDescription)")
+                return
             }
             userIsLoggedIn.toggle()
         }

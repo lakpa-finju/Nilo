@@ -104,7 +104,7 @@ struct SignupView: View {
             .onAppear{
                 Auth.auth().addStateDidChangeListener { auth, user in
                     if user != nil {
-                        userIsLoggedIn.toggle()
+                        //userIsLoggedIn.toggle()
                     }
                 }
             }
@@ -133,11 +133,21 @@ struct SignupView: View {
         userIsLoggedIn.toggle()
 
          */
-        Auth.auth().createUser(withEmail: email, password: password){ result, error in
-            if error != nil {
-                print(error!.localizedDescription)//force unwrapping cos we checked if it is nill
+        Auth.auth().createUser(withEmail: email, password: password){ authResult, error in
+            guard let user = authResult?.user, error == nil else {
+                print("Error creating user: \(error!.localizedDescription)")
+                return
             }
             userIsLoggedIn.toggle()
+            let changeRequest = user.createProfileChangeRequest()
+            changeRequest.displayName = name // user's name entered during sign up
+            changeRequest.commitChanges { error in
+                if let error = error {
+                    print("Error setting user's display name: \(error.localizedDescription)")
+                } else {
+                    print("User's display name set successfully")
+                }
+            }
         }
         
         

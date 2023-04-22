@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct UserProfileView: View {
-    @EnvironmentObject var userManager: EventManager
+    @EnvironmentObject var eventManager: EventManager
     @State var reservations:[String:Any]
     var body: some View {
        

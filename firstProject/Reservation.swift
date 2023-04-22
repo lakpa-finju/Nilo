@@ -9,6 +9,8 @@ import SwiftUI
 
 struct Reservation: Identifiable{
     var id: String
+    var NameOfReserver: String
     var email:String
+    
 }
 
