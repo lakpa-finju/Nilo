@@ -43,6 +43,8 @@ struct LocationView: View {
                     //for Cafe 77
                     NavigationLink{
                         Cafe77View()
+                            .environmentObject(eventManager)
+                            .environmentObject(reservationManager)
                     }label: {
                         Text("Cafe 77")
                             .font(.headline)
@@ -56,6 +58,8 @@ struct LocationView: View {
                     //for Hillel
                     NavigationLink{
                         HillelView()
+                            .environmentObject(eventManager)
+                            .environmentObject(reservationManager)
                     }label: {
                         Text("Hillel")
                             .font(.headline)
@@ -68,6 +72,8 @@ struct LocationView: View {
                     //for Fireside
                     NavigationLink{
                         FiresideView()
+                            .environmentObject(eventManager)
+                            .environmentObject(reservationManager)
                     }label: {
                         Text("Fireside")
                             .font(.headline)
@@ -80,6 +86,8 @@ struct LocationView: View {
                     //For Foodside
                     NavigationLink{
                         FoodsideView()
+                            .environmentObject(eventManager)
+                            .environmentObject(reservationManager)
                     }label: {
                         Text("Foodside")
                             .font(.headline)
@@ -92,6 +100,8 @@ struct LocationView: View {
                     //For Brief Stop
                     NavigationLink{
                         BriefstopView()
+                            .environmentObject(eventManager)
+                            .environmentObject(reservationManager)
                     }label: {
                         Text("Brief Stop")
                             .font(.headline)
