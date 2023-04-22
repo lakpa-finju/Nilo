@@ -15,6 +15,7 @@ struct firstProjectApp: App {
     @StateObject var dataManager = DataManager()
     @StateObject var eventManager = EventManager()
     @StateObject var reservationsManager = ReservationsManager()
+    @StateObject var userProfileManager = UserProfileManager()
     
 
     
@@ -31,6 +32,7 @@ struct firstProjectApp: App {
             LoginView()
                 .environmentObject(eventManager)
               .environmentObject(reservationsManager)
+              .environmentObject(userProfileManager)
             //ContentView()
             //ListView().environmentObject(dataManager)
             

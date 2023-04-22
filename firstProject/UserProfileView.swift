@@ -8,6 +8,8 @@
 import SwiftUI
 struct UserProfileView: View {
     @EnvironmentObject var eventManger: EventManager
+    @EnvironmentObject var userProfileManager: UserProfileManager
+    @EnvironmentObject var reservationsManager: ReservationsManager
     var body: some View {
         VStack(spacing: 20) {
             Image(systemName: "person.circle.fill")
@@ -33,7 +35,10 @@ struct UserProfileView: View {
                     .foregroundColor(.blue)
             }
             
-            NavigationLink(destination: ReservationsView()) {
+            NavigationLink(destination: ReservationsView()
+                .environmentObject(userProfileManager)
+                .environmentObject(reservationsManager)
+            ) {
                 Text("My Reservations")
                     .foregroundColor(.blue)
             }
@@ -57,14 +62,9 @@ struct ChangePasswordView: View {
     }
 }
 
-struct ReservationsView: View {
-    var body: some View {
-        Text("My Reservations")
-    }
-}
-
 struct UserProfileView_Previews: PreviewProvider {
     static var previews: some View {
         UserProfileView().environmentObject(EventManager())
+        
     }
 }

@@ -14,6 +14,8 @@ struct LoginView: View {
     @StateObject private var dataManager = DataManager()
     @EnvironmentObject private var eventManager : EventManager
     @EnvironmentObject private var reservationsManager : ReservationsManager
+    @EnvironmentObject private var userProfileManager : UserProfileManager
+    
     var body: some View {
         NavigationStack{
             //if user is logged in the send to locationView else login
@@ -21,6 +23,7 @@ struct LoginView: View {
                 //ListView().environmentObject(dataManager)
                 LocationView().environmentObject(eventManager)
                     .environmentObject(reservationsManager)
+                    .environmentObject(userProfileManager)
             } else{
                 //content
                 content

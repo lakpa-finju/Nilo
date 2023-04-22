@@ -13,11 +13,46 @@ class ReservationsManager: ObservableObject{
     @EnvironmentObject var eventManager: EventManager 
     @Published var reservations: [Reservation] = []
     
-    //function to add resevations to the database
-    private func addReservation(reservation: Reservation){
+    init() {
         let db = Firestore.firestore()
-        let ref = db.collection("Reservations").document(reservation.id)
-                ref.setData(["id":reservation.id,"Name":reservation.NameOfReserver,"Email":reservation.email]){
+        _ = db.collection("Reservations").addSnapshotListener({ snapshot, error in
+            guard (snapshot?.documents) != nil else{
+                print("Error Fetching the Reservations \(error?.localizedDescription ?? "") from the databse")
+                return
+            }
+            self.fetchReservations()
+        })
+        
+    }
+    //function to add resevations to the database
+    func fetchReservations() {
+        reservations.removeAll()
+        let db = Firestore.firestore()
+        db.collection("Reservations").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    let data = document.data()
+                    let id = data["Id"] as? String ?? ""
+                    let nameOfReserver = data["Name of reserver"] as? String ?? ""
+                    let emailOfReserver = data["Email of Reserver"] as? String ?? ""
+                    let eventOrganizerName = data["Event organizer name"] as? String ?? ""
+                    
+                    let reservation = Reservation(id: id, nameOfReserver: nameOfReserver, emailOfReserver: emailOfReserver, eventOrganizerName: eventOrganizerName)
+                    self.reservations.append(reservation)
+                }
+            }
+        }
+    }
+
+    
+    
+    //function to add resevations to the database
+    private func addReservation(reservation: Reservation, eventId: String){
+        let db = Firestore.firestore()
+        let ref = db.collection("Reservations").document(eventId)
+        ref.setData(["Id":reservation.id,"Name of reserver":reservation.nameOfReserver,"Email of Reserver":reservation.emailOfReserver, "Event organizer name": reservation.eventOrganizerName]){
             error in
             if let error = error{
                 print(error.localizedDescription)
@@ -66,11 +101,11 @@ class ReservationsManager: ObservableObject{
         guard event.numberOfSwipes > 0 else { return }
                 
         // Create a new reservation object and add it to the reservations array
-        let reservation = Reservation(id: self.geteUserId(),NameOfReserver: self.getUserName(), email: self.getUserEmail())
+        let reservation = Reservation(id: self.geteUserId(),nameOfReserver: self.getUserName(), emailOfReserver: self.getUserEmail(), eventOrganizerName: event.name)
         //add reservation to the list to exchange between the view controller
         reservations.append(reservation)
         //add the reservation to the database
-        self.addReservation(reservation: reservation)
+        self.addReservation(reservation: reservation, eventId: event.id)
         
         //updated event 
         let updatedEvent = Event(id: event.id, name: event.name, location: event.location, numberOfSwipes: event.numberOfSwipes-1, time: event.time, message: event.message, phoneNo: event.message, dateCreated: event.dateCreated, reserved: event.reserved+1)

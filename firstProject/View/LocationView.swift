@@ -10,6 +10,7 @@ import SwiftUI
 struct LocationView: View {
     @EnvironmentObject var eventManager : EventManager
     @EnvironmentObject var reservationManager : ReservationsManager
+    @EnvironmentObject var userProfileManager : UserProfileManager
     @State private var showPopup = false
     var locations = ["Marketplace", "Cafe 77", "Fireside", "Foodside", "Hillel", "Brief Stop"]
     
@@ -138,7 +139,8 @@ struct LocationView: View {
                     ToolbarItem(placement: .navigationBarLeading, content: {
                         NavigationLink{
                             UserProfileView()
-                                .environmentObject(EventManager())
+                                .environmentObject(eventManager)
+                                .environmentObject(userProfileManager)
                         }label: {
                             //Text("Your profile")
                             //Image(systemName: "plus")
@@ -171,6 +173,7 @@ struct LocationView_Previews: PreviewProvider {
     static var previews: some View {
         LocationView().environmentObject(EventManager())
             .environmentObject(ReservationsManager())
+            .environmentObject(UserProfileManager())
             
     }
 }
