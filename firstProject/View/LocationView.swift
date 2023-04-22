@@ -135,6 +135,26 @@ struct LocationView: View {
                         
                         
                     })
+                    ToolbarItem(placement: .navigationBarLeading, content: {
+                        NavigationLink{
+                            UserProfileView()
+                        }label: {
+                            //Text("Your profile")
+                            //Image(systemName: "plus")
+                            Image(systemName: "person.circle.fill")
+                                .resizable()
+                                                    .frame(width: 40, height: 40)
+                                                    .clipShape(Circle())
+                                                    .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                                                    .shadow(radius: 7)
+                                                    .padding(.bottom, 20)
+                                                    .offset(y:15)
+                                                    .ignoresSafeArea()
+
+                        }
+                        
+                        
+                    })
                 }
                 
             }
