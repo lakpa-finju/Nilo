@@ -10,8 +10,9 @@ struct UserProfileView: View {
     @EnvironmentObject var eventManger: EventManager
     @EnvironmentObject var userProfileManager: UserProfileManager
     @EnvironmentObject var reservationsManager: ReservationsManager
+    
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 6) {
             Image(systemName: "person.circle.fill")
                 .resizable()
                 .scaledToFit()
