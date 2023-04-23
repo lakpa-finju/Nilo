@@ -11,20 +11,13 @@ struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var userIsLoggedIn = false
-    @StateObject private var dataManager = DataManager()
-    @EnvironmentObject private var eventManager : EventManager
-    @EnvironmentObject private var reservationsManager : ReservationsManager
-    @EnvironmentObject private var userProfileManager : UserProfilesManager
-    
+
     var body: some View {
         NavigationStack{
             //if user is logged in the send to locationView else login
             if userIsLoggedIn{
                 //ListView().environmentObject(dataManager)
-                LocationView().environmentObject(eventManager)
-                    .environmentObject(reservationsManager)
-                    .environmentObject(userProfileManager)
-            } else{
+                LocationView()            } else{
                 //content
                 content
             }
@@ -134,9 +127,7 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView().environmentObject(EventManager())
-            .environmentObject(ReservationsManager())
-            .environmentObject(UserProfilesManager())
+        LoginView()
     }
 }
 

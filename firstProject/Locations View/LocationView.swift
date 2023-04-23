@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct LocationView: View {
-    @EnvironmentObject var eventManager : EventManager
-    @EnvironmentObject var reservationManager : ReservationsManager
-    @EnvironmentObject var userProfileManager : UserProfilesManager
-    @EnvironmentObject var profileImagesManager: ProfileImagesManager
+    @StateObject var eventManager = EventManager()
+    @StateObject var reservationsManager = ReservationsManager()
+    @StateObject var userProfileManager = UserProfilesManager()
+    @StateObject var profileImagesManager = ProfileImagesManager()
+
     @State private var showPopup = false
     
     @State private var profileImage: UIImage?
@@ -34,7 +35,7 @@ struct LocationView: View {
                     NavigationLink{
                         MarketplaceView()
                             .environmentObject(eventManager)
-                            .environmentObject(reservationManager)
+                            .environmentObject(reservationsManager)
                             
                     }label: {
                         Text("Marketplace")
@@ -49,7 +50,7 @@ struct LocationView: View {
                     NavigationLink{
                         Cafe77View()
                             .environmentObject(eventManager)
-                            .environmentObject(reservationManager)
+                            .environmentObject(reservationsManager)
                     }label: {
                         Text("Cafe 77")
                             .font(.headline)
@@ -64,7 +65,7 @@ struct LocationView: View {
                     NavigationLink{
                         HillelView()
                             .environmentObject(eventManager)
-                            .environmentObject(reservationManager)
+                            .environmentObject(reservationsManager)
                     }label: {
                         Text("Hillel")
                             .font(.headline)
@@ -78,7 +79,7 @@ struct LocationView: View {
                     NavigationLink{
                         FiresideView()
                             .environmentObject(eventManager)
-                            .environmentObject(reservationManager)
+                            .environmentObject(reservationsManager)
                     }label: {
                         Text("Fireside")
                             .font(.headline)
@@ -92,7 +93,7 @@ struct LocationView: View {
                     NavigationLink{
                         FoodsideView()
                             .environmentObject(eventManager)
-                            .environmentObject(reservationManager)
+                            .environmentObject(reservationsManager)
                     }label: {
                         Text("Foodside")
                             .font(.headline)
@@ -106,7 +107,7 @@ struct LocationView: View {
                     NavigationLink{
                         BriefstopView()
                             .environmentObject(eventManager)
-                            .environmentObject(reservationManager)
+                            .environmentObject(reservationsManager)
                     }label: {
                         Text("Brief Stop")
                             .font(.headline)
@@ -147,6 +148,7 @@ struct LocationView: View {
                                 .environmentObject(eventManager)
                                 .environmentObject(userProfileManager)
                                 .environmentObject(profileImagesManager)
+                                .environmentObject(reservationsManager)
                         }label: {
                             //Text("Your profile")
                             //Image(systemName: "plus")
@@ -192,7 +194,8 @@ struct LocationView: View {
 
 struct LocationView_Previews: PreviewProvider {
     static var previews: some View {
-        LocationView().environmentObject(EventManager())
+        LocationView()
+            .environmentObject(EventManager())
             .environmentObject(ReservationsManager())
             .environmentObject(UserProfilesManager())
             .environmentObject(ProfileImagesManager())
