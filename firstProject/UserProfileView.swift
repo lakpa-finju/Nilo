@@ -56,13 +56,6 @@ struct UserProfileView: View {
     }
 }
 
-
-struct ChangePasswordView: View {
-    var body: some View {
-        Text("Change Password")
-    }
-}
-
 struct UserProfileView_Previews: PreviewProvider {
     static var previews: some View {
         UserProfileView().environmentObject(EventManager())
