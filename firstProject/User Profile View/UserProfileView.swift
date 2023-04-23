@@ -28,25 +28,52 @@ struct UserProfileView: View {
             Text(userProfileManager.getUserEmail())
                 .font(.body)
             
-            NavigationLink(destination: UpdateEmailView()) {
+            //upate Name
+            NavigationLink(destination: UpdateUserNameView()
+                .environmentObject(userProfileManager)) {
+                Text("Change Name")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color.blue)
+                    .cornerRadius(10)            }
+
+            
+            //upate email
+            NavigationLink(destination: UpdateEmailView()
+                .environmentObject(userProfileManager)) {
                 Text("Change Email")
-                    .foregroundColor(.blue)
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.blue)
+                        .cornerRadius(10)
             }
             
+            //update Password
             NavigationLink(destination: UpdatePasswordView()
                 .environmentObject(userProfileManager)
             
             ) {
                 Text("Change Password")
-                    .foregroundColor(.blue)
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color.blue)
+                    .cornerRadius(10)
             }
             
+            //list of reservations
             NavigationLink(destination: ReservationsView()
                 .environmentObject(userProfileManager)
                 .environmentObject(reservationsManager)
             ) {
                 Text("My Reservations")
-                    .foregroundColor(.blue)
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color.blue)
+                    .cornerRadius(10)
             }
             
             Spacer()
