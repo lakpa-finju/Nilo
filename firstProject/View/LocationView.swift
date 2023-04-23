@@ -174,6 +174,7 @@ struct LocationView_Previews: PreviewProvider {
         LocationView().environmentObject(EventManager())
             .environmentObject(ReservationsManager())
             .environmentObject(UserProfileManager())
+        
             
     }
 }

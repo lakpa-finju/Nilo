@@ -20,40 +20,38 @@ struct ReservationsView: View {
                     VStack(spacing: 10) {
                         ForEach(reservationsManager.reservations) { reservation in
                             if (reservation.eventOrganizerName == userProfileManager.getUserName()){
-                            VStack(spacing: 10) {
-                                
-                                Text("Name: \(reservation.nameOfReserver)")
-                                Text("Email: \(reservation.emailOfReserver)")
-                                
+                                VStack(spacing: 10) {
+                                    Text("Name: \(reservation.nameOfReserver)")
+                                    Text("Email: \(reservation.emailOfReserver)")
+                                    
+                                }
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.teal)//cyan/ mint/indigo
+                                .cornerRadius(10)
                             }
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.teal)//cyan/ mint/indigo
-                            .cornerRadius(10)
+                            
                         }
+                        .padding()
+                        .toolbar{
+                            ToolbarItem(placement: .navigationBarTrailing, content: {
+                                NavigationLink{
+                                    NewSwipeView()
+                                }label: {
+                                    Text("Offer Swipe(s)")
+                                    Image(systemName: "plus")
+                                }
+                            })
                         }
                         
-                        
                     }
-                    .padding()
-                    .toolbar{
-                        ToolbarItem(placement: .navigationBarTrailing, content: {
-                            NavigationLink{
-                                NewSwipeView()
-                            }label: {
-                                Text("Offer Swipe(s)")
-                                Image(systemName: "plus")
-                            }
-                        })
-                    }
-                    
+                    .frame(width: geometry.size.width, height: geometry.size.height)
                 }
-                .frame(width: geometry.size.width, height: geometry.size.height)
             }
+            
         }
         
     }
-    
 }
 
 struct ReservationsView_Previews: PreviewProvider {
