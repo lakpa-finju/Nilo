@@ -6,23 +6,35 @@
 //
 
 import SwiftUI
+
 struct UserProfileView: View {
     @EnvironmentObject var eventManger: EventManager
     @EnvironmentObject var userProfileManager: UserProfilesManager
     @EnvironmentObject var reservationsManager: ReservationsManager
+    @EnvironmentObject var profileImagesManager: ProfileImagesManager
+    @State private var profileImage: UIImage?
     
     var body: some View {
         VStack(spacing: 6) {
-            Image(systemName: "person.circle.fill")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 100, height: 100)
-                .foregroundColor(.gray)
-                .padding()
-                .background(Color.white)
-                .clipShape(Circle())
-                .overlay(Circle().stroke(Color.gray, lineWidth: 4))
-            
+            if let profileImage = profileImage{
+                Image(uiImage: profileImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 150,height: 200)
+                    .clipShape(Circle())
+    
+            } else{
+                Image(systemName: "person.circle.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 100)
+                    .foregroundColor(.gray)
+                    .padding()
+                    .background(Color.white)
+                    .clipShape(Circle())
+                    .overlay(Circle().stroke(Color.gray, lineWidth: 4))
+            }
+               
             //Display Name and Email address right below profile picture
             Text(userProfileManager.getUserName())
                 .font(.title)
@@ -81,6 +93,12 @@ struct UserProfileView: View {
         }
         .padding()
         .navigationBarTitle("Profile")
+        .onReceive(profileImagesManager.$profileImage, perform: { image in
+            profileImage = image
+        })
+        .onAppear {
+            profileImagesManager.loadProfileImage(profileImageId: userProfileManager.getUserName())
+        }
     }
 }
 
@@ -89,6 +107,7 @@ struct UserProfileView_Previews: PreviewProvider {
         UserProfileView().environmentObject(EventManager())
             .environmentObject(ReservationsManager())
             .environmentObject(UserProfilesManager())
+            .environmentObject(ProfileImagesManager())
         
     }
 }

@@ -11,7 +11,11 @@ struct LocationView: View {
     @EnvironmentObject var eventManager : EventManager
     @EnvironmentObject var reservationManager : ReservationsManager
     @EnvironmentObject var userProfileManager : UserProfilesManager
+    @EnvironmentObject var profileImagesManager: ProfileImagesManager
     @State private var showPopup = false
+    
+    @State private var profileImage: UIImage?
+    
     var locations = ["Marketplace", "Cafe 77", "Fireside", "Foodside", "Hillel", "Brief Stop"]
     
     var body: some View {
@@ -136,23 +140,34 @@ struct LocationView: View {
                         
                         
                     })
+                    
                     ToolbarItem(placement: .navigationBarLeading, content: {
                         NavigationLink{
                             UserProfileView()
                                 .environmentObject(eventManager)
                                 .environmentObject(userProfileManager)
+                                .environmentObject(profileImagesManager)
                         }label: {
                             //Text("Your profile")
                             //Image(systemName: "plus")
-                            Image(systemName: "person.circle.fill")
-                                .resizable()
-                                                    .frame(width: 40, height: 40)
-                                                    .clipShape(Circle())
-                                                    .overlay(Circle().stroke(Color.white, lineWidth: 2))
-                                                    .shadow(radius: 7)
-                                                    .padding(.bottom, 20)
-                                                    .offset(y:15)
-                                                    .ignoresSafeArea()
+                            if let profileImage = profileImage{
+                                Image(uiImage: profileImage)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 40,height: 40)
+                                    .clipShape(Circle())
+                    
+                            }else{
+                                Image(systemName: "person.circle.fill")
+                                    .resizable()
+                                    .frame(width: 40, height: 40)
+                                    .clipShape(Circle())
+                                    .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                                    .shadow(radius: 7)
+                                    .padding(.bottom, 20)
+                                    .offset(y:15)
+                                    .ignoresSafeArea()
+                            }
 
                         }
                         
@@ -164,6 +179,12 @@ struct LocationView: View {
             
             
         }
+        .onReceive(profileImagesManager.$profileImage, perform: { image in
+            profileImage = image
+        })
+        .onAppear {
+            profileImagesManager.loadProfileImage(profileImageId: userProfileManager.getUserName())
+        }
         .accentColor(Color(.label))
     }
     
@@ -174,6 +195,7 @@ struct LocationView_Previews: PreviewProvider {
         LocationView().environmentObject(EventManager())
             .environmentObject(ReservationsManager())
             .environmentObject(UserProfilesManager())
+            .environmentObject(ProfileImagesManager())
         
             
     }

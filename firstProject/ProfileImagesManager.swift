@@ -8,7 +8,7 @@ import SwiftUI
 import FirebaseStorage
 
 class ProfileImagesManager: ObservableObject{
-    
+    @Published var profileImage: UIImage?
     
     //Function to Upload UserFile in the database
     func uploadProfileImage(profileImage: ProfileImage){
@@ -27,12 +27,28 @@ class ProfileImagesManager: ObservableObject{
     }
     
     
-    //Function to get profile image from the database
-    func getProfileImage(profileImageId:String) {
-        let storage = Storage.storage()
-        let profileImageRef = storage.reference(withPath: "Profile images/\(profileImageId).jpg")
-        
-        
-    }
-    
+    //Function to load profile when ProfileImageId is passedIn
+    func loadProfileImage(profileImageId: String) {
+            let storage = Storage.storage()
+            let storageRef = storage.reference()
+            let profileImageRef = storageRef.child("Profile images/\(profileImageId).jpg")
+            
+            profileImageRef.downloadURL { (url, error) in
+                if let error = error {
+                    print("Error getting profile image URL: \(error.localizedDescription)")
+                } else if let url = url {
+                    URLSession.shared.dataTask(with: url) { (data, response, error) in
+                        if let error = error {
+                            print("Error loading profile image: \(error.localizedDescription)")
+                        } else if let data = data {
+                            if let image = UIImage(data: data) {
+                                DispatchQueue.main.async {
+                                    self.profileImage = image
+                                }
+                            }
+                        }
+                    }.resume()
+                }
+            }
+        }
 }
