@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ChangeEmailView: View {
+struct UpdateEmailView: View {
     @EnvironmentObject var userProfileManager: UserProfileManager
     @State private var newEmail: String = ""
 
@@ -39,6 +39,6 @@ struct ChangeEmailView: View {
 
 struct ChangeEmailView_Previews: PreviewProvider {
     static var previews: some View {
-        ChangeEmailView().environmentObject(UserProfileManager())
+        UpdateEmailView().environmentObject(UserProfileManager())
     }
 }

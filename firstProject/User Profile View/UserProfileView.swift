@@ -28,12 +28,12 @@ struct UserProfileView: View {
             Text(userProfileManager.getUserEmail())
                 .font(.body)
             
-            NavigationLink(destination: ChangeEmailView()) {
+            NavigationLink(destination: UpdateEmailView()) {
                 Text("Change Email")
                     .foregroundColor(.blue)
             }
             
-            NavigationLink(destination: ChangePasswordView()
+            NavigationLink(destination: UpdatePasswordView()
                 .environmentObject(userProfileManager)
             
             ) {

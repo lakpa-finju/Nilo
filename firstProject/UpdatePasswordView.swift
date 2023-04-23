@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ChangePasswordView: View {
+struct UpdatePasswordView: View {
     @EnvironmentObject var userProfileManager: UserProfileManager
     @State private var newPassword: String = ""
 
@@ -22,7 +22,7 @@ struct ChangePasswordView: View {
                         .keyboardType(.emailAddress)
                     
             Button{
-                userProfileManager.changeUserPassword(newPassword: newPassword)
+                userProfileManager.updateUserPassword(newPassword: newPassword)
                 newPassword = ""
             } label: {
                         Text("Update password")
@@ -39,7 +39,7 @@ struct ChangePasswordView: View {
 
 struct ChangePasswordView_Previews: PreviewProvider {
     static var previews: some View {
-        ChangePasswordView()
+        UpdatePasswordView()
             .environmentObject(UserProfileManager())
     }
 }

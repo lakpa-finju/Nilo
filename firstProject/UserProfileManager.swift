@@ -26,7 +26,7 @@ class UserProfileManager: ObservableObject{
         }    }
     
     //Update User Password
-    func changeUserPassword(newPassword: String){
+    func updateUserPassword(newPassword: String){
         if let user = Auth.auth().currentUser {
             user.updatePassword(to: newPassword) { error in
                 if let error = error {
