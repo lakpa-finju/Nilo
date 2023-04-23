@@ -38,6 +38,7 @@ struct firstProjectApp: App {
             
             //todo
             //Reserve button and update isn't workign properly
+            //look into pod file for firebase
             
             
         }
