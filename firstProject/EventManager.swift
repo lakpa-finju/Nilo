@@ -5,7 +5,7 @@
 //  Created by lakpafinju sherpa on 2023-04-20.
 //
 
-import SwiftUI
+//import SwiftUI
 import Firebase
 import FirebaseAuth
 //importing foundation for time

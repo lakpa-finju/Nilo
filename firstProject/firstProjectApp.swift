@@ -15,7 +15,7 @@ struct firstProjectApp: App {
     @StateObject var dataManager = DataManager()
     @StateObject var eventManager = EventManager()
     @StateObject var reservationsManager = ReservationsManager()
-    @StateObject var userProfileManager = UserProfileManager()
+    @StateObject var userProfileManager = UserProfilesManager()
     
 
     

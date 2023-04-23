@@ -8,7 +8,7 @@
 import SwiftUI
 import Firebase
 import FirebaseAuth
-class UserProfileManager: ObservableObject{
+class UserProfilesManager: ObservableObject{
     
     //Update the user Email address once the accout has been created
     func updateUserEmail(newEmail: String) {

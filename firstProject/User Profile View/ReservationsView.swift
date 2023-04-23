@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ReservationsView: View {
     @EnvironmentObject var reservationsManager: ReservationsManager
-    @EnvironmentObject var userProfileManager: UserProfileManager
+    @EnvironmentObject var userProfileManager: UserProfilesManager
     var body: some View {
         VStack {
             Text("Reservations")
@@ -57,6 +57,6 @@ struct ReservationsView: View {
 struct ReservationsView_Previews: PreviewProvider {
     static var previews: some View {
         ReservationsView().environmentObject(ReservationsManager())
-            .environmentObject(UserProfileManager())
+            .environmentObject(UserProfilesManager())
     }
 }

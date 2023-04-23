@@ -14,7 +14,7 @@ struct LoginView: View {
     @StateObject private var dataManager = DataManager()
     @EnvironmentObject private var eventManager : EventManager
     @EnvironmentObject private var reservationsManager : ReservationsManager
-    @EnvironmentObject private var userProfileManager : UserProfileManager
+    @EnvironmentObject private var userProfileManager : UserProfilesManager
     
     var body: some View {
         NavigationStack{
@@ -134,7 +134,9 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoginView().environmentObject(EventManager())
+            .environmentObject(ReservationsManager())
+            .environmentObject(UserProfilesManager())
     }
 }
 

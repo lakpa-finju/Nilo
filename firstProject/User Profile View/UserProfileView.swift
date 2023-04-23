@@ -8,7 +8,7 @@
 import SwiftUI
 struct UserProfileView: View {
     @EnvironmentObject var eventManger: EventManager
-    @EnvironmentObject var userProfileManager: UserProfileManager
+    @EnvironmentObject var userProfileManager: UserProfilesManager
     @EnvironmentObject var reservationsManager: ReservationsManager
     
     var body: some View {
@@ -88,7 +88,7 @@ struct UserProfileView_Previews: PreviewProvider {
     static var previews: some View {
         UserProfileView().environmentObject(EventManager())
             .environmentObject(ReservationsManager())
-            .environmentObject(UserProfileManager())
+            .environmentObject(UserProfilesManager())
         
     }
 }

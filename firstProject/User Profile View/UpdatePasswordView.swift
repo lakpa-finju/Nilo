@@ -1,5 +1,5 @@
 //
-//  ChangeEmailView.swift
+//  ChangePasswordView.swift
 //  firstProject
 //
 //  Created by lakpafinju sherpa on 2023-04-22.
@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct UpdateEmailView: View {
-    @EnvironmentObject var userProfileManager: UserProfileManager
-    @State private var newEmail: String = ""
+struct UpdatePasswordView: View {
+    @EnvironmentObject var userProfileManager: UserProfilesManager
+    @State private var newPassword: String = ""
 
     var body: some View {
         VStack {
-            TextField("New Email Address", text: $newEmail)
+            SecureField("Enter a new Password", text: $newPassword)
                         .padding()
                         .background(Color(.systemGray6))
                         .cornerRadius(8)
@@ -22,10 +22,10 @@ struct UpdateEmailView: View {
                         .keyboardType(.emailAddress)
                     
             Button{
-                userProfileManager.updateUserEmail(newEmail: newEmail)
-                newEmail = ""
+                userProfileManager.updateUserPassword(newPassword: newPassword)
+                newPassword = ""
             } label: {
-                        Text("Update Email")
+                        Text("Update password")
                             .foregroundColor(.white)
                             .padding()
                             .background(Color.blue)
@@ -37,8 +37,9 @@ struct UpdateEmailView: View {
     }
 }
 
-struct ChangeEmailView_Previews: PreviewProvider {
+struct ChangePasswordView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdateEmailView().environmentObject(UserProfileManager())
+        UpdatePasswordView()
+            .environmentObject(UserProfilesManager())
     }
 }

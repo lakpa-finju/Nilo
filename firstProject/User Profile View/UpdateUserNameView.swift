@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct UpdateUserNameView: View {
-    @EnvironmentObject var userProfileManager: UserProfileManager
+    @EnvironmentObject var userProfileManager: UserProfilesManager
     @State private var firstName: String = ""
     @State private var lastName: String = ""
 
@@ -51,6 +51,6 @@ struct UpdateUserNameView: View {
 struct UpdateUserNameView_Previews: PreviewProvider {
     static var previews: some View {
         UpdateUserNameView()
-            .environmentObject(UserProfileManager())
+            .environmentObject(UserProfilesManager())
     }
 }
