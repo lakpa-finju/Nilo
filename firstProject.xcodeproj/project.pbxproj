@@ -29,6 +29,7 @@
 		2524F5AD29F2E4B1009D4BCF /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2524F5AC29F2E4B1009D4BCF /* UserProfileView.swift */; };
 		25C3241129F4822700D97ABA /* UserProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C3241029F4822700D97ABA /* UserProfileManager.swift */; };
 		25C3241329F487D000D97ABA /* ReservationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C3241229F487D000D97ABA /* ReservationsView.swift */; };
+		25C3241529F4B25E00D97ABA /* ChangeEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C3241429F4B25E00D97ABA /* ChangeEmailView.swift */; };
 		25E1B33729EC629300CD9D69 /* firstProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E1B33629EC629300CD9D69 /* firstProjectApp.swift */; };
 		25E1B33929EC629300CD9D69 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E1B33829EC629300CD9D69 /* ContentView.swift */; };
 		25E1B33B29EC629600CD9D69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25E1B33A29EC629600CD9D69 /* Assets.xcassets */; };
@@ -61,6 +62,7 @@
 		2524F5AC29F2E4B1009D4BCF /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		25C3241029F4822700D97ABA /* UserProfileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileManager.swift; sourceTree = "<group>"; };
 		25C3241229F487D000D97ABA /* ReservationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationsView.swift; sourceTree = "<group>"; };
+		25C3241429F4B25E00D97ABA /* ChangeEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEmailView.swift; sourceTree = "<group>"; };
 		25E1B33329EC629300CD9D69 /* firstProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = firstProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25E1B33629EC629300CD9D69 /* firstProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = firstProjectApp.swift; sourceTree = "<group>"; };
 		25E1B33829EC629300CD9D69 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				2524F5A829F2E123009D4BCF /* Reservation.swift */,
 				25C3241229F487D000D97ABA /* ReservationsView.swift */,
 				2524F5AC29F2E4B1009D4BCF /* UserProfileView.swift */,
+				25C3241429F4B25E00D97ABA /* ChangeEmailView.swift */,
 				25C3241029F4822700D97ABA /* UserProfileManager.swift */,
 				2524F5AA29F2E1DE009D4BCF /* ReservationsManager.swift */,
 				25E1B33A29EC629600CD9D69 /* Assets.xcassets */,
@@ -254,6 +257,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2524F59729F1C2BA009D4BCF /* SignupView.swift in Sources */,
+				25C3241529F4B25E00D97ABA /* ChangeEmailView.swift in Sources */,
 				2524F59029F18D79009D4BCF /* EventManager.swift in Sources */,
 				2524F5A929F2E123009D4BCF /* Reservation.swift in Sources */,
 				2524F56029EEF8BB009D4BCF /* NewDogView.swift in Sources */,

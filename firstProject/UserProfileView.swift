@@ -21,16 +21,22 @@ struct UserProfileView: View {
                 .background(Color.white)
                 .clipShape(Circle())
                 .overlay(Circle().stroke(Color.gray, lineWidth: 4))
-
-            Text(eventManger.getUserName())
+            
+            //Display Name and Email address right below profile picture
+            Text(userProfileManager.getUserName())
                 .font(.title)
+            Text(userProfileManager.getUserEmail())
+                .font(.body)
             
             NavigationLink(destination: ChangeEmailView()) {
                 Text("Change Email")
                     .foregroundColor(.blue)
             }
             
-            NavigationLink(destination: ChangePasswordView()) {
+            NavigationLink(destination: ChangePasswordView()
+                .environmentObject(userProfileManager)
+            
+            ) {
                 Text("Change Password")
                     .foregroundColor(.blue)
             }
@@ -50,11 +56,6 @@ struct UserProfileView: View {
     }
 }
 
-struct ChangeEmailView: View {
-    var body: some View {
-        Text("Change Email")
-    }
-}
 
 struct ChangePasswordView: View {
     var body: some View {
@@ -65,6 +66,8 @@ struct ChangePasswordView: View {
 struct UserProfileView_Previews: PreviewProvider {
     static var previews: some View {
         UserProfileView().environmentObject(EventManager())
+            .environmentObject(ReservationsManager())
+            .environmentObject(UserProfileManager())
         
     }
 }
