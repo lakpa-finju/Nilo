@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MarketplaceView: View {
-    @EnvironmentObject var eventManager: EventManager
+    @EnvironmentObject var eventManager: EventsManager
     @EnvironmentObject var reservationManager: ReservationsManager
     @State private var showPopup = false
     
@@ -83,7 +83,7 @@ struct MarketplaceView: View {
 struct MarketplaceView_Previews: PreviewProvider {
     static var previews: some View {
         MarketplaceView()
-            .environmentObject(EventManager())
+            .environmentObject(EventsManager())
             .environmentObject(ReservationsManager())
     }
 }

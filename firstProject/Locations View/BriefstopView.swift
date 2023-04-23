@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BriefstopView: View {
-    @EnvironmentObject var eventManager: EventManager
+    @EnvironmentObject var eventManager: EventsManager
     @EnvironmentObject var reservationManager: ReservationsManager
     @State private var showPopup = false
     
@@ -80,7 +80,7 @@ struct BriefstopView: View {
 
 struct BriefstopView_Previews: PreviewProvider {
     static var previews: some View {
-        BriefstopView().environmentObject(EventManager())
+        BriefstopView().environmentObject(EventsManager())
             .environmentObject(ReservationsManager())
     }
 }

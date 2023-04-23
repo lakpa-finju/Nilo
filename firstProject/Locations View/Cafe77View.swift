@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Cafe77View: View {
-    @EnvironmentObject var eventManager: EventManager
+    @EnvironmentObject var eventManager: EventsManager
     @EnvironmentObject var reservationManager: ReservationsManager
     @State private var showPopup = false
     
@@ -82,7 +82,7 @@ struct Cafe77View: View {
 
 struct Cafe77View_Previews: PreviewProvider {
     static var previews: some View {
-        Cafe77View().environmentObject(EventManager())
+        Cafe77View().environmentObject(EventsManager())
             .environmentObject(ReservationsManager())
     }
 }

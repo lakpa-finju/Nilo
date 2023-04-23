@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HillelView: View {
-    @EnvironmentObject var eventManager: EventManager
+    @EnvironmentObject var eventManager: EventsManager
     @EnvironmentObject var reservationManager: ReservationsManager
     @State private var showPopup = false
     var body: some View {
@@ -80,7 +80,7 @@ struct HillelView: View {
 
 struct HillelView_Previews: PreviewProvider {
     static var previews: some View {
-        HillelView().environmentObject(EventManager())
+        HillelView().environmentObject(EventsManager())
             .environmentObject(ReservationsManager())
     }
 }

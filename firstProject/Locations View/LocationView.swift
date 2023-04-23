@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LocationView: View {
-    @StateObject var eventManager = EventManager()
+    @StateObject var eventManager = EventsManager()
     @StateObject var reservationsManager = ReservationsManager()
     @StateObject var userProfileManager = UserProfilesManager()
     @StateObject var profileImagesManager = ProfileImagesManager()
@@ -196,7 +196,7 @@ struct LocationView: View {
 struct LocationView_Previews: PreviewProvider {
     static var previews: some View {
         LocationView()
-            .environmentObject(EventManager())
+            .environmentObject(EventsManager())
             .environmentObject(ReservationsManager())
             .environmentObject(UserProfilesManager())
             .environmentObject(ProfileImagesManager())

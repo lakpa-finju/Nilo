@@ -10,7 +10,7 @@ import Firebase
 import FirebaseAuth
 
 class ReservationsManager: ObservableObject{
-    @EnvironmentObject var eventManager: EventManager 
+    @EnvironmentObject var eventManager: EventsManager 
     @Published var reservations: [Reservation] = []
     
     init() {
@@ -111,7 +111,7 @@ class ReservationsManager: ObservableObject{
         let updatedEvent = Event(id: event.id, name: event.name, location: event.location, numberOfSwipes: event.numberOfSwipes-1, time: event.time, message: event.message, phoneNo: event.message, dateCreated: event.dateCreated, reserved: event.reserved+1)
         
         //update in the database
-        let eventManager = EventManager()
+        let eventManager = EventsManager()
         eventManager.updateEvent(event: updatedEvent)
     }
 }

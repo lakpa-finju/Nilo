@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct NewSwipeView: View {
-    @EnvironmentObject var eventManager: EventManager
+    @EnvironmentObject var eventManager: EventsManager
     @State private var name = ""
     @State private var numberOfSwipes = 1
     @State private var location = "Marketplace"
@@ -162,6 +162,6 @@ struct NewSwipeView: View {
 
 struct NewSwipeView_Previews: PreviewProvider {
     static var previews: some View {
-        NewSwipeView().environmentObject(EventManager())
+        NewSwipeView().environmentObject(EventsManager())
     }
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct UserProfileView: View {
-    @EnvironmentObject var eventManger: EventManager
+    @EnvironmentObject var eventManger: EventsManager
     @EnvironmentObject var userProfileManager: UserProfilesManager
     @EnvironmentObject var reservationsManager: ReservationsManager
     @EnvironmentObject var profileImagesManager: ProfileImagesManager
@@ -116,7 +116,7 @@ struct UserProfileView: View {
 
 struct UserProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        UserProfileView().environmentObject(EventManager())
+        UserProfileView().environmentObject(EventsManager())
             .environmentObject(ReservationsManager())
             .environmentObject(UserProfilesManager())
             .environmentObject(ProfileImagesManager())

@@ -12,7 +12,7 @@ struct SignupView: View {
     @State private var password = ""
     @State private var userIsLoggedIn = false
     @State private var name = ""
-    @StateObject private var eventManager = EventManager()
+    @StateObject private var eventManager = EventsManager()
     
     var body: some View {
             //if user is logged in send to locationView else sign in

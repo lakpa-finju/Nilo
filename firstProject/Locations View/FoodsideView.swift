@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FoodsideView: View {
-    @EnvironmentObject var eventManager: EventManager
+    @EnvironmentObject var eventManager: EventsManager
     @EnvironmentObject var reservationManager: ReservationsManager
     @State private var showPopup = false
     
@@ -79,7 +79,7 @@ struct FoodsideView: View {
 
 struct FoodsideView_Previews: PreviewProvider {
     static var previews: some View {
-        FoodsideView().environmentObject(EventManager())
+        FoodsideView().environmentObject(EventsManager())
             .environmentObject(ReservationsManager())
     }
 }

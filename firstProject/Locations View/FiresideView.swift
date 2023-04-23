@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FiresideView: View {
-    @EnvironmentObject var eventManager: EventManager
+    @EnvironmentObject var eventManager: EventsManager
     @EnvironmentObject var reservationManager: ReservationsManager
     @State private var showPopup = false
     
@@ -80,7 +80,7 @@ struct FiresideView: View {
 
 struct FiresideView_Previews: PreviewProvider {
     static var previews: some View {
-        FiresideView().environmentObject(EventManager())
+        FiresideView().environmentObject(EventsManager())
             .environmentObject(ReservationsManager())
     }
 }

@@ -11,7 +11,7 @@ import FirebaseAuth
 //importing foundation for time
 //import Foundation
 
-class EventManager: ObservableObject {
+class EventsManager: ObservableObject {
     @Published var events:[Event] = []
     
     init() {
