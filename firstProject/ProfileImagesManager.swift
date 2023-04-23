@@ -10,6 +10,11 @@ import FirebaseStorage
 class ProfileImagesManager: ObservableObject{
     @Published var profileImage: UIImage?
     
+    init() {
+        let userProfilesManager = UserProfilesManager()
+        loadProfileImage(profileImageId: userProfilesManager.getUserName())
+    }
+    
     //Function to Upload UserFile in the database
     func uploadProfileImage(profileImage: ProfileImage){
         let uploadRef = Storage.storage().reference(withPath: "Profile images/\(profileImage.id).jpg")

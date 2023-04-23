@@ -41,6 +41,18 @@ struct UserProfileView: View {
             Text(userProfileManager.getUserEmail())
                 .font(.body)
             
+            //Upload/change Profile Picture
+            NavigationLink(destination: ProfileImageUploadView()
+                .environmentObject(userProfileManager)
+                .environmentObject(profileImagesManager)) {
+                Text("Change/upload profile Image")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color.blue)
+                    .cornerRadius(10)            }
+
+            
             //upate Name
             NavigationLink(destination: UpdateUserNameView()
                 .environmentObject(userProfileManager)) {

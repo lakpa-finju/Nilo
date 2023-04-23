@@ -8,7 +8,7 @@
 import SwiftUI
 //The file type is image/jpeg
 struct ProfileImage: Identifiable{
-    var id: String
+    var id: String //basically authenticated user's name
     var image: UIImage
     
 }

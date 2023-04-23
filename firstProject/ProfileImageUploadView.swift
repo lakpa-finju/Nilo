@@ -12,13 +12,19 @@ struct ProfileImageUploadView: View {
                 Image(uiImage: image)
                     .resizable()
                     .scaledToFit()
-            } else {
-                Text("Select an image")
+                Text("Profile Image uploaded successfully!")
+                        
             }
+            
             Button(action: {
                 self.showImagePicker = true
             }, label: {
                 Text("Choose Image")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color.blue)
+                    .cornerRadius(10)
             })
             .sheet(isPresented: $showImagePicker, onDismiss: loadImage, content: {
                 ImagePickerView(selectedImage: $profileImage)
@@ -26,13 +32,14 @@ struct ProfileImageUploadView: View {
         }
     }
     
+    //loads up new image and upates it to the database
     func loadImage() {
         guard let selectedImage = profileImage else { return }
         let profileImage = ProfileImage(id: userProfilesManager.getUserName() , image: selectedImage)
         profileImagesManager.uploadProfileImage(profileImage: profileImage)
         
-        
-    }
+        }
+   
 }
 
 
