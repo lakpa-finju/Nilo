@@ -23,12 +23,22 @@ struct MarketplaceView: View {
                         ForEach(eventManager.events) { event in
                             if (event.location == "Marketplace" && event.numberOfSwipes > 0){
                                 VStack(spacing: 10) {
-                                HStack {
+                                    
                                     Text("\(event.name) is eating at \(event.time)")
-                                        .font(.system(.title3))
-                                        .foregroundColor(Color.black)
-                                        .bold()
-                                    Spacer()
+                                            .font(.system(.title3))
+                                            .foregroundColor(Color.black)
+                                            .bold()
+                                    
+                                    if (event.message != ""){
+                                        Text("Message: \(event.message)")
+                                            
+                                    }
+                                    
+                                    HStack {
+                                        Text("Available swipe(s): \(event.numberOfSwipes)")
+                                        Spacer()
+                                        Text("Reserved: \(event.reserved)")
+                                    }
                                     Button(action: {
                                         reservationManager.reserveSpot(for: event)
                                         
@@ -39,19 +49,12 @@ struct MarketplaceView: View {
                                             .background(Color.blue)
                                             .cornerRadius(10)
                                     })
-                                    
                                 }
-                                HStack {
-                                    Text("Available swipe(s): \(event.numberOfSwipes)")
-                                    Spacer()
-                                    Text("Reserved: \(event.reserved)")
-                                }
-                            }
                                 .frame(maxWidth: .infinity)
                                 .padding()
                                 .background(Color.teal)//cyan/ mint/indigo
                                 .cornerRadius(10)
-                        }
+                            }
                         }
                         
                     }
@@ -60,6 +63,7 @@ struct MarketplaceView: View {
                         ToolbarItem(placement: .navigationBarTrailing, content: {
                             NavigationLink{
                                 NewSwipeView()
+                                    .environmentObject(eventManager)
                             }label: {
                                 Text("Offer Swipe(s)")
                                 Image(systemName: "plus")

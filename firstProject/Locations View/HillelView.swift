@@ -22,13 +22,23 @@ struct HillelView: View {
                         ForEach(eventManager.events) { event in
                             if (event.location == "Hillel" && event.numberOfSwipes > 0){
                                 VStack(spacing: 10) {
-                                HStack {
                                     Text("\(event.name) is eating at \(event.time)")
-                                        .font(.system(.title3))
-                                        .foregroundColor(Color.black)
-                                        .bold()
+                                            .font(.system(.title3))
+                                            .foregroundColor(Color.black)
+                                            .bold()
+                                    
+                                    if (event.message != ""){
+                                        Text("Message: \(event.message)")
+                                    }
+    
+                                
+                                HStack {
+                                    Text("Available swipe(s): \(event.numberOfSwipes)")
                                     Spacer()
-                                    Button(action: {
+                                    Text("Reserved: \(event.reserved)")
+                                }
+                                
+                                Button(action: {
                                         reservationManager.reserveSpot(for: event)
                                         
                                     }, label: {
@@ -38,13 +48,6 @@ struct HillelView: View {
                                             .background(Color.blue)
                                             .cornerRadius(10)
                                     })
-                                    
-                                }
-                                HStack {
-                                    Text("Available swipe(s): \(event.numberOfSwipes)")
-                                    Spacer()
-                                    Text("Reserved: \(event.reserved)")
-                                }
                             }
                                 .frame(maxWidth: .infinity)
                                 .padding()
@@ -59,6 +62,7 @@ struct HillelView: View {
                         ToolbarItem(placement: .navigationBarTrailing, content: {
                             NavigationLink{
                                 NewSwipeView()
+                                    .environmentObject(eventManager)
                             }label: {
                                 Text("Offer Swipe(s)")
                                 Image(systemName: "plus")

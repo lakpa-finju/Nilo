@@ -43,11 +43,11 @@ struct SignupView: View {
                 TextField("Name",text: $name)
                     .foregroundColor(.black)
                     .textFieldStyle(.plain)
-                    .placeholder(when: name.isEmpty){
+                    /*.placeholder(when: name.isEmpty){
                         Text("Name")
                             .foregroundColor(.black)
                             .bold()
-                    }
+                    }*/
                 
                 //This is for line below Name
                 Rectangle()
@@ -58,11 +58,13 @@ struct SignupView: View {
                 TextField("Email",text: $email)
                     .foregroundColor(.black)
                     .textFieldStyle(.plain)
+                /*
                     .placeholder(when: email.isEmpty){
                         Text("Email")
                             .foregroundColor(.black)
                             .bold()
                     }
+                 */
                 //This is for line below emial
                 Rectangle()
                     .frame(width: 350,height: 1)
@@ -71,11 +73,13 @@ struct SignupView: View {
                 SecureField("Password",text: $password)
                     .foregroundColor(.black)
                     .textFieldStyle(.plain)
+                /*
                     .placeholder(when: password.isEmpty){
                         Text("Password")
                             .foregroundColor(.black)
                             .bold()
                     }
+                 */
                 // this is for line below password
                 Rectangle()
                     .frame(width: 350,height: 1)

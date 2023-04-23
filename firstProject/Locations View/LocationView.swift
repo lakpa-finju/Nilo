@@ -134,6 +134,7 @@ struct LocationView: View {
                     ToolbarItem(placement: .navigationBarTrailing, content: {
                         NavigationLink{
                             NewSwipeView()
+                                .environmentObject(eventManager)
                         }label: {
                             Text("Offer Swipe(s)")
                             Image(systemName: "plus")

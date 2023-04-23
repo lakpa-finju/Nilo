@@ -45,11 +45,13 @@ struct LoginView: View {
                 TextField("Email",text: $email)
                     .foregroundColor(.black)
                     .textFieldStyle(.plain)
+                /*
                     .placeholder(when: email.isEmpty){
                         Text("Email")
                             .foregroundColor(.black)
                             .bold()
                     }
+                 */
                 //This is for line below emial
                 Rectangle()
                     .frame(width: 350,height: 1)
@@ -58,11 +60,12 @@ struct LoginView: View {
                 SecureField("Password",text: $password)
                     .foregroundColor(.black)
                     .textFieldStyle(.plain)
+                /*
                     .placeholder(when: password.isEmpty){
                         Text("Password")
                             .foregroundColor(.black)
                             .bold()
-                    }
+                    }*/
                 // this is for line below password
                 Rectangle()
                     .frame(width: 350,height: 1)
