@@ -10,19 +10,20 @@ import SwiftUI
 struct ReservationsView: View {
     @EnvironmentObject var reservationsManager: ReservationsManager
     @EnvironmentObject var userProfileManager: UserProfilesManager
+    @EnvironmentObject var profileImagesManager: ProfileImagesManager
     var body: some View {
         VStack {
             Text("Reservations")
                 .font(.system(.title))
-            
             GeometryReader { geometry in
                 ScrollView(.vertical, showsIndicators: true) {
                     VStack(spacing: 10) {
                         ForEach(reservationsManager.reservations) { reservation in
-                            if (reservation.eventOrganizerName == userProfileManager.getUserName()){
+                            if (reservation.id == userProfileManager.geteUserId()){
                                 VStack(spacing: 10) {
                                     Text("Name: \(reservation.nameOfReserver)")
                                     Text("Email: \(reservation.emailOfReserver)")
+                                    
                                     
                                 }
                                 .frame(maxWidth: .infinity)
@@ -32,17 +33,7 @@ struct ReservationsView: View {
                             }
                             
                         }
-                        .padding()
-                        .toolbar{
-                            ToolbarItem(placement: .navigationBarTrailing, content: {
-                                NavigationLink{
-                                    NewSwipeView()
-                                }label: {
-                                    Text("Offer Swipe(s)")
-                                    Image(systemName: "plus")
-                                }
-                            })
-                        }
+                      
                         
                     }
                     .frame(width: geometry.size.width, height: geometry.size.height)
@@ -58,5 +49,6 @@ struct ReservationsView_Previews: PreviewProvider {
     static var previews: some View {
         ReservationsView().environmentObject(ReservationsManager())
             .environmentObject(UserProfilesManager())
+            .environmentObject(ProfileImagesManager())
     }
 }

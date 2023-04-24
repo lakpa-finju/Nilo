@@ -34,12 +34,13 @@ class ReservationsManager: ObservableObject{
             } else {
                 for document in querySnapshot!.documents {
                     let data = document.data()
-                    let id = data["Id"] as? String ?? ""
+                    let id = data["Event Id"] as? String ?? ""
+                    let reserverId = data["Reserver Id"] as? String ?? ""
                     let nameOfReserver = data["Name of reserver"] as? String ?? ""
                     let emailOfReserver = data["Email of Reserver"] as? String ?? ""
                     let eventOrganizerName = data["Event organizer name"] as? String ?? ""
                     
-                    let reservation = Reservation(id: id, nameOfReserver: nameOfReserver, emailOfReserver: emailOfReserver, eventOrganizerName: eventOrganizerName)
+                    let reservation = Reservation(id: id,reserverId: reserverId, nameOfReserver: nameOfReserver, emailOfReserver: emailOfReserver, eventOrganizerName: eventOrganizerName)
                     self.reservations.append(reservation)
                 }
             }
@@ -53,7 +54,7 @@ class ReservationsManager: ObservableObject{
         let db = Firestore.firestore()
         let randomId = UUID.init().uuidString
         let ref = db.collection("Reservations").document(randomId)
-        ref.setData(["Event Id":reservation.id,"Name of reserver":reservation.nameOfReserver,"Email of Reserver":reservation.emailOfReserver, "Event organizer name": reservation.eventOrganizerName]){
+        ref.setData(["Event Id":reservation.id,"Reserver Id":reservation.reserverId,"Name of reserver":reservation.nameOfReserver,"Email of Reserver":reservation.emailOfReserver, "Event organizer name": reservation.eventOrganizerName]){
             error in
             if let error = error{
                 print(error.localizedDescription)
@@ -102,7 +103,7 @@ class ReservationsManager: ObservableObject{
         guard event.numberOfSwipes > 0 else { return }
                 
         // Create a new reservation object and add it to the reservations array
-        let reservation = Reservation(id: event.id,nameOfReserver: self.getUserName(), emailOfReserver: self.getUserEmail(), eventOrganizerName: event.name)
+        let reservation = Reservation(id: event.id,reserverId: self.geteUserId(), nameOfReserver: self.getUserName(), emailOfReserver: self.getUserEmail(), eventOrganizerName: event.name)
         //add reservation to the list to exchange between the view controller
         reservations.append(reservation)
         //add the reservation to the database
