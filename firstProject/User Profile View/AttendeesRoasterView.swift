@@ -20,8 +20,9 @@ struct AttendeesRoasterView: View {
             GeometryReader { geometry in
                 ScrollView(.vertical, showsIndicators: true) {
                     VStack(spacing: 10) {
-                        ForEach(reservationsManager.reservations) { reservation in
-                            if (reservation.id == userProfileManager.geteUserId()){
+                        ForEach(reservationsManager.reservations, id: \.id) {
+                            reservation in
+                            if (reservation.eventId == userProfileManager.geteUserId()){
                                 VStack(spacing: 5) {
                                     Text("Name: \(reservation.nameOfReserver)")
                                         .font(.system(.title))
