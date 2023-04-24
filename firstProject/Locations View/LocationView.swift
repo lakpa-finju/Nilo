@@ -12,10 +12,14 @@ struct LocationView: View {
     @StateObject var reservationsManager = ReservationsManager()
     @StateObject var userProfileManager = UserProfilesManager()
     @StateObject var profileImagesManager = ProfileImagesManager()
-
-    @State private var showPopup = false
-    
     @State private var profileImage: UIImage?
+    @State private var doesExist = false
+    
+    //this function awaits until we get response from the database
+    private func updateDoesExist() async {
+            doesExist = await reservationsManager.checkExistence(collectionsName: "Events", documentId: eventManager.geteUserId())
+        }
+
     
     var locations = ["Marketplace", "Cafe 77", "Fireside", "Foodside", "Hillel", "Brief Stop"]
     
@@ -116,14 +120,14 @@ struct LocationView: View {
                             .background(Color.blue)
                             .cornerRadius(10)
                     }
-                    
+                   
                     //Foot note
                     HStack {
                         Spacer()
                         Text("© 2023 - Created by Lakpa F. Sherpa")
                             .font(.footnote)
                             .foregroundColor(.black)
-                            .offset(y:220)
+                            .offset(y:190)
                         Spacer()
                     }
                     
@@ -132,12 +136,21 @@ struct LocationView: View {
                 .navigationTitle("Locations")
                 .toolbar{
                     ToolbarItem(placement: .navigationBarTrailing, content: {
-                        NavigationLink{
-                            NewSwipeView()
-                                .environmentObject(eventManager)
-                        }label: {
-                            Text("Offer Swipe(s)")
-                            Image(systemName: "plus")
+                        if (doesExist == false){
+                            NavigationLink{
+                                NewSwipeView()
+                                    .environmentObject(eventManager)
+                            }label: {
+                                Text("Offer Swipe(s)")
+                                Image(systemName: "plus")
+                            }
+                        }else{
+                            NavigationLink{
+                                CancelEventView()
+                                    .environmentObject(eventManager)
+                            }label: {
+                                Text("Cancel my Offer")
+                            }
                         }
                         
                         
@@ -186,6 +199,9 @@ struct LocationView: View {
             profileImage = image
         })
         .accentColor(Color(.label))
+        .task {
+                    await updateDoesExist()
+                }
     }
     
 }

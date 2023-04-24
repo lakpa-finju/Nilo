@@ -93,6 +93,21 @@ class EventsManager: ObservableObject {
         
     }
     
+    //function to delete event from the database
+    func deleteEvent(event: Event){
+        let db = Firestore.firestore()
+        let ref = db.collection("Events").document(event.id)
+        // Delete the document
+        ref.delete { error in
+            if let error = error {
+                print("Error deleting document: \(error.localizedDescription)")
+            } else {
+                print("Document successfully deleted!")
+            }
+        }
+        
+    }
+    
     //returns a event given eventid
     func getevent(eventId: String) -> Event? {
         for event in self.events{

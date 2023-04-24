@@ -67,13 +67,23 @@ struct FoodsideView: View {
                     .padding()
                     .toolbar{
                         ToolbarItem(placement: .navigationBarTrailing, content: {
-                            NavigationLink{
-                                NewSwipeView()
-                                    .environmentObject(eventManager)
-                            }label: {
-                                Text("Offer Swipe(s)")
-                                Image(systemName: "plus")
+                            if (doesExist == false){
+                                NavigationLink{
+                                    NewSwipeView()
+                                        .environmentObject(eventManager)
+                                }label: {
+                                    Text("Offer Swipe(s)")
+                                    Image(systemName: "plus")
+                                }
+                            }else{
+                                NavigationLink{
+                                    CancelEventView()
+                                        .environmentObject(eventManager)
+                                }label: {
+                                    Text("Cancel my Offer")
+                                }
                             }
+                            
                         })
                     }
 

@@ -42,6 +42,7 @@
 		25F60DC929F582B5009455F1 /* Todo in Resources */ = {isa = PBXBuildFile; fileRef = 25F60DC829F582B5009455F1 /* Todo */; };
 		25F60DCB29F61AD9009455F1 /* AttendeesRoasterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F60DCA29F61AD9009455F1 /* AttendeesRoasterView.swift */; };
 		25F60DCD29F720A1009455F1 /* customPlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F60DCC29F720A1009455F1 /* customPlaceHolder.swift */; };
+		25F60DCF29F728BC009455F1 /* CancelEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F60DCE29F728BC009455F1 /* CancelEventView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,7 @@
 		25F60DC829F582B5009455F1 /* Todo */ = {isa = PBXFileReference; lastKnownFileType = text; path = Todo; sourceTree = "<group>"; };
 		25F60DCA29F61AD9009455F1 /* AttendeesRoasterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendeesRoasterView.swift; sourceTree = "<group>"; };
 		25F60DCC29F720A1009455F1 /* customPlaceHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customPlaceHolder.swift; sourceTree = "<group>"; };
+		25F60DCE29F728BC009455F1 /* CancelEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelEventView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 				25C3241F29F4D6C700D97ABA /* ProfileImagesManager.swift */,
 				25F60DC829F582B5009455F1 /* Todo */,
 				2524F58F29F18D79009D4BCF /* EventsManager.swift */,
+				25F60DCE29F728BC009455F1 /* CancelEventView.swift */,
 				25C3241029F4822700D97ABA /* UserProfilesManager.swift */,
 				2524F5AA29F2E1DE009D4BCF /* ReservationsManager.swift */,
 				25E1B33A29EC629600CD9D69 /* Assets.xcassets */,
@@ -301,6 +304,7 @@
 				25E1B33729EC629300CD9D69 /* firstProjectApp.swift in Sources */,
 				25C3241129F4822700D97ABA /* UserProfilesManager.swift in Sources */,
 				2524F5A329F1DDEA009D4BCF /* FoodsideView.swift in Sources */,
+				25F60DCF29F728BC009455F1 /* CancelEventView.swift in Sources */,
 				2524F59229F196DC009D4BCF /* LocationView.swift in Sources */,
 				2524F59F29F1DCC4009D4BCF /* HillelView.swift in Sources */,
 			);
