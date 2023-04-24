@@ -9,8 +9,13 @@ import SwiftUI
 
 struct FoodsideView: View {
     @EnvironmentObject var eventManager: EventsManager
-    @EnvironmentObject var reservationManager: ReservationsManager
-    @State private var showPopup = false
+    @EnvironmentObject var reservationsManager: ReservationsManager
+    @State private var doesExist = false
+    
+    //this function awaits until we get response from the database
+    private func updateDoesExist() async {
+            doesExist = await reservationsManager.checkExistence(collectionsName: "Events", documentId: eventManager.geteUserId())
+        }
     
     var body: some View {
         VStack {
@@ -38,16 +43,19 @@ struct FoodsideView: View {
                                     Text("Reserved: \(event.reserved)")
                                 }
                                 
-                                Button(action: {
-                                        reservationManager.reserveSpot(for: event)
-                                        
-                                    }, label: {
-                                        Text("Reserve")
-                                            .foregroundColor(Color.white)
-                                            .padding(.all, 10)
-                                            .background(Color.blue)
-                                            .cornerRadius(10)
-                                    })
+                                    // if User has set an event that is offered a swipe, they shouldn't see a reserve btn
+                                    if (doesExist == false){
+                                        Button(action: {
+                                            reservationsManager.reserveSpot(for: event)
+                                            
+                                        }, label: {
+                                            Text("Reserve")
+                                                .foregroundColor(Color.white)
+                                                .padding(.all, 10)
+                                                .background(Color.blue)
+                                                .cornerRadius(10)
+                                        })
+                                    }
                             }
                                 .frame(maxWidth: .infinity)
                                 .padding()
@@ -73,6 +81,9 @@ struct FoodsideView: View {
                 .frame(width: geometry.size.width, height: geometry.size.height)
             }
         }
+        .task {
+                    await updateDoesExist()
+                }
         
     }
 }
@@ -83,88 +94,3 @@ struct FoodsideView_Previews: PreviewProvider {
             .environmentObject(ReservationsManager())
     }
 }
-/*
-struct FoodsideView: View {
-    @EnvironmentObject var eventManager: EventManager
-    @EnvironmentObject var reservationManager: ReservationsManager
-    @State private var showPopup = false
-    
-    var body: some View {
-        VStack{
-            Text("Foodside").font(.system(.title))
-            GeometryReader{ geometry in
-                ScrollView (.vertical, showsIndicators: true) {
-                    /*
-                    VStack (spacing:7){
-                        ForEach(0..<50) { index in
-                            Text("Item \(index)")
-                                .font(.title)
-                                .foregroundColor(.white)
-                                .frame(width: 300, height: 50)
-                                .background(Color.blue)
-                            
-                        }
-                        
-                        */
-                         
-                         List(eventManager.events, id:\.id){event in
-                         if (event.location == "Foodside" && event.numberOfSwipes > 0){
-                         VStack {
-                         HStack {
-                         Text("\(event.name) is eating at \(event.time)")
-                         .font(.system(.body))
-                         .foregroundColor(Color.black)
-                         .bold()
-                         Spacer()
-                         Button(action: {
-                         reservationManager.reserveSpot(for: event)
-                         
-                         }, label: {
-                         Text("Reserve")
-                         .foregroundColor(Color.white)
-                         .padding(.all, 10)
-                         .background(Color.blue)
-                         .cornerRadius(10)
-                         })
-                         }
-                         HStack {
-                         Text("Available Seats: \(event.numberOfSwipes)")
-                         Spacer()
-                         Text("Reserved Seats: \(event.reserved)")
-                         }
-                         }
-                         
-                         }
-                         
-                        
-                    }
-                    .offset(y:-40)
-                    .toolbar{
-                        ToolbarItem(placement: .navigationBarTrailing, content: {
-                            NavigationLink{
-                                NewSwipeView()
-                            }label: {
-                                Text("Offer Swipe(s)")
-                                Image(systemName: "plus")
-                            }
-                        })
-                    }
-                    //this prevents the first item cut off from scroll view top
-                    .offset(y:50)
-                    
-                } // for scroll view
-                .frame(width: geometry.size.width, height: geometry.size.height)
-                
-            }//for geometry veiw
-            
-        }//vstack
-    }
-}
-
-struct FoodsideView_Previews: PreviewProvider {
-    static var previews: some View {
-        FoodsideView().environmentObject(EventManager())
-            .environmentObject(ReservationsManager())
-    }
-}
-*/

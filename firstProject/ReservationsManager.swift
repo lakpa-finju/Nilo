@@ -64,21 +64,17 @@ class ReservationsManager: ObservableObject{
     }
     
     //function to check if a document is in the database collections
-    private func checkExistence(collectionsName: String, documentId: String) -> Bool{
-        var doesExist: Bool = false
+    func checkExistence(collectionsName: String, documentId: String) async -> Bool {
         let db = Firestore.firestore()
-        let randomId = UUID.init().uuidString
-        let ref = db.collection(collectionsName)
-        ref.document(documentId).getDocument { (document, error) in
-            if let document = document, document.exists {
-                doesExist = true
-            } else {
-                doesExist = false
+            let documentReference = db.collection(collectionsName).document(documentId)
+            do {
+                let documentSnapshot = try await documentReference.getDocument()
+                return documentSnapshot.exists
+            } catch {
+                print("Error fetching document: \(error)")
+                return false
             }
         }
-        return doesExist
-        
-    }
 
     
     //get the loggedin user Email

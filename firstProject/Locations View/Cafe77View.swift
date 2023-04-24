@@ -9,8 +9,13 @@ import SwiftUI
 
 struct Cafe77View: View {
     @EnvironmentObject var eventManager: EventsManager
-    @EnvironmentObject var reservationManager: ReservationsManager
-    @State private var showPopup = false
+    @EnvironmentObject var reservationsManager: ReservationsManager
+    @State private var doesExist = false
+    
+    //this function awaits until we get response from the database
+    private func updateDoesExist() async {
+            doesExist = await reservationsManager.checkExistence(collectionsName: "Events", documentId: eventManager.geteUserId())
+        }
     
     var body: some View {
         VStack {
@@ -37,17 +42,19 @@ struct Cafe77View: View {
                                     Spacer()
                                     Text("Reserved: \(event.reserved)")
                                 }
-                                Button(action: {
-                                        reservationManager.reserveSpot(for: event)
-                                        
-                                    }, label: {
-                                        Text("Reserve")
-                                            .foregroundColor(Color.white)
-                                            .padding(.all, 10)
-                                            .background(Color.blue)
-                                            .cornerRadius(10)
-                                    })
-                                    
+                                    // if User has set an event that is offered a swipe, they shouldn't see a reserve btn
+                                    if (doesExist == false){
+                                        Button(action: {
+                                            reservationsManager.reserveSpot(for: event)
+                                            
+                                        }, label: {
+                                            Text("Reserve")
+                                                .foregroundColor(Color.white)
+                                                .padding(.all, 10)
+                                                .background(Color.blue)
+                                                .cornerRadius(10)
+                                        })
+                                    }
                                 
                             }
                                 .frame(maxWidth: .infinity)
@@ -75,6 +82,9 @@ struct Cafe77View: View {
                 .frame(width: geometry.size.width, height: geometry.size.height)
             }
         }
+        .task {
+                    await updateDoesExist()
+                }
         
     }
     
