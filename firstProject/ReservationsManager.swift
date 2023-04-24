@@ -49,10 +49,11 @@ class ReservationsManager: ObservableObject{
     
     
     //function to add resevations to the database
-    private func addReservation(reservation: Reservation, eventId: String){
+    private func addReservation(reservation: Reservation){
         let db = Firestore.firestore()
-        let ref = db.collection("Reservations").document(eventId)
-        ref.setData(["Id":reservation.id,"Name of reserver":reservation.nameOfReserver,"Email of Reserver":reservation.emailOfReserver, "Event organizer name": reservation.eventOrganizerName]){
+        let randomId = UUID.init().uuidString
+        let ref = db.collection("Reservations").document(randomId)
+        ref.setData(["Event Id":reservation.id,"Name of reserver":reservation.nameOfReserver,"Email of Reserver":reservation.emailOfReserver, "Event organizer name": reservation.eventOrganizerName]){
             error in
             if let error = error{
                 print(error.localizedDescription)
@@ -101,11 +102,11 @@ class ReservationsManager: ObservableObject{
         guard event.numberOfSwipes > 0 else { return }
                 
         // Create a new reservation object and add it to the reservations array
-        let reservation = Reservation(id: self.geteUserId(),nameOfReserver: self.getUserName(), emailOfReserver: self.getUserEmail(), eventOrganizerName: event.name)
+        let reservation = Reservation(id: event.id,nameOfReserver: self.getUserName(), emailOfReserver: self.getUserEmail(), eventOrganizerName: event.name)
         //add reservation to the list to exchange between the view controller
         reservations.append(reservation)
         //add the reservation to the database
-        self.addReservation(reservation: reservation, eventId: event.id)
+        self.addReservation(reservation: reservation)
         
         //updated event 
         let updatedEvent = Event(id: event.id, name: event.name, location: event.location, numberOfSwipes: event.numberOfSwipes-1, time: event.time, message: event.message, phoneNo: event.message, dateCreated: event.dateCreated, reserved: event.reserved+1)
