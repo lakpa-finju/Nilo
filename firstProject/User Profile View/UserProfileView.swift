@@ -92,6 +92,7 @@ struct UserProfileView: View {
             NavigationLink(destination: ReservationsView()
                 .environmentObject(userProfileManager)
                 .environmentObject(reservationsManager)
+                .environmentObject(profileImagesManager)
             ) {
                 Text("My Reservations")
                     .font(.headline)
@@ -108,9 +109,6 @@ struct UserProfileView: View {
         .onReceive(profileImagesManager.$profileImage, perform: { image in
             profileImage = image
         })
-        /*.onAppear {
-            profileImagesManager.loadProfileImage(profileImageId: userProfileManager.getUserName())
-        }*/
     }
 }
 

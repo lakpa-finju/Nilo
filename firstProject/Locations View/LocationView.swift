@@ -185,9 +185,6 @@ struct LocationView: View {
         .onReceive(profileImagesManager.$profileImage, perform: { image in
             profileImage = image
         })
-        .onAppear {
-            profileImagesManager.loadProfileImage(profileImageId: userProfileManager.getUserName())
-        }
         .accentColor(Color(.label))
     }
     
