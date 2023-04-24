@@ -40,14 +40,11 @@ struct SignupView: View {
                     .offset(x:-100,y: -100)
                 
                 //Name palceholder
-                TextField("Name",text: $name)
+                TextField("",text: $name)
+                    .bold()
                     .foregroundColor(.black)
                     .textFieldStyle(.plain)
-                    /*.placeholder(when: name.isEmpty){
-                        Text("Name")
-                            .foregroundColor(.black)
-                            .bold()
-                    }*/
+                    .customPlaceholder("Name", text: $name)
                 
                 //This is for line below Name
                 Rectangle()
@@ -55,31 +52,21 @@ struct SignupView: View {
                     .foregroundColor(.black)
                 
                 //Email placeholder
-                TextField("Email",text: $email)
+                TextField("",text: $email)
+                    .bold()
                     .foregroundColor(.black)
                     .textFieldStyle(.plain)
-                /*
-                    .placeholder(when: email.isEmpty){
-                        Text("Email")
-                            .foregroundColor(.black)
-                            .bold()
-                    }
-                 */
+                    .customPlaceholder("Email", text: $email)
                 //This is for line below emial
                 Rectangle()
                     .frame(width: 350,height: 1)
                     .foregroundColor(.black)
                 
-                SecureField("Password",text: $password)
+                SecureField("", text: $password)
                     .foregroundColor(.black)
                     .textFieldStyle(.plain)
-                /*
-                    .placeholder(when: password.isEmpty){
-                        Text("Password")
-                            .foregroundColor(.black)
-                            .bold()
-                    }
-                 */
+                    .customPlaceholder("Password", text: $password)
+                
                 // this is for line below password
                 Rectangle()
                     .frame(width: 350,height: 1)
@@ -161,8 +148,10 @@ struct SignupView: View {
 }
 
 
+
 struct SignupView_Previews: PreviewProvider {
     static var previews: some View {
         SignupView()
     }
 }
+

@@ -42,30 +42,21 @@ struct LoginView: View {
                     .foregroundColor(.black)
                     .font(.system(size: 40, weight: .bold,design: .rounded))
                     .offset(x:-100,y: -100)
-                TextField("Email",text: $email)
+                TextField("",text: $email)
+                    .bold()
                     .foregroundColor(.black)
                     .textFieldStyle(.plain)
-                /*
-                    .placeholder(when: email.isEmpty){
-                        Text("Email")
-                            .foregroundColor(.black)
-                            .bold()
-                    }
-                 */
+                    .customPlaceholder("Email", text: $email)
+
                 //This is for line below emial
                 Rectangle()
                     .frame(width: 350,height: 1)
                     .foregroundColor(.black)
                 
-                SecureField("Password",text: $password)
+                SecureField("",text: $password)
                     .foregroundColor(.black)
                     .textFieldStyle(.plain)
-                /*
-                    .placeholder(when: password.isEmpty){
-                        Text("Password")
-                            .foregroundColor(.black)
-                            .bold()
-                    }*/
+                    .customPlaceholder("Password", text: $password)
                 // this is for line below password
                 Rectangle()
                     .frame(width: 350,height: 1)

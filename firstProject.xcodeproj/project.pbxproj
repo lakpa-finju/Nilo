@@ -41,6 +41,7 @@
 		25E1B37229EDA67000CD9D69 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 25E1B37129EDA67000CD9D69 /* FirebaseAuth */; };
 		25F60DC929F582B5009455F1 /* Todo in Resources */ = {isa = PBXBuildFile; fileRef = 25F60DC829F582B5009455F1 /* Todo */; };
 		25F60DCB29F61AD9009455F1 /* AttendeesRoasterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F60DCA29F61AD9009455F1 /* AttendeesRoasterView.swift */; };
+		25F60DCD29F720A1009455F1 /* customPlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F60DCC29F720A1009455F1 /* customPlaceHolder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		25E1B36E29EDA36700CD9D69 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		25F60DC829F582B5009455F1 /* Todo */ = {isa = PBXFileReference; lastKnownFileType = text; path = Todo; sourceTree = "<group>"; };
 		25F60DCA29F61AD9009455F1 /* AttendeesRoasterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendeesRoasterView.swift; sourceTree = "<group>"; };
+		25F60DCC29F720A1009455F1 /* customPlaceHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = customPlaceHolder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 			children = (
 				2524F58A29F09340009D4BCF /* LoginView.swift */,
 				2524F59629F1C2BA009D4BCF /* SignupView.swift */,
+				25F60DCC29F720A1009455F1 /* customPlaceHolder.swift */,
 			);
 			path = userAuthentication;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				2524F5AD29F2E4B1009D4BCF /* UserProfileView.swift in Sources */,
 				2524F5AB29F2E1DE009D4BCF /* ReservationsManager.swift in Sources */,
 				25C3241729F4BB4C00D97ABA /* UpdatePasswordView.swift in Sources */,
+				25F60DCD29F720A1009455F1 /* customPlaceHolder.swift in Sources */,
 				2524F59429F19D30009D4BCF /* NewSwipeView.swift in Sources */,
 				2524F5A529F1DE6E009D4BCF /* BriefstopView.swift in Sources */,
 				25C3241A29F4BDF700D97ABA /* UpdateUserNameView.swift in Sources */,
