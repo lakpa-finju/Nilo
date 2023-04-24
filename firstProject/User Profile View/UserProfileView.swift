@@ -88,7 +88,20 @@ struct UserProfileView: View {
                     .cornerRadius(10)
             }
             
-            //list of reservations
+            //list of swipes taken
+            NavigationLink(destination: AttendeesRoasterView()
+                .environmentObject(userProfileManager)
+                .environmentObject(reservationsManager)
+                .environmentObject(profileImagesManager)
+            ) {
+                Text("Swipe(s) reserved")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color.blue)
+                    .cornerRadius(10)
+            }
+            //list of reservations that the logged in User made
             NavigationLink(destination: ReservationsView()
                 .environmentObject(userProfileManager)
                 .environmentObject(reservationsManager)
@@ -101,7 +114,6 @@ struct UserProfileView: View {
                     .background(Color.blue)
                     .cornerRadius(10)
             }
-            
             Spacer()
         }
         .padding()
