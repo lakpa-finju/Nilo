@@ -108,9 +108,9 @@ struct UserProfileView: View {
         .onReceive(profileImagesManager.$profileImage, perform: { image in
             profileImage = image
         })
-        .onAppear {
+        /*.onAppear {
             profileImagesManager.loadProfileImage(profileImageId: userProfileManager.getUserName())
-        }
+        }*/
     }
 }
 

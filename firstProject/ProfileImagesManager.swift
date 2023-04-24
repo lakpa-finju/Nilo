@@ -12,7 +12,7 @@ class ProfileImagesManager: ObservableObject{
     
     init() {
         let userProfilesManager = UserProfilesManager()
-        loadProfileImage(profileImageId: userProfilesManager.getUserName())
+        loadProfileImage(profileImageId: userProfilesManager.geteUserId())
     }
     
     //Function to Upload UserFile in the database

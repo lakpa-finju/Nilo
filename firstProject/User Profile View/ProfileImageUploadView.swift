@@ -35,7 +35,7 @@ struct ProfileImageUploadView: View {
     //loads up new image and upates it to the database
     func loadImage() {
         guard let selectedImage = profileImage else { return }
-        let profileImage = ProfileImage(id: userProfilesManager.getUserName() , image: selectedImage)
+        let profileImage = ProfileImage(id: userProfilesManager.geteUserId() , image: selectedImage)
         profileImagesManager.uploadProfileImage(profileImage: profileImage)
         
         }
