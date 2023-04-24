@@ -11,8 +11,14 @@ struct ReservationsView: View {
     @EnvironmentObject var reservationsManager: ReservationsManager
     @EnvironmentObject var userProfileManager: UserProfilesManager
     @EnvironmentObject var profileImagesManager: ProfileImagesManager
-    @State private var eventOrganizerImage: UIImage?
+    @State private var eventOrganizerImages: [String: UIImage] = [:]
+
     
+    private func loadEventOrganizerImage(profileImageId:String) async{
+        if let image = await profileImagesManager.loadEventOrganizerImage(profileImageId: profileImageId) {
+                eventOrganizerImages[profileImageId] = image
+            }
+    }
     var body: some View {
         VStack {
             Text("Reservations")
@@ -28,7 +34,7 @@ struct ReservationsView: View {
                                     Text("Email: \(reservation.eventOrganizerEmail)")
                                         .font(.system(.title3))
                                     //Display profile picture if there is one
-                                    if let eventOrganizerImage = eventOrganizerImage{
+                                    if let eventOrganizerImage = eventOrganizerImages[reservation.eventId]{
                                         Image(uiImage: eventOrganizerImage)
                                             .resizable()
                                             .aspectRatio(contentMode: .fill)
@@ -49,6 +55,9 @@ struct ReservationsView: View {
                                        
                                     
                                 }
+                                .task {
+                                   await loadEventOrganizerImage(profileImageId: reservation.eventId)
+                                }
                                 .frame(maxWidth: .infinity)
                                 .padding()
                                 .background(Color.teal)//cyan/ mint/indigo
@@ -59,9 +68,9 @@ struct ReservationsView: View {
                       Spacer() //to push the data to the top when there is only one data
                         
                     }
-                    .onReceive(profileImagesManager.$eventOrganizerImage, perform: { image in
+                   /* .onReceive(profileImagesManager.$eventOrganizerImage, perform: { image in
                         eventOrganizerImage = image
-                    })
+                    }) */
                     .frame(width: geometry.size.width, height: geometry.size.height)
                 }
             }

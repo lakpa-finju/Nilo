@@ -132,8 +132,8 @@ class ReservationsManager: ObservableObject{
         let updatedEvent = Event(id: event.id, name: event.name, location: event.location, numberOfSwipes: event.numberOfSwipes-1, time: event.time, message: event.message, phoneNo: event.message, dateCreated: event.dateCreated, reserved: event.reserved+1)
         
         //get the profile image of the event organizer from the database
-        let profileImagesManager = ProfileImagesManager()
-        profileImagesManager.loadEventOrganizerImage(profileImageId: reservation.eventId)
+        /*let profileImagesManager = ProfileImagesManager()
+        profileImagesManager.loadEventOrganizerImage(profileImageId: reservation.eventId)*/
         
         //update in the database
         let eventManager = EventsManager()
