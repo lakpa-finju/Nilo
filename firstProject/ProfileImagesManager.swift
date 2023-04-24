@@ -9,6 +9,7 @@ import FirebaseStorage
 
 class ProfileImagesManager: ObservableObject{
     @Published var profileImage: UIImage?
+    @Published var eventOrganizerImage: UIImage?
     
     init() {
         let userProfilesManager = UserProfilesManager()
@@ -49,6 +50,31 @@ class ProfileImagesManager: ObservableObject{
                             if let image = UIImage(data: data) {
                                 DispatchQueue.main.async {
                                     self.profileImage = image
+                                }
+                            }
+                        }
+                    }.resume()
+                }
+            }
+        }
+    
+    //Function to load event orgainzer's profile image when ProfileImageId is passedIn
+    func loadEventOrganizerImage(profileImageId: String) {
+            let storage = Storage.storage()
+            let storageRef = storage.reference()
+            let profileImageRef = storageRef.child("Profile images/\(profileImageId).jpg")
+            
+            profileImageRef.downloadURL { (url, error) in
+                if let error = error {
+                    print("Error getting profile image URL: \(error.localizedDescription)")
+                } else if let url = url {
+                    URLSession.shared.dataTask(with: url) { (data, response, error) in
+                        if let error = error {
+                            print("Error loading profile image: \(error.localizedDescription)")
+                        } else if let data = data {
+                            if let image = UIImage(data: data) {
+                                DispatchQueue.main.async {
+                                    self.eventOrganizerImage = image
                                 }
                             }
                         }

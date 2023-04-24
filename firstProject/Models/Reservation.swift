@@ -10,10 +10,12 @@ import SwiftUI
 struct Reservation: Identifiable{
     var id: String // Id of the event
     var eventId:String
-    var reserverId: String
-    var nameOfReserver: String
+    var reserverId:String
+    var nameOfReserver:String
     var emailOfReserver:String
-    var eventOrganizerName: String
+    var eventOrganizerName:String
+    var eventOrganizerEmail:String
+    var eventTime:String
     
 }
 

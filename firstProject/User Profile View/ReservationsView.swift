@@ -11,7 +11,7 @@ struct ReservationsView: View {
     @EnvironmentObject var reservationsManager: ReservationsManager
     @EnvironmentObject var userProfileManager: UserProfilesManager
     @EnvironmentObject var profileImagesManager: ProfileImagesManager
-    @State private var reserverImage: UIImage?
+    @State private var eventOrganizerImage: UIImage?
     
     var body: some View {
         VStack {
@@ -21,15 +21,15 @@ struct ReservationsView: View {
                 ScrollView(.vertical, showsIndicators: true) {
                     VStack(spacing: 10) {
                         ForEach(reservationsManager.reservations) { reservation in
-                            if (reservation.id == userProfileManager.geteUserId()){
+                            if (reservation.reserverId == userProfileManager.geteUserId()){
                                 VStack(spacing: 5) {
-                                    Text("Name: \(reservation.nameOfReserver)")
+                                    Text("Name: \(reservation.eventOrganizerName)")
                                         .font(.system(.title))
-                                    Text("Email: \(reservation.emailOfReserver)")
+                                    Text("Email: \(reservation.eventOrganizerEmail)")
                                         .font(.system(.title3))
                                     //Display profile picture if there is one
-                                    if let reserverImage = reserverImage{
-                                        Image(uiImage: reserverImage)
+                                    if let eventOrganizerImage = eventOrganizerImage{
+                                        Image(uiImage: eventOrganizerImage)
                                             .resizable()
                                             .aspectRatio(contentMode: .fill)
                                             .frame(width: 150,height: 200)
@@ -59,8 +59,8 @@ struct ReservationsView: View {
                       Spacer() //to push the data to the top when there is only one data
                         
                     }
-                    .onReceive(profileImagesManager.$profileImage, perform: { image in
-                        reserverImage = image
+                    .onReceive(profileImagesManager.$eventOrganizerImage, perform: { image in
+                        eventOrganizerImage = image
                     })
                     .frame(width: geometry.size.width, height: geometry.size.height)
                 }
