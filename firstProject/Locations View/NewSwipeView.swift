@@ -32,7 +32,7 @@ struct NewSwipeView: View {
             
             Button {
                 //add user
-                let event = Event(id: "EventManagerclass", name: name, location: location, numberOfSwipes: numberOfSwipes, time: time, message: message, phoneNo: phoneNo, dateCreated: eventManager.getTime(), reserved: 0)
+                let event = Event(id: "EventManagerclass", name: name,email: eventManager.getUserEmail(), location: location, numberOfSwipes: numberOfSwipes, time: time, message: message, phoneNo: phoneNo, dateCreated: eventManager.getTime(), reserved: 0)
                                 
                 //adding user to the database
                 eventManager.addevent(event: event)

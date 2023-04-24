@@ -10,6 +10,7 @@ import SwiftUI
 struct Event: Identifiable{
     var id: String
     var name: String
+    var email: String
     var location: String
     var numberOfSwipes: Int
     var time: String

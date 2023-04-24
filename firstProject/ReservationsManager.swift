@@ -121,7 +121,7 @@ class ReservationsManager: ObservableObject{
                 
         // Create a new reservation object and add it to the reservations array
         let randomId = UUID.init().uuidString
-        let reservation = Reservation(id: randomId, eventId: event.id, reserverId: self.geteUserId(), nameOfReserver: self.getUserName(), emailOfReserver: self.getUserEmail(), eventOrganizerName: event.name, eventOrganizerEmail: "Xiaj@mail.wlu.edu", eventTime: event.time)
+        let reservation = Reservation(id: randomId, eventId: event.id, reserverId: self.geteUserId(), nameOfReserver: self.getUserName(), emailOfReserver: self.getUserEmail(), eventOrganizerName: event.name, eventOrganizerEmail: event.email, eventTime: event.time)
 
         //add reservation to the list to exchange between the view controller
         reservations.append(reservation)
@@ -129,7 +129,7 @@ class ReservationsManager: ObservableObject{
         self.addReservation(reservation: reservation)
         
         //updated event 
-        let updatedEvent = Event(id: event.id, name: event.name, location: event.location, numberOfSwipes: event.numberOfSwipes-1, time: event.time, message: event.message, phoneNo: event.message, dateCreated: event.dateCreated, reserved: event.reserved+1)
+        let updatedEvent = Event(id: event.id, name: event.name,email: event.email , location: event.location, numberOfSwipes: event.numberOfSwipes-1, time: event.time, message: event.message, phoneNo: event.message, dateCreated: event.dateCreated, reserved: event.reserved+1)
         
         //get the profile image of the event organizer from the database
         /*let profileImagesManager = ProfileImagesManager()
