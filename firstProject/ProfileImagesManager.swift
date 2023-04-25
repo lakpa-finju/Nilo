@@ -34,8 +34,13 @@ class ProfileImagesManager: ObservableObject {
         let storageRef = storage.reference()
         let profileImageRef = storageRef.child("Profile images/\(profileImageId).jpg")
         
+        // Set the cache key to include the file's metadata
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/jpeg"
+        let cacheKey = profileImageRef.fullPath + String(metadata.hashValue)
+
         // Check if image is already cached
-        if let cachedImage = SDImageCache.shared.imageFromCache(forKey: profileImageRef.fullPath) {
+        if let cachedImage = SDImageCache.shared.imageFromCache(forKey: cacheKey) {
             return cachedImage
         }
         
@@ -50,7 +55,11 @@ class ProfileImagesManager: ObservableObject {
                     if let error = error {
                         print("Error downloading profile image: \(error.localizedDescription)")
                     } else if let image = image {
-                        SDImageCache.shared.store(image, forKey: profileImageRef.fullPath)
+                        // Set the cache key to include the file's metadata
+                        let metadata = StorageMetadata()
+                        metadata.contentType = "image/jpeg"
+                        let cacheKey = profileImageRef.fullPath + String(metadata.hashValue)
+                        SDImageCache.shared.store(image, forKey: cacheKey)
                         downloadedImage = image
                         print("Image downloading to local cache!")
                     }
