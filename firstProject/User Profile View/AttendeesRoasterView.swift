@@ -19,16 +19,15 @@ struct AttendeesRoasterView: View {
             GeometryReader { geometry in
                 ScrollView(.vertical, showsIndicators: true) {
                     VStack(spacing: 10) {
-                        ForEach(reservationsManager.reservations, id: \.id) {
-                            reservation in
-                            if (reservation.eventId == userProfileManager.geteUserId()){
+                        ForEach(reservationsManager.reservations.sorted(by: { $0.key < $1.key }), id: \.key) { key, value in
+                            if (value.eventId == userProfileManager.geteUserId()){
                                 VStack(spacing: 5) {
-                                    Text("Name: \(reservation.nameOfReserver)")
+                                    Text("Name: \(value.nameOfReserver)")
                                         .font(.system(.title))
-                                    Text("Email: \(reservation.emailOfReserver)")
+                                    Text("Email: \(value.emailOfReserver)")
                                         .font(.system(.title3))
                                     //Display profile picture if there is one
-                                    if let reserverImage = profileImagesManager.loadProfileImage(profileImageId: reservation.reserverId){
+                                    if let reserverImage = profileImagesManager.loadProfileImage(profileImageId: value.reserverId){
                                         Image(uiImage: reserverImage)
                                             .resizable()
                                             .aspectRatio(contentMode: .fill)

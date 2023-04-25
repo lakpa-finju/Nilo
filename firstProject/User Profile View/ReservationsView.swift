@@ -19,7 +19,7 @@ struct ReservationsView: View {
             GeometryReader { geometry in
                 ScrollView(.vertical, showsIndicators: true) {
                     VStack(spacing: 10) {
-                        ForEach(reservationsManager.reservations, id: \.id) { reservation in
+                        ForEach(reservationsManager.reservations.sorted(by: {$0.key<$1.key}), id: \.key) {key, reservation in
                             if (reservation.reserverId == userProfileManager.geteUserId()){
                                 VStack(spacing: 5) {
                                     Text("Name: \(reservation.eventOrganizerName)")
@@ -45,6 +45,17 @@ struct ReservationsView: View {
                                             .clipShape(Circle())
                                             .overlay(Circle().stroke(Color.gray, lineWidth: 4))
                                     }
+                                    Button {
+                                        reservationsManager.cancelSpot(for: reservation)
+                                    } label: {
+                                        Text("Cancel Reservation")
+                                            .font(.headline)
+                                            .foregroundColor(.white)
+                                            .padding()
+                                            .background(Color.blue)
+                                            .cornerRadius(10)
+                                    }
+
 
 
                                 }

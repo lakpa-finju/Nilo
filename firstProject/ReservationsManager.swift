@@ -11,7 +11,7 @@ import FirebaseAuth
 
 class ReservationsManager: ObservableObject{
     //@EnvironmentObject var eventManager: EventsManager
-    @Published var reservations: [Reservation] = []
+    @Published var reservations: [String:Reservation] = [:]
     
     init() {
         let db = Firestore.firestore()
@@ -24,7 +24,8 @@ class ReservationsManager: ObservableObject{
         })
         
     }
-    //function to add resevations to the database
+    
+    //function to fetch resevations from the database
     func fetchReservations() {
         reservations.removeAll()
         let db = Firestore.firestore()
@@ -42,15 +43,16 @@ class ReservationsManager: ObservableObject{
                     let eventOrganizerName = data["Event organizer name"] as? String ?? ""
                     let eventOrganizerEmail = data["Event organizer email"] as? String ?? ""
                     let eventTime = data["Event time"] as? String ?? ""
-
+                    
                     
                     let reservation = Reservation(id: id,eventId: eventId,reserverId: reserverId, nameOfReserver: nameOfReserver, emailOfReserver: emailOfReserver, eventOrganizerName: eventOrganizerName, eventOrganizerEmail: eventOrganizerEmail, eventTime: eventTime)
-                    self.reservations.append(reservation)
+                    self.reservations[id] = reservation
+                    
                 }
             }
         }
     }
-
+    
     
     
     //function to add resevations to the database
@@ -69,16 +71,16 @@ class ReservationsManager: ObservableObject{
     //function to check if a document is in the database collections
     func checkExistence(collectionsName: String, documentId: String) async -> Bool {
         let db = Firestore.firestore()
-            let documentReference = db.collection(collectionsName).document(documentId)
-            do {
-                let documentSnapshot = try await documentReference.getDocument()
-                return documentSnapshot.exists
-            } catch {
-                print("Error fetching document: \(error)")
-                return false
-            }
+        let documentReference = db.collection(collectionsName).document(documentId)
+        do {
+            let documentSnapshot = try await documentReference.getDocument()
+            return documentSnapshot.exists
+        } catch {
+            print("Error fetching document: \(error)")
+            return false
         }
-
+    }
+    
     
     //get the loggedin user Email
     private func getUserEmail() -> String{
@@ -118,27 +120,72 @@ class ReservationsManager: ObservableObject{
     func reserveSpot(for event: Event) {
         // Check if there are any available spots
         guard event.numberOfSwipes > 0 else { return }
-                
+        
         // Create a new reservation object and add it to the reservations array
         let randomId = UUID.init().uuidString
         let reservation = Reservation(id: randomId, eventId: event.id, reserverId: self.geteUserId(), nameOfReserver: self.getUserName(), emailOfReserver: self.getUserEmail(), eventOrganizerName: event.name, eventOrganizerEmail: event.email, eventTime: event.time)
-
+        
         //add reservation to the list to exchange between the view controller
-        reservations.append(reservation)
+        self.reservations[reservation.id] = reservation
         //add the reservation to the database
         self.addReservation(reservation: reservation)
         
-        //updated event 
+        //updated event
         let updatedEvent = Event(id: event.id, name: event.name,email: event.email , location: event.location, numberOfSwipes: event.numberOfSwipes-1, time: event.time, message: event.message, phoneNo: event.message, dateCreated: event.dateCreated, reserved: event.reserved+1)
         
         //get the profile image of the event organizer from the database
         /*let profileImagesManager = ProfileImagesManager()
-        profileImagesManager.loadEventOrganizerImage(profileImageId: reservation.eventId)*/
+         profileImagesManager.loadEventOrganizerImage(profileImageId: reservation.eventId)*/
         
         //update in the database
         let eventManager = EventsManager()
         eventManager.updateEvent(event: updatedEvent)
     }
+    
+    ///Function to cancel a spot
+    func cancelSpot(for reservation: Reservation) {
+        guard reservations[reservation.id] != nil else {
+            return
+        }
+        //if there is reservation then remove it from reservations and update the event
+        reservations[reservation.id] = nil
+        
+        //delete the reservation from the database
+        self.deleteReservation(reservation: reservation)
+        
+        //get the profile image of the event organizer from the database
+        /*let profileImagesManager = ProfileImagesManager()
+         profileImagesManager.loadEventOrganizerImage(profileImageId: reservation.eventId)*/
+        
+        //update in the database
+        let eventManager = EventsManager()
+        //Update the event's number of swipe
+        var event = eventManager.getevent(eventId: reservation.eventId)
+        //updated event
+        guard var event = event else{
+            return
+        }
+        event.numberOfSwipes = event.numberOfSwipes+1
+        event.reserved = event.reserved - 1
+        eventManager.updateEvent(event: event)
+    }
+    
+    
+    //function to delete event from the database
+    func deleteReservation(reservation: Reservation){
+        let db = Firestore.firestore()
+        let ref = db.collection("Reservations").document(reservation.id)
+        // Delete the document
+        ref.delete { error in
+            if let error = error {
+                print("Error deleting document: \(error.localizedDescription)")
+            } else {
+                print("Document successfully deleted!")
+            }
+        }
+        
+    }
+    
 }
 
 

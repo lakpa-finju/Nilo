@@ -195,6 +195,9 @@ struct LocationView: View {
             
             
         }
+        .onAppear{
+            profileImage = profileImagesManager.loadProfileImage(profileImageId: eventManager.geteUserId())
+        }
         .accentColor(Color(.label))
         .task {
                     await updateDoesExist()
