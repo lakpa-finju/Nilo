@@ -23,7 +23,6 @@
 		2524F5A929F2E123009D4BCF /* Reservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2524F5A829F2E123009D4BCF /* Reservation.swift */; };
 		2524F5AB29F2E1DE009D4BCF /* ReservationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2524F5AA29F2E1DE009D4BCF /* ReservationsManager.swift */; };
 		2524F5AD29F2E4B1009D4BCF /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2524F5AC29F2E4B1009D4BCF /* UserProfileView.swift */; };
-		253AAC7729F80FA00051F798 /* CancelReservationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253AAC7629F80FA00051F798 /* CancelReservationView.swift */; };
 		256ECC3229F783D1006B2240 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 256ECC3129F783D1006B2240 /* SDWebImage */; };
 		25C3241129F4822700D97ABA /* UserProfilesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C3241029F4822700D97ABA /* UserProfilesManager.swift */; };
 		25C3241329F487D000D97ABA /* ReservationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C3241229F487D000D97ABA /* ReservationsView.swift */; };
@@ -63,7 +62,6 @@
 		2524F5A829F2E123009D4BCF /* Reservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reservation.swift; sourceTree = "<group>"; };
 		2524F5AA29F2E1DE009D4BCF /* ReservationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationsManager.swift; sourceTree = "<group>"; };
 		2524F5AC29F2E4B1009D4BCF /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
-		253AAC7629F80FA00051F798 /* CancelReservationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelReservationView.swift; sourceTree = "<group>"; };
 		25C3241029F4822700D97ABA /* UserProfilesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilesManager.swift; sourceTree = "<group>"; };
 		25C3241229F487D000D97ABA /* ReservationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationsView.swift; sourceTree = "<group>"; };
 		25C3241429F4B25E00D97ABA /* UpdateEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateEmailView.swift; sourceTree = "<group>"; };
@@ -168,7 +166,6 @@
 				25C3241D29F4D5C600D97ABA /* ProfileImage.swift */,
 				25C3241F29F4D6C700D97ABA /* ProfileImagesManager.swift */,
 				25F60DCE29F728BC009455F1 /* CancelEventView.swift */,
-				253AAC7629F80FA00051F798 /* CancelReservationView.swift */,
 				25F60DC829F582B5009455F1 /* Todo */,
 				2524F58F29F18D79009D4BCF /* EventsManager.swift */,
 				25C3241029F4822700D97ABA /* UserProfilesManager.swift */,
@@ -296,7 +293,6 @@
 				2524F5A129F1DD66009D4BCF /* FiresideView.swift in Sources */,
 				2524F59A29F1D7B4009D4BCF /* MarketplaceView.swift in Sources */,
 				2524F58B29F09340009D4BCF /* LoginView.swift in Sources */,
-				253AAC7729F80FA00051F798 /* CancelReservationView.swift in Sources */,
 				2524F5AD29F2E4B1009D4BCF /* UserProfileView.swift in Sources */,
 				2524F5AB29F2E1DE009D4BCF /* ReservationsManager.swift in Sources */,
 				25C3241729F4BB4C00D97ABA /* UpdatePasswordView.swift in Sources */,

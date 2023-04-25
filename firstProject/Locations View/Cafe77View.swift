@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct Cafe77View: View {
-    @EnvironmentObject var eventManager: EventsManager
+    @EnvironmentObject var eventsManager: EventsManager
     @EnvironmentObject var reservationsManager: ReservationsManager
     @State private var doesExist = false
     
     //this function awaits until we get response from the database
     private func updateDoesExist() async {
-            doesExist = await reservationsManager.checkExistence(collectionsName: "Events", documentId: eventManager.geteUserId())
+            doesExist = await reservationsManager.checkExistence(collectionsName: "Events", documentId: eventsManager.geteUserId())
         }
     
     var body: some View {
@@ -25,7 +25,7 @@ struct Cafe77View: View {
             GeometryReader { geometry in
                 ScrollView(.vertical, showsIndicators: true) {
                     VStack(spacing: 10) {
-                        ForEach(eventManager.events) { event in
+                        ForEach(eventsManager.events.sorted(by: {$0.key < $1.key}), id:\.key) { key, event in
                             if (event.location == "Cafe 77" && event.numberOfSwipes > 0){
                                 VStack(spacing: 10) {
                                     Text("\(event.name) is eating at \(event.time)")
@@ -70,7 +70,7 @@ struct Cafe77View: View {
                         ToolbarItem(placement: .navigationBarTrailing, content: {
                             NavigationLink{
                                 NewSwipeView()
-                                    .environmentObject(eventManager)
+                                    .environmentObject(eventsManager)
                             }label: {
                                 Text("Offer Swipe(s)")
                                 Image(systemName: "plus")

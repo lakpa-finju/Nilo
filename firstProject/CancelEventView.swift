@@ -16,7 +16,7 @@ struct CancelEventView: View {
             GeometryReader { geometry in
                 ScrollView(.vertical, showsIndicators: true) {
                     VStack(spacing: 10) {
-                        ForEach(eventsManager.events) { event in
+                        ForEach(eventsManager.events.sorted(by: {$0.key < $1.key}), id:\.key) { key, event in
                             if (event.id == eventsManager.geteUserId()){
                                 Spacer()
                                 VStack(spacing: 5) {

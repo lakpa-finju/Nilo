@@ -160,14 +160,14 @@ class ReservationsManager: ObservableObject{
         //update in the database
         let eventManager = EventsManager()
         //Update the event's number of swipe
-        var event = eventManager.getevent(eventId: reservation.eventId)
+        let event = eventManager.getevent(eventId: reservation.eventId)
         //updated event
         guard var event = event else{
             return
         }
-        event.numberOfSwipes = event.numberOfSwipes+1
-        event.reserved = event.reserved - 1
-        eventManager.updateEvent(event: event)
+        let updatedEvent = Event(id: event.id, name: event.name, email: event.email, location: event.location, numberOfSwipes: event.numberOfSwipes+1, time: event.time, message: event.message, phoneNo: event.phoneNo, dateCreated: event.dateCreated, reserved: event.reserved-1)
+
+        eventManager.updateEvent(event: updatedEvent)
     }
     
     
