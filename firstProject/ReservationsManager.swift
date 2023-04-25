@@ -130,16 +130,9 @@ class ReservationsManager: ObservableObject{
         //add the reservation to the database
         self.addReservation(reservation: reservation)
         
-        //updated event
-        let updatedEvent = Event(id: event.id, name: event.name,email: event.email , location: event.location, numberOfSwipes: event.numberOfSwipes-1, time: event.time, message: event.message, phoneNo: event.message, dateCreated: event.dateCreated, reserved: event.reserved+1)
-        
-        //get the profile image of the event organizer from the database
-        /*let profileImagesManager = ProfileImagesManager()
-         profileImagesManager.loadEventOrganizerImage(profileImageId: reservation.eventId)*/
-        
         //update in the database
         let eventManager = EventsManager()
-        eventManager.updateEvent(event: updatedEvent)
+        eventManager.updateEvent(eventId: event.id)
     }
     
     ///Function to cancel a spot
@@ -157,17 +150,20 @@ class ReservationsManager: ObservableObject{
         /*let profileImagesManager = ProfileImagesManager()
          profileImagesManager.loadEventOrganizerImage(profileImageId: reservation.eventId)*/
         
-        //update in the database
-        let eventManager = EventsManager()
-        //Update the event's number of swipe
-        let event = eventManager.getevent(eventId: reservation.eventId)
-        //updated event
-        guard var event = event else{
-            return
+        let db = Firestore.firestore()
+        let ref = db.collection("Events").document(reservation.eventId)
+        ref.updateData([
+            "Number of swipes": FieldValue.increment(Int64(1)),
+            "Reserved": FieldValue.increment(Int64(-1))
+        ]) { error in
+            if let error = error {
+                print("Error updating document: \(error.localizedDescription)")
+            } else {
+                print("Document updated successfully")
+            }
         }
-        let updatedEvent = Event(id: event.id, name: event.name, email: event.email, location: event.location, numberOfSwipes: event.numberOfSwipes+1, time: event.time, message: event.message, phoneNo: event.phoneNo, dateCreated: event.dateCreated, reserved: event.reserved-1)
 
-        eventManager.updateEvent(event: updatedEvent)
+
     }
     
     

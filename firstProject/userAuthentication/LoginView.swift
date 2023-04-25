@@ -17,7 +17,9 @@ struct LoginView: View {
             //if user is logged in the send to locationView else login
             if userIsLoggedIn{
                 //ListView().environmentObject(dataManager)
-                LocationView()            } else{
+                LocationView()
+                
+            } else{
                 //content
                 content
             }
