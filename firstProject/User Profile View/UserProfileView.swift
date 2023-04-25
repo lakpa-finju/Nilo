@@ -16,7 +16,7 @@ struct UserProfileView: View {
     
     var body: some View {
         VStack(spacing: 6) {
-            if let profileImage = profileImage{
+            if let profileImage = profileImagesManager.loadProfileImage(profileImageId: eventManger.geteUserId()){
                 Image(uiImage: profileImage)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
@@ -118,9 +118,9 @@ struct UserProfileView: View {
         }
         .padding()
         .navigationBarTitle("Profile")
-        .onReceive(profileImagesManager.$profileImage, perform: { image in
-            profileImage = image
-        })
+        .onAppear{
+            profileImage = profileImagesManager.loadProfileImage(profileImageId: userProfileManager.geteUserId())
+        }
     }
 }
 

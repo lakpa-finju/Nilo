@@ -11,14 +11,7 @@ struct ReservationsView: View {
     @EnvironmentObject var reservationsManager: ReservationsManager
     @EnvironmentObject var userProfileManager: UserProfilesManager
     @EnvironmentObject var profileImagesManager: ProfileImagesManager
-    @State private var eventOrganizerImages: [String: UIImage] = [:]
 
-    
-    private func loadEventOrganizerImage(profileImageId:String) async{
-        if let image = await profileImagesManager.loadEventOrganizerImage(profileImageId: profileImageId) {
-                eventOrganizerImages[profileImageId] = image
-            }
-    }
     var body: some View {
         VStack {
             Text("Reservations")
@@ -26,7 +19,7 @@ struct ReservationsView: View {
             GeometryReader { geometry in
                 ScrollView(.vertical, showsIndicators: true) {
                     VStack(spacing: 10) {
-                        ForEach(reservationsManager.reservations) { reservation in
+                        ForEach(reservationsManager.reservations, id: \.id) { reservation in
                             if (reservation.reserverId == userProfileManager.geteUserId()){
                                 VStack(spacing: 5) {
                                     Text("Name: \(reservation.eventOrganizerName)")
@@ -34,13 +27,13 @@ struct ReservationsView: View {
                                     Text("Email: \(reservation.eventOrganizerEmail)")
                                         .font(.system(.title3))
                                     //Display profile picture if there is one
-                                    if let eventOrganizerImage = eventOrganizerImages[reservation.eventId]{
+                                    if let eventOrganizerImage = profileImagesManager.loadProfileImage(profileImageId: reservation.eventId){
                                         Image(uiImage: eventOrganizerImage)
                                             .resizable()
                                             .aspectRatio(contentMode: .fill)
                                             .frame(width: 150,height: 200)
                                             .clipShape(Circle())
-                            
+
                                     } else {
                                         Image(systemName: "person.circle.fill")
                                             .resizable()
@@ -52,11 +45,8 @@ struct ReservationsView: View {
                                             .clipShape(Circle())
                                             .overlay(Circle().stroke(Color.gray, lineWidth: 4))
                                     }
-                                       
-                                    
-                                }
-                                .task {
-                                   await loadEventOrganizerImage(profileImageId: reservation.eventId)
+
+
                                 }
                                 .frame(maxWidth: .infinity)
                                 .padding()
@@ -68,9 +58,6 @@ struct ReservationsView: View {
                       Spacer() //to push the data to the top when there is only one data
                         
                     }
-                   /* .onReceive(profileImagesManager.$eventOrganizerImage, perform: { image in
-                        eventOrganizerImage = image
-                    }) */
                     .frame(width: geometry.size.width, height: geometry.size.height)
                 }
             }

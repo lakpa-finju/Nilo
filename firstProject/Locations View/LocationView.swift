@@ -195,9 +195,6 @@ struct LocationView: View {
             
             
         }
-        .onReceive(profileImagesManager.$profileImage, perform: { image in
-            profileImage = image
-        })
         .accentColor(Color(.label))
         .task {
                     await updateDoesExist()

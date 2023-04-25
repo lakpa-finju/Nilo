@@ -11,7 +11,6 @@ struct AttendeesRoasterView: View {
     @EnvironmentObject var reservationsManager: ReservationsManager
     @EnvironmentObject var userProfileManager: UserProfilesManager
     @EnvironmentObject var profileImagesManager: ProfileImagesManager
-    @State private var reserverImage: UIImage?
     
     var body: some View {
         VStack {
@@ -29,7 +28,7 @@ struct AttendeesRoasterView: View {
                                     Text("Email: \(reservation.emailOfReserver)")
                                         .font(.system(.title3))
                                     //Display profile picture if there is one
-                                    if let reserverImage = reserverImage{
+                                    if let reserverImage = profileImagesManager.loadProfileImage(profileImageId: reservation.reserverId){
                                         Image(uiImage: reserverImage)
                                             .resizable()
                                             .aspectRatio(contentMode: .fill)
@@ -60,9 +59,6 @@ struct AttendeesRoasterView: View {
                       Spacer() //to push the data to the top when there is only one data
                         
                     }
-                    .onReceive(profileImagesManager.$profileImage, perform: { image in
-                        reserverImage = image
-                    })
                     .frame(width: geometry.size.width, height: geometry.size.height)
                 }
             }
