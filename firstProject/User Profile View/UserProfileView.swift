@@ -121,6 +121,11 @@ struct UserProfileView: View {
                             presentationMode.wrappedValue.dismiss()
                         }, label: {
                             Text("Sign Out")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(Color.blue)
+                                .cornerRadius(10)
                         })
             
             
