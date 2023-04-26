@@ -12,6 +12,7 @@ struct UserProfileView: View {
     @EnvironmentObject var userProfileManager: UserProfilesManager
     @EnvironmentObject var reservationsManager: ReservationsManager
     @EnvironmentObject var profileImagesManager: ProfileImagesManager
+    @Environment(\.presentationMode) var presentationMode
     @State private var profileImage: UIImage?
     
     var body: some View {
@@ -114,19 +115,29 @@ struct UserProfileView: View {
                     .background(Color.blue)
                     .cornerRadius(10)
             }
-            Spacer()
+            //singout
+            Button(action: {
+                userProfileManager.signOut()
+                            presentationMode.wrappedValue.dismiss()
+                        }, label: {
+                            Text("Sign Out")
+                        })
+            
+            
         }
         .padding()
         .navigationBarTitle("Profile")
         .onAppear{
             profileImage = profileImagesManager.loadProfileImage(profileImageId: userProfileManager.geteUserId())
         }
+        
     }
 }
 
 struct UserProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        UserProfileView().environmentObject(EventsManager())
+        UserProfileView()
+            .environmentObject(EventsManager())
             .environmentObject(ReservationsManager())
             .environmentObject(UserProfilesManager())
             .environmentObject(ProfileImagesManager())

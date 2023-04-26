@@ -142,7 +142,6 @@
 			children = (
 				25E1B33529EC629300CD9D69 /* firstProject */,
 				25E1B33429EC629300CD9D69 /* Products */,
-				FF8D9F5806BE19782F8E1506 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -191,13 +190,6 @@
 				2524F5A829F2E123009D4BCF /* Reservation.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		FF8D9F5806BE19782F8E1506 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

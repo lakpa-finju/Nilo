@@ -4,7 +4,7 @@
 //
 //  Created by lakpafinju sherpa on 2023-04-22.
 //
-
+import Foundation
 import SwiftUI
 import Firebase
 import FirebaseAuth
@@ -96,6 +96,25 @@ class UserProfilesManager: ObservableObject{
         }
         return userId
     }
+
+    //function to logout the user
+    func signOut() {
+        do {
+            try Auth.auth().signOut()
+
+            // Set the root view controller to the login view controller
+            let loginVC = LoginView()
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+               let window = windowScene.windows.first {
+                window.rootViewController = UIHostingController(rootView: loginVC)
+                window.makeKeyAndVisible()
+            }
+
+        } catch let error as NSError {
+            print("Error signing out: %@", error)
+        }
+    }
+
 
     
 }
