@@ -21,21 +21,21 @@ struct UserProfileView: View {
                 Image(uiImage: profileImage)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: 150,height: 200)
+                    .frame(maxWidth: 150,maxHeight: 200)
                     .clipShape(Circle())
-    
+                
             } else{
                 Image(systemName: "person.circle.fill")
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 100, height: 100)
+                    .frame(maxWidth: 100, maxHeight: 100)
                     .foregroundColor(.gray)
                     .padding()
                     .background(Color.white)
                     .clipShape(Circle())
                     .overlay(Circle().stroke(Color.gray, lineWidth: 4))
             }
-               
+            
             //Display Name and Email address right below profile picture
             Text(userProfileManager.getUserName())
                 .font(.title)
@@ -46,40 +46,40 @@ struct UserProfileView: View {
             NavigationLink(destination: ProfileImageUploadView()
                 .environmentObject(userProfileManager)
                 .environmentObject(profileImagesManager)) {
-                Text("Change/upload profile Image")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .padding()
-                    .background(Color.blue)
+                    Text("Change/upload profile Image")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.blue)
                     .cornerRadius(10)            }
-
+            
             
             //upate Name
             NavigationLink(destination: UpdateUserNameView()
                 .environmentObject(userProfileManager)) {
-                Text("Change Name")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .padding()
-                    .background(Color.blue)
+                    Text("Change Name")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.blue)
                     .cornerRadius(10)            }
-
+            
             
             //upate email
             NavigationLink(destination: UpdateEmailView()
                 .environmentObject(userProfileManager)) {
-                Text("Change Email")
+                    Text("Change Email")
                         .font(.headline)
                         .foregroundColor(.white)
                         .padding()
                         .background(Color.blue)
                         .cornerRadius(10)
-            }
+                }
             
             //update Password
             NavigationLink(destination: UpdatePasswordView()
                 .environmentObject(userProfileManager)
-            
+                           
             ) {
                 Text("Change Password")
                     .font(.headline)
@@ -88,6 +88,8 @@ struct UserProfileView: View {
                     .background(Color.blue)
                     .cornerRadius(10)
             }
+            
+            
             
             //list of swipes taken
             NavigationLink(destination: AttendeesRoasterView()
@@ -118,15 +120,15 @@ struct UserProfileView: View {
             //singout
             Button(action: {
                 userProfileManager.signOut()
-                            presentationMode.wrappedValue.dismiss()
-                        }, label: {
-                            Text("Sign Out")
-                                .font(.headline)
-                                .foregroundColor(.white)
-                                .padding()
-                                .background(Color.blue)
-                                .cornerRadius(10)
-                        })
+                presentationMode.wrappedValue.dismiss()
+            }, label: {
+                Text("Sign Out")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color.blue)
+                    .cornerRadius(10)
+            })
             
             
         }
