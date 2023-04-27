@@ -63,7 +63,7 @@ struct LandingPageView: View {
                 }
             }
             .toolbar{
-                ToolbarItem(placement: .navigationBarLeading, content: {
+                ToolbarItem(placement: .navigationBarTrailing, content: {
                     NavigationLink{
                         UserProfileView()
                             .environmentObject(eventsManager)
@@ -101,10 +101,9 @@ struct LandingPageView: View {
                 profileImage = profileImagesManager.loadProfileImage(profileImageId: eventsManager.geteUserId())
             }
             .accentColor(Color(.label))
+            .navigationTitle("Home")
             
         }
-        
-        
                 
     }
 }
