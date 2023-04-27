@@ -26,7 +26,8 @@ struct LandingPageView: View {
                 VStack(alignment: .center, spacing: 10){
                     NavigationLink{
                         LocationView()
-                        
+                            .environmentObject(eventsManager)
+                            .environmentObject(reservationsManager)
                     }label: {
                         Text("Dining swipe(s)")
                             .font(.headline)
@@ -35,11 +36,24 @@ struct LandingPageView: View {
                             .background(Color.primary)
                             .cornerRadius(10)
                     }
+                    
                     NavigationLink{
                         EmptyView()
                         
                     }label: {
                         Text("Find Travel Buddies")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.primary)
+                            .cornerRadius(10)
+                    }
+                    
+                    NavigationLink{
+                        EmptyView()
+                        
+                    }label: {
+                        Text("Campus Events")
                             .font(.headline)
                             .foregroundColor(.white)
                             .padding()

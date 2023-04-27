@@ -8,11 +8,8 @@
 import SwiftUI
 
 struct LocationView: View {
-    @StateObject var eventsManager = EventsManager()
-    @StateObject var reservationsManager = ReservationsManager()
-    @StateObject var userProfileManager = UserProfilesManager()
-    @StateObject var profileImagesManager = ProfileImagesManager()
-    //@State private var profileImage: UIImage?
+    @EnvironmentObject var eventsManager: EventsManager
+    @EnvironmentObject var reservationsManager: ReservationsManager
     @State private var doesExist = false
 
     var locations = ["Marketplace", "Cafe 77", "Fireside", "Foodside", "Hillel", "Brief Stop"]
@@ -149,55 +146,14 @@ struct LocationView: View {
                         
                         
                     })
-                    /*
-                    ToolbarItem(placement: .navigationBarLeading, content: {
-                        NavigationLink{
-                            UserProfileView()
-                                .environmentObject(eventsManager)
-                                .environmentObject(userProfileManager)
-                                .environmentObject(profileImagesManager)
-                                .environmentObject(reservationsManager)
-                        }label: {
-                            //Text("Your profile")
-                            //Image(systemName: "plus")
-                            if let profileImage = profileImage{
-                                Image(uiImage: profileImage)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 40,height: 40)
-                                    .clipShape(Circle())
                     
-                            }else{
-                                Image(systemName: "person.circle.fill")
-                                    .resizable()
-                                    .frame(width: 40, height: 40)
-                                    .clipShape(Circle())
-                                    .overlay(Circle().stroke(Color.white, lineWidth: 2))
-                                    .shadow(radius: 7)
-                                    .padding(.bottom, 20)
-                                    .offset(y:15)
-                                    .ignoresSafeArea()
-                            }
-
-                        }
-                        
-                        
-                    })*/
                 }
                 
             }
             .onAppear{
-                /*profileImage = profileImagesManager.loadProfileImage(profileImageId: eventsManager.geteUserId())*/
                 doesExist = eventsManager.checkExistence(eventId: eventsManager.geteUserId())
             }
             .accentColor(Color(.label))
-            
-        //}
-        /*.onAppear{
-            profileImage = profileImagesManager.loadProfileImage(profileImageId: eventsManager.geteUserId())
-            doesExist = eventsManager.checkExistence(eventId: eventsManager.geteUserId())
-        }
-        .accentColor(Color(.label))*/
   
     }
     
@@ -208,8 +164,6 @@ struct LocationView_Previews: PreviewProvider {
         LocationView()
             .environmentObject(EventsManager())
             .environmentObject(ReservationsManager())
-            .environmentObject(UserProfilesManager())
-            .environmentObject(ProfileImagesManager())
         
             
     }

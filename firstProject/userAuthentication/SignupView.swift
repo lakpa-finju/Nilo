@@ -17,7 +17,8 @@ struct SignupView: View {
     var body: some View {
             //if user is logged in send to locationView else sign in
             if userIsLoggedIn{
-                LocationView().environmentObject(eventManager)
+                LandingPageView()
+                
             } else{
                 //content
                 content
