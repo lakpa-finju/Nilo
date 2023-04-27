@@ -12,7 +12,7 @@ import FirebaseAuth
 class ReservationsManager: ObservableObject{
     //@EnvironmentObject var eventManager: EventsManager
     @Published var reservations: [String:Reservation] = [:]
-    
+    @Published var eventIdToReservationId:[String:String] = [:]
     init() {
         let db = Firestore.firestore()
         _ = db.collection("Reservations").addSnapshotListener({ snapshot, error in
@@ -28,6 +28,7 @@ class ReservationsManager: ObservableObject{
     //function to fetch resevations from the database
     func fetchReservations() {
         reservations.removeAll()
+        eventIdToReservationId.removeAll()
         let db = Firestore.firestore()
         db.collection("Reservations").getDocuments() { (querySnapshot, err) in
             if let err = err {
@@ -47,6 +48,7 @@ class ReservationsManager: ObservableObject{
                     
                     let reservation = Reservation(id: id,eventId: eventId,reserverId: reserverId, nameOfReserver: nameOfReserver, emailOfReserver: emailOfReserver, eventOrganizerName: eventOrganizerName, eventOrganizerEmail: eventOrganizerEmail, eventTime: eventTime)
                     self.reservations[id] = reservation
+                    self.eventIdToReservationId[eventId] = id
                     
                 }
             }
@@ -75,20 +77,7 @@ class ReservationsManager: ObservableObject{
         }
         return true
     }
-    /*
-    //function to check if a document is in the database collections
-    func checkExistence(collectionsName: String, documentId: String) async -> Bool {
-        let db = Firestore.firestore()
-        let documentReference = db.collection(collectionsName).document(documentId)
-        do {
-            let documentSnapshot = try await documentReference.getDocument()
-            return documentSnapshot.exists
-        } catch {
-            print("Error fetching document: \(error)")
-            return false
-        }
-    }*/
-    
+        
     
     //get the loggedin user Email
     private func getUserEmail() -> String{
@@ -190,6 +179,20 @@ class ReservationsManager: ObservableObject{
         
     }
     
+    //function to delete event from the database
+    func deleteReservation(reservationId: String){
+        let db = Firestore.firestore()
+        let ref = db.collection("Reservations").document(reservationId)
+        // Delete the document
+        ref.delete { error in
+            if let error = error {
+                print("Error deleting document: \(error.localizedDescription)")
+            } else {
+                print("Document successfully deleted!")
+            }
+        }
+        
+    }
 }
 
 

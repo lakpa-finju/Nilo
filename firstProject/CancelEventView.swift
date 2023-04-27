@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CancelEventView: View {
     @EnvironmentObject private var eventsManager: EventsManager
+    @EnvironmentObject private var reservationsManager: ReservationsManager
     var body: some View {
         VStack {
             Text("Cancel swipe offering")
@@ -34,7 +35,8 @@ struct CancelEventView: View {
                                     
                                     Button(action: {
                                         eventsManager.deleteEvent(event: event)
-                                        
+                                        let reservationId = reservationsManager.eventIdToReservationId[event.id]
+                                        reservationsManager.deleteReservation(reservationId: reservationId ?? "")
                                     }, label: {
                                         Text("Cancel Offer")
                                             .foregroundColor(Color.white)
@@ -69,5 +71,6 @@ struct CancelEventView: View {
 struct CancelEventView_Previews: PreviewProvider {
     static var previews: some View {
         CancelEventView().environmentObject(EventsManager())
+            .environmentObject(ReservationsManager())
     }
 }

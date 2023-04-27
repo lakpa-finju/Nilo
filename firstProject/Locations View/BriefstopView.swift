@@ -75,6 +75,7 @@ struct BriefstopView: View {
                                 NavigationLink{
                                     CancelEventView()
                                         .environmentObject(eventsManager)
+                                        .environmentObject(reservationsManager)
                                 }label: {
                                     Text("Cancel my Offer")
                                 }

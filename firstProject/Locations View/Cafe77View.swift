@@ -63,12 +63,22 @@ struct Cafe77View: View {
                     .padding()
                     .toolbar{
                         ToolbarItem(placement: .navigationBarTrailing, content: {
-                            NavigationLink{
-                                NewSwipeView()
-                                    .environmentObject(eventsManager)
-                            }label: {
-                                Text("Offer Swipe(s)")
-                                Image(systemName: "plus")
+                            if (doesExist == false){
+                                NavigationLink{
+                                    NewSwipeView()
+                                        .environmentObject(eventsManager)
+                                }label: {
+                                    Text("Offer Swipe(s)")
+                                    Image(systemName: "plus")
+                                }
+                            }else{
+                                NavigationLink{
+                                    CancelEventView()
+                                        .environmentObject(eventsManager)
+                                        .environmentObject(reservationsManager)
+                                }label: {
+                                    Text("Cancel my Offer")
+                                }
                             }
                         })
                     }
