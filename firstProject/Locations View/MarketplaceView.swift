@@ -11,12 +11,7 @@ struct MarketplaceView: View {
     @EnvironmentObject var eventsManager: EventsManager
     @EnvironmentObject var reservationsManager: ReservationsManager
     @State private var doesExist = false
-    
-    //this function awaits until we get response from the database
-    private func updateDoesExist() async {
-            doesExist = await reservationsManager.checkExistence(collectionsName: "Events", documentId: eventsManager.geteUserId())
-        }
-    
+  
     var body: some View {
         VStack {
             Text("Marketplace")
@@ -96,9 +91,10 @@ struct MarketplaceView: View {
     
         
         }
-        .task {
-                    await updateDoesExist()
-                }
+        .onAppear{
+            doesExist = eventsManager.checkExistence(eventId: eventsManager.geteUserId())
+        }
+        
     }
     
 }

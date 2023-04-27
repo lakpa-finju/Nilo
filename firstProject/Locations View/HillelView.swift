@@ -12,11 +12,6 @@ struct HillelView: View {
     @EnvironmentObject var reservationsManager: ReservationsManager
     @State private var doesExist = false
     
-    //this function awaits until we get response from the database
-    private func updateDoesExist() async {
-            doesExist = await reservationsManager.checkExistence(collectionsName: "Events", documentId: eventsManager.geteUserId())
-        }
-    
     var body: some View {
         VStack {
             Text("Hillel")
@@ -93,9 +88,9 @@ struct HillelView: View {
                 .frame(width: geometry.size.width, height: geometry.size.height)
             }
         }
-        .task {
-                    await updateDoesExist()
-                }
+        .onAppear{
+            doesExist = eventsManager.checkExistence(eventId: eventsManager.geteUserId())
+        }
         
     }
 }

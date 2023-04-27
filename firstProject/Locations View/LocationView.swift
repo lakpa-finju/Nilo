@@ -8,19 +8,13 @@
 import SwiftUI
 
 struct LocationView: View {
-    @StateObject var eventManager = EventsManager()
+    @StateObject var eventsManager = EventsManager()
     @StateObject var reservationsManager = ReservationsManager()
     @StateObject var userProfileManager = UserProfilesManager()
     @StateObject var profileImagesManager = ProfileImagesManager()
     @State private var profileImage: UIImage?
     @State private var doesExist = false
-    
-    //this function awaits until we get response from the database
-    private func updateDoesExist() async {
-            doesExist = await reservationsManager.checkExistence(collectionsName: "Events", documentId: eventManager.geteUserId())
-        }
 
-    
     var locations = ["Marketplace", "Cafe 77", "Fireside", "Foodside", "Hillel", "Brief Stop"]
     
     var body: some View {
@@ -38,7 +32,7 @@ struct LocationView: View {
                     //for Marketplace
                     NavigationLink{
                         MarketplaceView()
-                            .environmentObject(eventManager)
+                            .environmentObject(eventsManager)
                             .environmentObject(reservationsManager)
                             
                     }label: {
@@ -53,7 +47,7 @@ struct LocationView: View {
                     //for Cafe 77
                     NavigationLink{
                         Cafe77View()
-                            .environmentObject(eventManager)
+                            .environmentObject(eventsManager)
                             .environmentObject(reservationsManager)
                     }label: {
                         Text("Cafe 77")
@@ -68,7 +62,7 @@ struct LocationView: View {
                     //for Hillel
                     NavigationLink{
                         HillelView()
-                            .environmentObject(eventManager)
+                            .environmentObject(eventsManager)
                             .environmentObject(reservationsManager)
                     }label: {
                         Text("Hillel")
@@ -82,7 +76,7 @@ struct LocationView: View {
                     //for Fireside
                     NavigationLink{
                         FiresideView()
-                            .environmentObject(eventManager)
+                            .environmentObject(eventsManager)
                             .environmentObject(reservationsManager)
                     }label: {
                         Text("Fireside")
@@ -96,7 +90,7 @@ struct LocationView: View {
                     //For Foodside
                     NavigationLink{
                         FoodsideView()
-                            .environmentObject(eventManager)
+                            .environmentObject(eventsManager)
                             .environmentObject(reservationsManager)
                     }label: {
                         Text("Foodside")
@@ -110,7 +104,7 @@ struct LocationView: View {
                     //For Brief Stop
                     NavigationLink{
                         BriefstopView()
-                            .environmentObject(eventManager)
+                            .environmentObject(eventsManager)
                             .environmentObject(reservationsManager)
                     }label: {
                         Text("Brief Stop")
@@ -139,7 +133,7 @@ struct LocationView: View {
                         if (doesExist == false){
                             NavigationLink{
                                 NewSwipeView()
-                                    .environmentObject(eventManager)
+                                    .environmentObject(eventsManager)
                             }label: {
                                 Text("Offer Swipe(s)")
                                 Image(systemName: "plus")
@@ -147,7 +141,7 @@ struct LocationView: View {
                         }else{
                             NavigationLink{
                                 CancelEventView()
-                                    .environmentObject(eventManager)
+                                    .environmentObject(eventsManager)
                             }label: {
                                 Text("Cancel my Offer")
                             }
@@ -159,7 +153,7 @@ struct LocationView: View {
                     ToolbarItem(placement: .navigationBarLeading, content: {
                         NavigationLink{
                             UserProfileView()
-                                .environmentObject(eventManager)
+                                .environmentObject(eventsManager)
                                 .environmentObject(userProfileManager)
                                 .environmentObject(profileImagesManager)
                                 .environmentObject(reservationsManager)
@@ -196,12 +190,11 @@ struct LocationView: View {
             
         }
         .onAppear{
-            profileImage = profileImagesManager.loadProfileImage(profileImageId: eventManager.geteUserId())
+            profileImage = profileImagesManager.loadProfileImage(profileImageId: eventsManager.geteUserId())
+            doesExist = eventsManager.checkExistence(eventId: eventsManager.geteUserId())
         }
         .accentColor(Color(.label))
-        .task {
-                    await updateDoesExist()
-                }
+  
     }
     
 }

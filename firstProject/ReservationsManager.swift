@@ -68,6 +68,14 @@ class ReservationsManager: ObservableObject{
         
     }
     
+    //Function to check existence locally in the cache memory
+    func checkExistence(reservationId:String)->Bool{
+        guard reservations[reservationId] != nil else {
+            return false
+        }
+        return true
+    }
+    /*
     //function to check if a document is in the database collections
     func checkExistence(collectionsName: String, documentId: String) async -> Bool {
         let db = Firestore.firestore()
@@ -79,7 +87,7 @@ class ReservationsManager: ObservableObject{
             print("Error fetching document: \(error)")
             return false
         }
-    }
+    }*/
     
     
     //get the loggedin user Email

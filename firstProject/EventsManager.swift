@@ -70,6 +70,7 @@ class EventsManager: ObservableObject {
                 print(error.localizedDescription)
             }
         }
+        events[event.id] = event
         
     }
     
@@ -102,6 +103,7 @@ class EventsManager: ObservableObject {
                 print("Document successfully deleted!")
             }
         }
+        events.removeValue(forKey: event.id)
         
     }
     
@@ -114,6 +116,14 @@ class EventsManager: ObservableObject {
         }
         requiredEvent = events[eventId]
         return requiredEvent
+    }
+    
+    //Function to check existence locally in the cache memory
+    func checkExistence(eventId:String)->Bool{
+        guard events[eventId] != nil else {
+            return false
+        }
+        return true
     }
     
     // get the loggedin event name
