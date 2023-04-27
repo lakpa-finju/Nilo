@@ -14,6 +14,7 @@ struct UserProfileView: View {
     @EnvironmentObject var profileImagesManager: ProfileImagesManager
     @Environment(\.presentationMode) var presentationMode
     @State private var profileImage: UIImage?
+    @State private var isShowingSettings = false
     
     var body: some View {
         VStack(spacing: 6) {
@@ -42,54 +43,6 @@ struct UserProfileView: View {
             Text(userProfileManager.getUserEmail())
                 .font(.body)
             
-            //Upload/change Profile Picture
-            NavigationLink(destination: ProfileImageUploadView()
-                .environmentObject(userProfileManager)
-                .environmentObject(profileImagesManager)) {
-                    Text("Change/upload profile Image")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color.blue)
-                    .cornerRadius(10)            }
-            
-            
-            //upate Name
-            NavigationLink(destination: UpdateUserNameView()
-                .environmentObject(userProfileManager)) {
-                    Text("Change Name")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color.blue)
-                    .cornerRadius(10)            }
-            
-            
-            //upate email
-            NavigationLink(destination: UpdateEmailView()
-                .environmentObject(userProfileManager)) {
-                    Text("Change Email")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color.blue)
-                        .cornerRadius(10)
-                }
-            
-            //update Password
-            NavigationLink(destination: UpdatePasswordView()
-                .environmentObject(userProfileManager)
-                           
-            ) {
-                Text("Change Password")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .padding()
-                    .background(Color.blue)
-                    .cornerRadius(10)
-            }
-            
-            
             
             //list of swipes taken
             NavigationLink(destination: AttendeesRoasterView()
@@ -117,25 +70,65 @@ struct UserProfileView: View {
                     .background(Color.blue)
                     .cornerRadius(10)
             }
-            //singout
-            Button(action: {
-                userProfileManager.signOut()
-                presentationMode.wrappedValue.dismiss()
-            }, label: {
-                Text("Sign Out")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .padding()
-                    .background(Color.blue)
-                    .cornerRadius(10)
-            })
-            
-            
+            Spacer()
+                        
         }
         .padding()
         .navigationBarTitle("Profile")
+        .toolbar{
+            ToolbarItem(placement: .navigationBarTrailing, content: {
+                Button{
+                    isShowingSettings.toggle()
+                }label:{
+                    Image(systemName:"gear" )//"line.horizontal.3")
+                }
+            })
+                        }
+                        
         .onAppear{
             profileImage = profileImagesManager.loadProfileImage(profileImageId: userProfileManager.geteUserId())
+        }
+        .sheet(isPresented: $isShowingSettings) {
+            NavigationView {
+                List {
+                    //Upload/change Profile Picture
+                    NavigationLink(destination: ProfileImageUploadView()
+                        .environmentObject(userProfileManager)
+                        .environmentObject(profileImagesManager)) {
+                            Label("Change/Upload profile Image", systemImage: "person.crop.circle")
+                            
+                        }
+                    
+                    
+                    //upate Name
+                    NavigationLink(destination: UpdateUserNameView()
+                        .environmentObject(userProfileManager)) {
+                            Label("Change Name", systemImage: "pencil.and.ellipsis.rectangle")           }
+                    
+                    
+                    //upate email
+                    NavigationLink(destination: UpdateEmailView()
+                        .environmentObject(userProfileManager)) {
+                            Label("Update Email", systemImage: "envelope")                        }
+                    
+                    //update Password
+                    NavigationLink(destination: UpdatePasswordView()
+                        .environmentObject(userProfileManager)
+                                   
+                    ) {
+                        Label("Change Password", systemImage: "lock.rotation")
+                    }
+                    
+                    Button(action: {
+                        userProfileManager.signOut()
+                        presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Label("Sign out", systemImage: "power")
+                         
+                    }
+                }
+                .navigationTitle("Settings")
+            }
         }
         
     }
