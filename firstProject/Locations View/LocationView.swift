@@ -12,13 +12,13 @@ struct LocationView: View {
     @StateObject var reservationsManager = ReservationsManager()
     @StateObject var userProfileManager = UserProfilesManager()
     @StateObject var profileImagesManager = ProfileImagesManager()
-    @State private var profileImage: UIImage?
+    //@State private var profileImage: UIImage?
     @State private var doesExist = false
 
     var locations = ["Marketplace", "Cafe 77", "Fireside", "Foodside", "Hillel", "Brief Stop"]
     
     var body: some View {
-        NavigationStack {
+       // NavigationStack {
             ZStack{
                 //this is for background
                 Color.white
@@ -136,7 +136,6 @@ struct LocationView: View {
                                     .environmentObject(eventsManager)
                             }label: {
                                 Text("Offer Swipe(s)")
-                                Image(systemName: "plus")
                             }
                         }else{
                             NavigationLink{
@@ -150,7 +149,7 @@ struct LocationView: View {
                         
                         
                     })
-                    
+                    /*
                     ToolbarItem(placement: .navigationBarLeading, content: {
                         NavigationLink{
                             UserProfileView()
@@ -183,18 +182,22 @@ struct LocationView: View {
                         }
                         
                         
-                    })
+                    })*/
                 }
                 
             }
+            .onAppear{
+                /*profileImage = profileImagesManager.loadProfileImage(profileImageId: eventsManager.geteUserId())*/
+                doesExist = eventsManager.checkExistence(eventId: eventsManager.geteUserId())
+            }
+            .accentColor(Color(.label))
             
-            
-        }
-        .onAppear{
+        //}
+        /*.onAppear{
             profileImage = profileImagesManager.loadProfileImage(profileImageId: eventsManager.geteUserId())
             doesExist = eventsManager.checkExistence(eventId: eventsManager.geteUserId())
         }
-        .accentColor(Color(.label))
+        .accentColor(Color(.label))*/
   
     }
     
