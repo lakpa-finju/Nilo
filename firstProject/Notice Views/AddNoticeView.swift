@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AddNoticeView: View {
-    @EnvironmentObject private var noticesManager: TravelPlansManager
+    @EnvironmentObject private var noticesManager: NoticesManager
     @EnvironmentObject private var userProfilesManager: UserProfilesManager
     @State private var id: String = ""
     @State private var publisherId: String = ""
@@ -71,7 +71,7 @@ struct AddNoticeView: View {
 struct AddNoticesView_Previews: PreviewProvider {
     static var previews: some View {
         AddNoticeView()
-            .environmentObject(TravelPlansManager())
+            .environmentObject(NoticesManager())
             .environmentObject(ProfileImagesManager())
     }
 }
