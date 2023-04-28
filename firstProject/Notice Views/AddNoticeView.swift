@@ -36,30 +36,21 @@ struct AddNoticeView: View {
                         .frame(minHeight: 200)
                 })
                 
-                Button(action: {
-                    let notice = Notice(id: UUID().uuidString, publisherId: userProfilesManager.geteUserId(), studentOrganziationName: studentOrganziationName, publisherEmail: userProfilesManager.getUserEmail(), eventDate: eventDate, noticeDescription: noticeDescription, eventLocation: eventLocation)
-                    // Do something with the notice object, such as saving to a database
-                    noticesManager.addNotice(notice: notice)
-                    //empty it out!
-                    studentOrganziationName = ""
-                    eventLocation = ""
-                    noticeDescription = "Thanks the description is submited it should be live anytime soon"
-                    
-                }) {
-                    Text("Save Notice")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.blue)
-                        .cornerRadius(50)
+            }
+            .toolbar{
+                ToolbarItem(placement:.navigationBarTrailing){
+                    Button("Save") {
+                        let notice = Notice(id: UUID().uuidString, publisherId: userProfilesManager.geteUserId(), studentOrganziationName: studentOrganziationName, publisherEmail: userProfilesManager.getUserEmail(), eventDate: eventDate, noticeDescription: noticeDescription, eventLocation: eventLocation)
+                        // Do something with the notice object, such as saving to a database
+                        noticesManager.addNotice(notice: notice)
+                        //empty it out!
+                        studentOrganziationName = ""
+                        eventLocation = ""
+                        noticeDescription = "Thanks the description is submited it should be live anytime soon"
                         
+                    }
+                    .disabled(studentOrganziationName.isEmpty || eventLocation.isEmpty || noticeDescription.isEmpty)
                 }
-                .disabled(studentOrganziationName.isEmpty || eventLocation.isEmpty || noticeDescription.isEmpty)
-            
-
-                
-                    
             }
             .navigationBarTitle("Create Notice")
         

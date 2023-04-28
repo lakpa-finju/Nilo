@@ -79,7 +79,9 @@ struct TravelPlansView: View {
         .toolbar{
             ToolbarItem(placement: .navigationBarTrailing, content: {
                 NavigationLink{
-                    EmptyView()
+                    AddTravelPlanView()
+                        .environmentObject(travelPlansManager)
+                        .environmentObject(userProfilesManager)
                 }label: {
                     HStack{
                         Text("Add Travel Plan")
