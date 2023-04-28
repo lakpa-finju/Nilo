@@ -12,7 +12,8 @@ struct LandingPageView: View {
     @StateObject var reservationsManager = ReservationsManager()
     @StateObject var userProfileManager = UserProfilesManager()
     @StateObject var profileImagesManager = ProfileImagesManager()
-    @StateObject var noticesManager = TravelPlansManager()
+    @StateObject var noticesManager = NoticesManager()
+    @StateObject var travePlansManager = TravelPlansManager()
     @State private var profileImage: UIImage?
     var body: some View {
         NavigationStack{
@@ -39,7 +40,9 @@ struct LandingPageView: View {
                     }
                     
                     NavigationLink{
-                        EmptyView()
+                        TravelPlansView()
+                            .environmentObject(userProfileManager)
+                            .environmentObject(travePlansManager)
                         
                     }label: {
                         Text("Find Travel Buddies")
@@ -53,6 +56,7 @@ struct LandingPageView: View {
                     NavigationLink{
                         NoticesView()
                             .environmentObject(noticesManager)
+                            .environmentObject(userProfileManager)
                         
                     }label: {
                         Text("Campus Events")

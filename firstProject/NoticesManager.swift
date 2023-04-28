@@ -109,9 +109,9 @@ class NoticesManager: ObservableObject{
     }
     
     //function to delete event from the database
-    func deleteNotice(notice: Notice){
+    func deleteNotice(noticeId: String){
         let db = Firestore.firestore()
-        let ref = db.collection("Notices").document(notice.id)
+        let ref = db.collection("Notices").document(noticeId)
         // Delete the document
         ref.delete { error in
             if let error = error {
@@ -120,7 +120,7 @@ class NoticesManager: ObservableObject{
                 print("Document successfully deleted!")
             }
         }
-        notices.removeValue(forKey: notice.id)
+        notices.removeValue(forKey: noticeId)
         
     }
     
