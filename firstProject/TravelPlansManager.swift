@@ -112,9 +112,9 @@ class TravelPlansManager: ObservableObject{
     }
     
     //function to delete event from the database
-    func deleteTravelPlan(travelPlan: TravelPlan){
+    func deleteTravelPlan(travelPlanId: String){
         let db = Firestore.firestore()
-        let ref = db.collection("Travel buddies").document(travelPlan.id)
+        let ref = db.collection("Travel buddies").document(travelPlanId)
         // Delete the document
         ref.delete { error in
             if let error = error {
@@ -123,7 +123,7 @@ class TravelPlansManager: ObservableObject{
                 print("Document successfully deleted!")
             }
         }
-        travelPlans.removeValue(forKey: travelPlan.id)
+        travelPlans.removeValue(forKey: travelPlanId)
         
     }
     

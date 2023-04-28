@@ -29,7 +29,7 @@ struct AddNoticeView: View {
                     DatePicker("Event Date", selection: $eventDate, displayedComponents: [.date, .hourAndMinute])
                     
                 }
-                Section(header: Text("Event invitation/Description"), content: {
+                Section(header: Text("Event invitation. Short, sweet, & welcoming"), content: {
                     TextEditor(text: $noticeDescription)
                         .font(.system(size: 24))
                         .lineLimit(nil)

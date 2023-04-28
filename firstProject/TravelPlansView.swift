@@ -49,15 +49,19 @@ struct TravelPlansView: View {
                                 
                             }
                             if(userProfilesManager.geteUserId() == value.publisherId){
-                                Button {
-                                    if(travelPlansManager.travelPlans[value.id] != nil){
-                                        travelPlansManager.travelPlans.removeValue(forKey: value.id)
+                                    Button {
+                                        travelPlansManager.deleteTravelPlan(travelPlanId: value.id)
+                                    } label: {
+                                        Text("Remove Travel Plan")
+                                            .font(.headline)
+                                            .foregroundColor(.red)
+                                            .padding(5)
+                                            .background(Color.black)
+                                            .cornerRadius(10)
                                     }
-                                } label: {
-                                    Text("Remove plan")
-                                        .foregroundColor(.red)
-                                }
-                                
+
+                                    
+                                                                
                             }
                             
                         }
