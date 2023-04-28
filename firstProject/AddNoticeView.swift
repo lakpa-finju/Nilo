@@ -72,5 +72,6 @@ struct AddNoticesView_Previews: PreviewProvider {
     static var previews: some View {
         AddNoticeView()
             .environmentObject(NoticesManager())
+            .environmentObject(ProfileImagesManager())
     }
 }

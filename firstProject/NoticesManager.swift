@@ -10,6 +10,7 @@ import FirebaseAuth
 
 class NoticesManager: ObservableObject{
     @Published var notices: [String:Notice] = [:]
+
     
     init() {
         let db = Firestore.firestore()
