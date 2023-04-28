@@ -7,7 +7,7 @@
 
 import SwiftUI
 struct NoticesView: View {
-    @EnvironmentObject private var noticesManager: TravelPlansManager
+    @EnvironmentObject private var noticesManager: NoticesManager
     @EnvironmentObject private var userProfilesManager: UserProfilesManager
     
     private let dateFormatter: DateFormatter = {
