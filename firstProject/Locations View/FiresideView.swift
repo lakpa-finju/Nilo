@@ -14,9 +14,6 @@ struct FiresideView: View {
     
     var body: some View {
         VStack {
-            Text("Fireside")
-                .font(.system(.title))
-            
             GeometryReader { geometry in
                 ScrollView(.vertical, showsIndicators: true) {
                     VStack(spacing: 10) {
@@ -88,6 +85,7 @@ struct FiresideView: View {
                 .frame(width: geometry.size.width, height: geometry.size.height)
             }
         }
+        .navigationTitle("Fireside")
         .onAppear{
             doesExist = eventsManager.checkExistence(eventId: eventsManager.geteUserId())
         }

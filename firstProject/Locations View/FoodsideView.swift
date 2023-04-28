@@ -14,9 +14,6 @@ struct FoodsideView: View {
   
     var body: some View {
         VStack {
-            Text("Foodside")
-                .font(.system(.title))
-            
             GeometryReader { geometry in
                 ScrollView(.vertical, showsIndicators: true) {
                     VStack(spacing: 10) {
@@ -87,6 +84,7 @@ struct FoodsideView: View {
                 .frame(width: geometry.size.width, height: geometry.size.height)
             }
         }
+        .navigationTitle("Foodside")
         .onAppear{
             doesExist = eventsManager.checkExistence(eventId: eventsManager.geteUserId())
         }

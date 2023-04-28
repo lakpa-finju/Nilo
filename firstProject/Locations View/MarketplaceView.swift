@@ -14,9 +14,6 @@ struct MarketplaceView: View {
   
     var body: some View {
         VStack {
-            Text("Marketplace")
-                .font(.system(.title))
-            
             GeometryReader { geometry in
                 ScrollView(.vertical, showsIndicators: true) {
                     VStack(spacing: 10) {
@@ -92,6 +89,7 @@ struct MarketplaceView: View {
     
         
         }
+        .navigationTitle("Marketplace")
         .onAppear{
             doesExist = eventsManager.checkExistence(eventId: eventsManager.geteUserId())
         }

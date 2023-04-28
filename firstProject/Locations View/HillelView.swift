@@ -13,10 +13,7 @@ struct HillelView: View {
     @State private var doesExist = false
     
     var body: some View {
-        VStack {
-            Text("Hillel")
-                .font(.system(.title))
-            
+        VStack {            
             GeometryReader { geometry in
                 ScrollView(.vertical, showsIndicators: true) {
                     VStack(spacing: 10) {
@@ -89,6 +86,7 @@ struct HillelView: View {
                 .frame(width: geometry.size.width, height: geometry.size.height)
             }
         }
+        .navigationTitle("Hillel")
         .onAppear{
             doesExist = eventsManager.checkExistence(eventId: eventsManager.geteUserId())
         }
