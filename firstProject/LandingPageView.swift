@@ -12,7 +12,7 @@ struct LandingPageView: View {
     @StateObject var reservationsManager = ReservationsManager()
     @StateObject var userProfileManager = UserProfilesManager()
     @StateObject var profileImagesManager = ProfileImagesManager()
-    @StateObject var noticesManager = NoticesManager()
+    @StateObject var noticesManager = TravelPlansManager()
     @State private var profileImage: UIImage?
     var body: some View {
         NavigationStack{
@@ -117,7 +117,7 @@ struct LandingPageView_Previews: PreviewProvider {
             .environmentObject(ReservationsManager())
             .environmentObject(UserProfilesManager())
             .environmentObject(ProfileImagesManager())
-            .environmentObject(NoticesManager())
+            .environmentObject(TravelPlansManager())
     }
 }
 
