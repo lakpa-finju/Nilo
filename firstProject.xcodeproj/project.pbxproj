@@ -12,7 +12,6 @@
 		2524F58E29F18C2F009D4BCF /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2524F58D29F18C2F009D4BCF /* Event.swift */; };
 		2524F59029F18D79009D4BCF /* EventsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2524F58F29F18D79009D4BCF /* EventsManager.swift */; };
 		2524F59229F196DC009D4BCF /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2524F59129F196DC009D4BCF /* LocationView.swift */; };
-		2524F59429F19D30009D4BCF /* NewSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2524F59329F19D30009D4BCF /* NewSwipeView.swift */; };
 		2524F59729F1C2BA009D4BCF /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2524F59629F1C2BA009D4BCF /* SignupView.swift */; };
 		2524F59A29F1D7B4009D4BCF /* MarketplaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2524F59929F1D7B4009D4BCF /* MarketplaceView.swift */; };
 		2524F59C29F1DBC2009D4BCF /* Cafe77View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2524F59B29F1DBC2009D4BCF /* Cafe77View.swift */; };
@@ -26,6 +25,7 @@
 		256ECC3229F783D1006B2240 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 256ECC3129F783D1006B2240 /* SDWebImage */; };
 		25AC9E3029FC23A70077DBC9 /* TravelPlansView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AC9E2F29FC23A70077DBC9 /* TravelPlansView.swift */; };
 		25AC9E3229FC6DE60077DBC9 /* AddTravelPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AC9E3129FC6DE60077DBC9 /* AddTravelPlanView.swift */; };
+		25AC9E3429FCA9B30077DBC9 /* NewSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AC9E3329FCA9B30077DBC9 /* NewSwipeView.swift */; };
 		25C3241129F4822700D97ABA /* UserProfilesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C3241029F4822700D97ABA /* UserProfilesManager.swift */; };
 		25C3241329F487D000D97ABA /* ReservationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C3241229F487D000D97ABA /* ReservationsView.swift */; };
 		25C3241529F4B25E00D97ABA /* UpdateEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C3241429F4B25E00D97ABA /* UpdateEmailView.swift */; };
@@ -60,7 +60,6 @@
 		2524F58D29F18C2F009D4BCF /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		2524F58F29F18D79009D4BCF /* EventsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsManager.swift; sourceTree = "<group>"; };
 		2524F59129F196DC009D4BCF /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
-		2524F59329F19D30009D4BCF /* NewSwipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSwipeView.swift; sourceTree = "<group>"; };
 		2524F59629F1C2BA009D4BCF /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		2524F59929F1D7B4009D4BCF /* MarketplaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketplaceView.swift; sourceTree = "<group>"; };
 		2524F59B29F1DBC2009D4BCF /* Cafe77View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cafe77View.swift; sourceTree = "<group>"; };
@@ -73,6 +72,7 @@
 		2524F5AC29F2E4B1009D4BCF /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		25AC9E2F29FC23A70077DBC9 /* TravelPlansView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelPlansView.swift; sourceTree = "<group>"; };
 		25AC9E3129FC6DE60077DBC9 /* AddTravelPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTravelPlanView.swift; sourceTree = "<group>"; };
+		25AC9E3329FCA9B30077DBC9 /* NewSwipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSwipeView.swift; sourceTree = "<group>"; };
 		25C3241029F4822700D97ABA /* UserProfilesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilesManager.swift; sourceTree = "<group>"; };
 		25C3241229F487D000D97ABA /* ReservationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationsView.swift; sourceTree = "<group>"; };
 		25C3241429F4B25E00D97ABA /* UpdateEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateEmailView.swift; sourceTree = "<group>"; };
@@ -130,8 +130,8 @@
 			isa = PBXGroup;
 			children = (
 				2524F59129F196DC009D4BCF /* LocationView.swift */,
-				2524F59329F19D30009D4BCF /* NewSwipeView.swift */,
 				2524F59E29F1DCC4009D4BCF /* HillelView.swift */,
+				25AC9E3329FCA9B30077DBC9 /* NewSwipeView.swift */,
 				2524F5A029F1DD66009D4BCF /* FiresideView.swift */,
 				2524F5A229F1DDEA009D4BCF /* FoodsideView.swift */,
 				2524F5A429F1DE6E009D4BCF /* BriefstopView.swift */,
@@ -327,7 +327,6 @@
 				25C3241729F4BB4C00D97ABA /* UpdatePasswordView.swift in Sources */,
 				25F60DCD29F720A1009455F1 /* customPlaceHolder.swift in Sources */,
 				25AC9E3029FC23A70077DBC9 /* TravelPlansView.swift in Sources */,
-				2524F59429F19D30009D4BCF /* NewSwipeView.swift in Sources */,
 				2524F5A529F1DE6E009D4BCF /* BriefstopView.swift in Sources */,
 				25C3241A29F4BDF700D97ABA /* UpdateUserNameView.swift in Sources */,
 				25FD34F629FB712500306C32 /* TravelPlansManager.swift in Sources */,
@@ -335,6 +334,7 @@
 				25C3241329F487D000D97ABA /* ReservationsView.swift in Sources */,
 				2524F58E29F18C2F009D4BCF /* Event.swift in Sources */,
 				2524F59C29F1DBC2009D4BCF /* Cafe77View.swift in Sources */,
+				25AC9E3429FCA9B30077DBC9 /* NewSwipeView.swift in Sources */,
 				25F60DCB29F61AD9009455F1 /* AttendeesRoasterView.swift in Sources */,
 				25E1B33729EC629300CD9D69 /* firstProjectApp.swift in Sources */,
 				25C3241129F4822700D97ABA /* UserProfilesManager.swift in Sources */,

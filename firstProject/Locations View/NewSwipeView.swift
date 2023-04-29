@@ -1,164 +1,62 @@
 //
-//  NewSwipeView.swift
+//  SwipePlanFormView.swift
 //  firstProject
 //
-//  Created by lakpafinju sherpa on 2023-04-20.
+//  Created by lakpafinju sherpa on 2023-04-28.
 //
-
 import SwiftUI
-
 struct NewSwipeView: View {
-    @EnvironmentObject var eventManager: EventsManager
-    @State private var name = ""
+    @EnvironmentObject private var eventsManager: EventsManager
+    //@State private var name = ""
     @State private var numberOfSwipes = 1
     @State private var location = "Marketplace"
-    @State private var time = ""
+    @State private var date = Date()
     @State private var message = ""
     @State private var phoneNo = ""
-    @State private var isSaved = false
-    
-    
-    var locations = ["Marketplace", "Cafe 77", "Fireside", "Foodside", "Hillel", "Brief Stop"]
-    
-    var body: some View {
-        
-        VStack {
-            Text("Offer Swipe")
-                .font(.system(.title))
-                .bold()
-                .offset(y:-20)
 
-            textFieldsView
-            
-            Button {
-                //add user
-                let event = Event(id: "EventManagerclass", name: name,email: eventManager.getUserEmail(), location: location, numberOfSwipes: numberOfSwipes, time: time, message: message, phoneNo: phoneNo, dateCreated: eventManager.getTime(), reserved: 0)
-                                
-                //adding user to the database
-                eventManager.addevent(event: event)
-                
-                //Reset state variables
-                name = ""
-                numberOfSwipes = 1
-                location = "Marketplace"
-                time = ""
-                message = "Thanks your post is published"
-                phoneNo = ""
-                isSaved.toggle() //alters the boolean variable value
-                
-            } label: {
-                Text("Save")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.blue)
-                    .cornerRadius(50)
-                    .padding(.horizontal)
-                
-            }
-            .padding()
-            .disabled(time.isEmpty)
-        }
-        .padding()
-        .background(Color(UIColor.systemBackground))
-        
-        
-    }
-    
-    
-    //This is the entire body view with text fileds and picker
-    var textFieldsView: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            /*
-            //For name
-            HStack {
-                Text("Name")
-                    .font(.system(size: 18, weight: .semibold))
-                    .foregroundColor(.black)
-                    .frame(width: 80, alignment: .leading)
-                
-                TextField("Enter your name here", text: $name)
-                    .font(.system(size: 18))
-                    .foregroundColor(.black)
-            }
-            */
-            //for location
-            HStack {
-                Text("Location")
-                    .font(.system(size: 18, weight: .semibold))
-                    .foregroundColor(.black)
-                    .frame(width: 80, alignment: .leading)
-                
-                Picker("Location", selection: $location) {
-                    ForEach(locations, id:\.self) {
-                        Text($0)
+    var locations = ["Marketplace", "Cafe 77", "Fireside", "Foodside", "Hillel", "Brief Stop"]
+
+    var body: some View {
+            Form {
+                Section(header: Text("Swipe information")) {
+                  //  TextField("Name", text: $name)
+                    Stepper(value: $numberOfSwipes, in: 1...20) {
+                        Text("Number of Swipes: \(numberOfSwipes)")
+                    }
+                    Picker("Location", selection: $location) {
+                        ForEach(locations, id: \.self) {
+                            Text($0)
+                        }
+                    }
+                    DatePicker(selection: $date, in: Date()..., displayedComponents: [.date, .hourAndMinute]) {
+                        Text("Date")
                     }
                 }
-                .font(.system(size: 18))
-                .foregroundColor(.black)
+
+                Section(header: Text("Additional Information")) {
+                    TextField("Message (Optional)", text: $message)
+                    TextField("Phone Number (Optional)", text: $phoneNo)
+                }
             }
-            
-            //for swipes
-            HStack {
-                Text("Number of swipes")
-                    .font(.system(size: 18, weight: .semibold))
-                    .foregroundColor(.black)
-                    .frame(width: 80, alignment: .leading)
-                
-                Picker("Number of swipes", selection: $numberOfSwipes) {
-                    ForEach(0..<21) { number in
-                        Text("\(number)")
+            .navigationTitle("Offer Swipe(s)")
+            .toolbar{
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Save"){
+                        //add user
+                        let event = Event(id: eventsManager.geteUserId(), name: eventsManager.getUserName(),email: eventsManager.getUserEmail(), location: location, numberOfSwipes: numberOfSwipes, time: date, message: message, phoneNo: phoneNo, dateCreated: eventsManager.getTime(), reserved: 0)
+                        eventsManager.addevent(event: event)
+                        //update the values
+                        numberOfSwipes = 1
+                        location = "Marketplace"
+                        date = Date()
+                        message = "Thanks! your post is published"
+                        phoneNo = ""
                     }
                 }
-                .font(.system(size: 18))
-                .foregroundColor(.white)
             }
-            
-            //for time
-            HStack {
-                Text("Time")
-                    .font(.system(size: 18, weight: .semibold))
-                    .foregroundColor(.black)
-                    .frame(width: 80, alignment: .leading)
-                
-                TextField("When are you planning to eat", text: $time)
-                    .font(.system(size: 18))
-                    .foregroundColor(.black)
-            }
-            
-            
-            //for message
-            HStack {
-                Text("Message")
-                    .font(.system(size: 18, weight: .semibold))
-                    .foregroundColor(.black)
-                    .frame(width: 80, alignment: .leading)
-                
-                TextField("Anything else (Optional)", text: $message)
-                    .font(.system(size: 18))
-                    .foregroundColor(.black)
-            }
-            
-            //for Phone Number
-            HStack {
-                Text("Phone no")
-                    .font(.system(size: 18, weight: .semibold))
-                    .foregroundColor(.black)
-                    .frame(width: 80, alignment: .leading)
-                
-                TextField("Contact Number (Optional)", text: $phoneNo)
-                    .font(.system(size: 18))
-                    .foregroundColor(.black)
-            }
-        }
-        .padding()
-        .background(Color(.white))
-        .cornerRadius(10)
-        
     }
-    
 }
+
 
 struct NewSwipeView_Previews: PreviewProvider {
     static var previews: some View {

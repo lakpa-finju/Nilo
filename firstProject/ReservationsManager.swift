@@ -43,7 +43,8 @@ class ReservationsManager: ObservableObject{
                     let emailOfReserver = data["Email of Reserver"] as? String ?? ""
                     let eventOrganizerName = data["Event organizer name"] as? String ?? ""
                     let eventOrganizerEmail = data["Event organizer email"] as? String ?? ""
-                    let eventTime = data["Event time"] as? String ?? ""
+                    let timeStamp = data["Event time"] as? Timestamp ?? Timestamp()
+                    let eventTime = timeStamp.dateValue()
                     
                     
                     let reservation = Reservation(id: id,eventId: eventId,reserverId: reserverId, nameOfReserver: nameOfReserver, emailOfReserver: emailOfReserver, eventOrganizerName: eventOrganizerName, eventOrganizerEmail: eventOrganizerEmail, eventTime: eventTime)

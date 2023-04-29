@@ -13,7 +13,7 @@ struct Event: Identifiable{
     var email: String
     var location: String
     var numberOfSwipes: Int
-    var time: String
+    var time: Date
     var message: String
     var phoneNo: String
     var dateCreated: Date

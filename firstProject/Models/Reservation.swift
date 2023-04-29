@@ -15,7 +15,7 @@ struct Reservation: Identifiable{
     var emailOfReserver:String
     var eventOrganizerName:String
     var eventOrganizerEmail:String
-    var eventTime:String
+    var eventTime:Date
     
 }
 

@@ -12,6 +12,13 @@ struct ReservationsView: View {
     @EnvironmentObject var userProfileManager: UserProfilesManager
     @EnvironmentObject var profileImagesManager: ProfileImagesManager
 
+    
+    private let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE, MMM d, yyyy 'at' h:mm a zzz"
+        return formatter
+    }()
+    
     var body: some View {
         VStack {
             Text("Reservations")
@@ -26,6 +33,7 @@ struct ReservationsView: View {
                                         .font(.system(.title))
                                     Text("Email: \(reservation.eventOrganizerEmail)")
                                         .font(.system(.title3))
+                                    Text("Time:  \(dateFormatter.string(from: reservation.eventTime))")
                                     //Display profile picture if there is one
                                     if let eventOrganizerImage = profileImagesManager.loadProfileImage(profileImageId: reservation.eventId){
                                         Image(uiImage: eventOrganizerImage)
@@ -55,8 +63,7 @@ struct ReservationsView: View {
                                             .background(Color.blue)
                                             .cornerRadius(10)
                                     }
-
-
+                                        
 
                                 }
                                 .frame(maxWidth: .infinity)

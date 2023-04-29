@@ -12,6 +12,12 @@ struct BriefstopView: View {
     @EnvironmentObject var reservationsManager: ReservationsManager
     @State private var doesExist = false
     
+    private let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE, MMM d, yyyy 'at' h:mm a zzz"
+        return formatter
+    }()
+    
     var body: some View {
         VStack {
             GeometryReader { geometry in
@@ -20,7 +26,7 @@ struct BriefstopView: View {
                         ForEach(eventsManager.events.sorted(by: {$0.key < $1.key}), id:\.key) { key, event in
                             if (event.location == "Brief Stop" && event.numberOfSwipes > 0){
                                 VStack(spacing: 10) {
-                                    Text("\(event.name) is eating at \(event.time)")
+                                    Text("\(event.name) is eating on \(dateFormatter.string(from: event.time))") 
                                             .font(.system(.title3))
                                             .foregroundColor(Color.black)
                                             .bold()
