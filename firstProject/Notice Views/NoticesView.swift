@@ -25,7 +25,7 @@ struct NoticesView: View {
                         ForEach(noticesManager.notices.sorted(by: {$0.value.eventDate < $1.value.eventDate}), id:\.key) { key, value in
                             if (Date() <= value.eventDate){
                                 VStack{
-                                    HStack{
+                                    VStack{
                                         Text("Invitation:")
                                             .font(.headline)
                                             .foregroundColor(.white)

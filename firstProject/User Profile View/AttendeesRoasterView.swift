@@ -14,8 +14,6 @@ struct AttendeesRoasterView: View {
     
     var body: some View {
         VStack {
-            Text("Roaster")
-                .font(.system(.title))
             GeometryReader { geometry in
                 ScrollView(.vertical, showsIndicators: true) {
                     VStack(spacing: 10) {
@@ -63,6 +61,7 @@ struct AttendeesRoasterView: View {
             }
             
         }
+        .navigationTitle("Roaster")
         
     }
 }

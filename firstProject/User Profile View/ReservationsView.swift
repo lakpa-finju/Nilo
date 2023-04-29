@@ -21,8 +21,6 @@ struct ReservationsView: View {
     
     var body: some View {
         VStack {
-            Text("Reservations")
-                .font(.system(.title))
             GeometryReader { geometry in
                 ScrollView(.vertical, showsIndicators: true) {
                     VStack(spacing: 10) {
@@ -81,6 +79,7 @@ struct ReservationsView: View {
             }
             
         }
+        .navigationTitle("Reservations")
         
     }
 }
