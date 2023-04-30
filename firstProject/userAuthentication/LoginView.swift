@@ -95,6 +95,15 @@ struct LoginView: View {
                         .foregroundColor(.black)
                 }
                 .padding(.top, 10)
+                //create a navigation link to forgotPasswordVIew
+                NavigationLink{
+                    ForgotPasswordView()
+                }label: {
+                    Text("forgot password")
+                        .bold()
+                        .foregroundColor(.black)
+                }
+                .padding(.top, 10)
                 
                 
             }

@@ -8,16 +8,18 @@
 import SwiftUI
 import FirebaseAuth
 struct SignupView: View {
+    @Environment(\.presentationMode) var presentationMode
     @State private var email = ""
     @State private var password = ""
     @State private var userIsLoggedIn = false
     @State private var name = ""
     @StateObject private var eventManager = EventsManager()
+    @State private var userIsVerified = false
     
     var body: some View {
             //if user is logged in send to locationView else sign in
             //may be implement isVarified option for email verification when creating a new user for the first time.
-            if userIsLoggedIn{
+            if (userIsLoggedIn && userIsVerified){
                 LandingPageView()
                 
             } else{
@@ -102,7 +104,8 @@ struct SignupView: View {
             .onAppear{
                 Auth.auth().addStateDidChangeListener { auth, user in
                     if user != nil {
-                        //userIsLoggedIn.toggle()
+                        //userIsLoggedIn = true
+                        //userisVerified = true
                     }
                 }
             }
@@ -120,13 +123,15 @@ struct SignupView: View {
             try await changeRequest.commitChanges()
             
             try await user.sendEmailVerification()
-            
+            userIsVerified = user.isEmailVerified
             print("Verification email sent to \(email)")
             let alert = UIAlertController(title: "Verify your email", message: "A verification email has been sent to \(email). Please check your inbox and follow the instructions to verify your account.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
                     if user.isEmailVerified{
-                        userIsLoggedIn.toggle()
+                        userIsLoggedIn = true
+                        userIsVerified = true
                     }
+                    self.presentationMode.wrappedValue.dismiss()
                     
                 }))
             
@@ -139,78 +144,6 @@ struct SignupView: View {
             print("Error creating user: \(error.localizedDescription)")
         }
     }
-
-
-    
-    /*
-    
-    func register() async {
-        do {
-            let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
-            let user = authResult.user
-            /*guard let user = authResult.user else {
-                print("Error creating user: no user found")
-                return
-            }*/
-            
-            let changeRequest = user.createProfileChangeRequest()
-            changeRequest.displayName = name
-            try await changeRequest.commitChanges()
-            
-            try await user.sendEmailVerification()
-            
-            print("Verification email sent to \(email)")
-            let alert = UIAlertController(title: "Verify your email", message: "A verification email has been sent to \(email). Please check your inbox and follow the instructions to verify your account.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-                userIsLoggedIn = true
-            }))
-            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-               let _ = windowScene.windows.first(where: { $0.isKeyWindow }) {
-                // access the mainWindow
-            } else {
-                // handle error: no window scene available
-            }
-            
-        } catch {
-            print("Error creating user: \(error.localizedDescription)")
-        }
-    }
-*/
-    
-    /*
-    //sign up function original without email verification
-    func register(){
-        //
-        Auth.auth().createUser(withEmail: email, password: password){ authResult, error in
-            guard let user = authResult?.user, error == nil else {
-                print("Error creating user: \(error!.localizedDescription)")
-                return
-            }
-            
-            let changeRequest = user.createProfileChangeRequest()
-            changeRequest.displayName = name // user's name entered during sign up
-            changeRequest.commitChanges { error in
-                if let error = error {
-                    print("Error setting user's display name: \(error.localizedDescription)")
-                } else {
-                    print("User's display name set successfully")
-                }
-            }
-            user.sendEmailVerification { error in
-                        if let error = error {
-                            print("Error sending verification email: \(error.localizedDescription)")
-                        } else {
-                            print("Verification email sent successfully")
-                        }
-                    }
-            
-            userIsLoggedIn.toggle()
-        }
-        
-        
-    }*/
-
-
 }
 
 
