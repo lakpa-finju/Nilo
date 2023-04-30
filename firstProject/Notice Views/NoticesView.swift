@@ -40,9 +40,9 @@ struct NoticesView: View {
                                         Spacer()
                                         if let days = timeDiff.day, let hours = timeDiff.hour {
                                             if days == 0 {
-                                                Text("Happening in \(hours) hours at \(dateFormatter2.string(from:value.eventDate))")
+                                                Text("Happening in \(hours) hours")
                                             } else if days == 1 {
-                                                Text("Happening tomorrow in \(hours) hours at \(dateFormatter2.string(from:value.eventDate))")
+                                                Text("Happening tomorrow in \(hours) hours")
                                             } else {
                                                 Text("Happening on \(dateFormatter.string(from: value.eventDate))")
                                             }
@@ -106,71 +106,7 @@ struct NoticesView: View {
                                 }
                                 
                             }
-                      /*
-                            if (Date() <= value.eventDate){
-                                VStack{
-                                    VStack{
-                                        Text("Invitation:")
-                                            .font(.headline)
-                                            .foregroundColor(.white)
-                                            .padding(5)
-                                            .background(Color.black)
-                                            .cornerRadius(10)
-                                        Text("\(value.noticeDescription)")
-                                        
-                                    Image(systemName: "multiply.circle.fill")
-                                        Spacer()
-                                    }
-                                    HStack{
-                                        Text("Location:")
-                                            .font(.headline)
-                                            .foregroundColor(.white)
-                                            .padding(5)
-                                            .background(Color.black)
-                                            .cornerRadius(10)
-                                        Text("\(value.eventLocation)")
-                                        Spacer()
-                                    }
-                                    HStack{
-                                        Text("Date:")
-                                            .font(.headline)
-                                            .foregroundColor(.white)
-                                            .padding(5)
-                                            .background(Color.black)
-                                            .cornerRadius(10)
-                                        Text("\(dateFormatter.string(from: value.eventDate))")
-                                        Spacer()
-                                    }
-                                    HStack{
-                                        Text("Organization:")
-                                            .font(.headline)
-                                            .foregroundColor(.white)
-                                            .padding(5)
-                                            .background(Color.black)
-                                            .cornerRadius(10)
-                                        Text("\(value.studentOrganziationName)")
-                                        Spacer()
-                                    }
-                                    if(userProfilesManager.geteUserId() == value.publisherId){
-                                        Button {
-                                            noticesManager.deleteNotice(noticeId: value.id)
-                                        } label: {
-                                            Text("Remove Notice")
-                                                .font(.headline)
-                                                .foregroundColor(.red)
-                                                .padding(5)
-                                                .background(Color.black)
-                                                .cornerRadius(10)
-                                        }
-
-                                    }
-                                
-                            }
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Color.teal)//cyan/ mint/indigo
-                                .cornerRadius(40)
-                        }*/
+                     
                         }
                         .frame(maxWidth: .infinity)
                         .padding()
