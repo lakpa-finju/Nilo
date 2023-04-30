@@ -11,12 +11,13 @@ struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var userIsLoggedIn = false
+    @State private var userIsVerified = false
     
     
     var body: some View {
         NavigationStack{
             //if user is logged in the send to locationView else login
-            if userIsLoggedIn{
+            if (userIsLoggedIn && userIsVerified){
                 //ListView().environmentObject(dataManager)
                 LandingPageView()
                 
@@ -89,7 +90,7 @@ struct LoginView: View {
                 NavigationLink{
                     SignupView()
                 }label: {
-                    Text("Do not have an account? Sign up")
+                    Text("Sign up")
                         .bold()
                         .foregroundColor(.black)
                 }
@@ -103,7 +104,8 @@ struct LoginView: View {
             .onAppear{
                 Auth.auth().addStateDidChangeListener { auth, user in
                     if user != nil {
-                       //userIsLoggedIn.toggle()
+                       //userIsLoggedIn = true
+                       // userIsVerified = true
                     }
                 }
             }
@@ -117,6 +119,9 @@ struct LoginView: View {
             guard  authResult?.user != nil, error == nil else {
                 print("Error creating user: \(error!.localizedDescription)")
                 return
+            }
+            if ((authResult?.user.isEmailVerified) != false){
+                userIsVerified = true
             }
             userIsLoggedIn.toggle()
         }

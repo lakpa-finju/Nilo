@@ -79,6 +79,9 @@ struct SignupView: View {
                     //sign up
                     Task{
                          await register()
+                        name = ""
+                        email = ""
+                        password = ""
                     }
                 } label: {
                     Text("Sign Up")
@@ -120,11 +123,13 @@ struct SignupView: View {
             
             print("Verification email sent to \(email)")
             let alert = UIAlertController(title: "Verify your email", message: "A verification email has been sent to \(email). Please check your inbox and follow the instructions to verify your account.", preferredStyle: .alert)
-            if user.isEmailVerified{
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-                    userIsLoggedIn.toggle()
+                    if user.isEmailVerified{
+                        userIsLoggedIn.toggle()
+                    }
+                    
                 }))
-            }
+            
             if let viewController = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController {
                 viewController.present(alert, animated: true, completion: nil)
             } else {
