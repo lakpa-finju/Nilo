@@ -141,6 +141,15 @@
 			path = "Locations View";
 			sourceTree = "<group>";
 		};
+		25AC9E3529FDA2220077DBC9 /* Travel Buddies View */ = {
+			isa = PBXGroup;
+			children = (
+				25AC9E3129FC6DE60077DBC9 /* AddTravelPlanView.swift */,
+				25AC9E2F29FC23A70077DBC9 /* TravelPlansView.swift */,
+			);
+			path = "Travel Buddies View";
+			sourceTree = "<group>";
+		};
 		25C3241829F4BCDE00D97ABA /* User Profile View */ = {
 			isa = PBXGroup;
 			children = (
@@ -186,8 +195,7 @@
 				25F60DC829F582B5009455F1 /* Todo */,
 				2524F58F29F18D79009D4BCF /* EventsManager.swift */,
 				25FD34F529FB712500306C32 /* TravelPlansManager.swift */,
-				25AC9E3129FC6DE60077DBC9 /* AddTravelPlanView.swift */,
-				25AC9E2F29FC23A70077DBC9 /* TravelPlansView.swift */,
+				25AC9E3529FDA2220077DBC9 /* Travel Buddies View */,
 				25FD34EC29FB362F00306C32 /* NoticesManager.swift */,
 				25FD34F229FB6B7B00306C32 /* Notice Views */,
 				25C3241029F4822700D97ABA /* UserProfilesManager.swift */,

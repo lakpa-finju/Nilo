@@ -16,6 +16,7 @@ struct SignupView: View {
     
     var body: some View {
             //if user is logged in send to locationView else sign in
+            //may be implement isVarified option for email verification when creating a new user for the first time.
             if userIsLoggedIn{
                 LandingPageView()
                 
@@ -76,7 +77,9 @@ struct SignupView: View {
                 //Creating Button for Sign up
                 Button{
                     //sign up
-                    register()
+                    Task{
+                         await register()
+                    }
                 } label: {
                     Text("Sign Up")
                         .bold()
@@ -104,33 +107,81 @@ struct SignupView: View {
         }.ignoresSafeArea()
     }
     
-    //sign up function
-    func register(){
-        /*
-        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-            guard let user = authResult?.user, error == nil else {
-                print("Error creating user: \(error!.localizedDescription)")
-                return
-            }
+    func register() async {
+        do {
+            let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
+            let user = authResult.user
+            
             let changeRequest = user.createProfileChangeRequest()
-            changeRequest.displayName = name // user's name entered during sign up
-            changeRequest.commitChanges { error in
-                if let error = error {
-                    print("Error setting user's display name: \(error.localizedDescription)")
-                } else {
-                    print("User's display name set successfully")
-                }
+            changeRequest.displayName = name
+            try await changeRequest.commitChanges()
+            
+            try await user.sendEmailVerification()
+            
+            print("Verification email sent to \(email)")
+            let alert = UIAlertController(title: "Verify your email", message: "A verification email has been sent to \(email). Please check your inbox and follow the instructions to verify your account.", preferredStyle: .alert)
+            if user.isEmailVerified{
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    userIsLoggedIn.toggle()
+                }))
             }
+            if let viewController = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController {
+                viewController.present(alert, animated: true, completion: nil)
+            } else {
+                print("Error: no key window available")
+            }
+        } catch {
+            print("Error creating user: \(error.localizedDescription)")
         }
-        userIsLoggedIn.toggle()
+    }
 
-         */
+
+    
+    /*
+    
+    func register() async {
+        do {
+            let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
+            let user = authResult.user
+            /*guard let user = authResult.user else {
+                print("Error creating user: no user found")
+                return
+            }*/
+            
+            let changeRequest = user.createProfileChangeRequest()
+            changeRequest.displayName = name
+            try await changeRequest.commitChanges()
+            
+            try await user.sendEmailVerification()
+            
+            print("Verification email sent to \(email)")
+            let alert = UIAlertController(title: "Verify your email", message: "A verification email has been sent to \(email). Please check your inbox and follow the instructions to verify your account.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                userIsLoggedIn = true
+            }))
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+               let _ = windowScene.windows.first(where: { $0.isKeyWindow }) {
+                // access the mainWindow
+            } else {
+                // handle error: no window scene available
+            }
+            
+        } catch {
+            print("Error creating user: \(error.localizedDescription)")
+        }
+    }
+*/
+    
+    /*
+    //sign up function original without email verification
+    func register(){
+        //
         Auth.auth().createUser(withEmail: email, password: password){ authResult, error in
             guard let user = authResult?.user, error == nil else {
                 print("Error creating user: \(error!.localizedDescription)")
                 return
             }
-            userIsLoggedIn.toggle()
+            
             let changeRequest = user.createProfileChangeRequest()
             changeRequest.displayName = name // user's name entered during sign up
             changeRequest.commitChanges { error in
@@ -140,10 +191,19 @@ struct SignupView: View {
                     print("User's display name set successfully")
                 }
             }
+            user.sendEmailVerification { error in
+                        if let error = error {
+                            print("Error sending verification email: \(error.localizedDescription)")
+                        } else {
+                            print("Verification email sent successfully")
+                        }
+                    }
+            
+            userIsLoggedIn.toggle()
         }
         
         
-    }
+    }*/
 
 
 }
