@@ -10,6 +10,8 @@ import SwiftUI
 struct LocationView: View {
     @EnvironmentObject var eventsManager: EventsManager
     @EnvironmentObject var reservationsManager: ReservationsManager
+    @EnvironmentObject var userProfileManager: UserProfilesManager
+    @EnvironmentObject var profileImagesManager: ProfileImagesManager
     @State private var doesExist = false
 
     var locations = ["Marketplace", "Cafe 77", "Fireside", "Foodside", "Hillel", "Brief Stop"]
@@ -31,6 +33,8 @@ struct LocationView: View {
                         MarketplaceView()
                             .environmentObject(eventsManager)
                             .environmentObject(reservationsManager)
+                            .environmentObject(userProfileManager)
+                            .environmentObject(profileImagesManager)
                             
                     }label: {
                         Text("Marketplace")
@@ -46,6 +50,8 @@ struct LocationView: View {
                         Cafe77View()
                             .environmentObject(eventsManager)
                             .environmentObject(reservationsManager)
+                            .environmentObject(userProfileManager)
+                            .environmentObject(profileImagesManager)
                     }label: {
                         Text("Cafe 77")
                             .font(.headline)
@@ -61,6 +67,8 @@ struct LocationView: View {
                         HillelView()
                             .environmentObject(eventsManager)
                             .environmentObject(reservationsManager)
+                            .environmentObject(userProfileManager)
+                            .environmentObject(profileImagesManager)
                     }label: {
                         Text("Hillel")
                             .font(.headline)
@@ -75,6 +83,8 @@ struct LocationView: View {
                         FiresideView()
                             .environmentObject(eventsManager)
                             .environmentObject(reservationsManager)
+                            .environmentObject(userProfileManager)
+                            .environmentObject(profileImagesManager)
                     }label: {
                         Text("Fireside")
                             .font(.headline)
@@ -89,6 +99,8 @@ struct LocationView: View {
                         FoodsideView()
                             .environmentObject(eventsManager)
                             .environmentObject(reservationsManager)
+                            .environmentObject(userProfileManager)
+                            .environmentObject(profileImagesManager)
                     }label: {
                         Text("Foodside")
                             .font(.headline)
@@ -103,6 +115,8 @@ struct LocationView: View {
                         BriefstopView()
                             .environmentObject(eventsManager)
                             .environmentObject(reservationsManager)
+                            .environmentObject(userProfileManager)
+                            .environmentObject(profileImagesManager)
                     }label: {
                         Text("Brief Stop")
                             .font(.headline)
@@ -164,6 +178,8 @@ struct LocationView_Previews: PreviewProvider {
         LocationView()
             .environmentObject(EventsManager())
             .environmentObject(ReservationsManager())
+            .environmentObject(UserProfilesManager())
+            .environmentObject(ProfileImagesManager())
         
             
     }

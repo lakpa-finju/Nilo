@@ -14,10 +14,11 @@ struct AttendeesRoasterView: View {
     
     var body: some View {
         VStack {
+            Text("people reservations")
             GeometryReader { geometry in
                 ScrollView(.vertical, showsIndicators: true) {
                     VStack(spacing: 10) {
-                        ForEach(reservationsManager.reservations.sorted(by: { $0.key < $1.key }), id: \.key) { key, value in
+                        ForEach(reservationsManager.peopleReservation.sorted(by: { $0.key < $1.key }), id: \.key) { key, value in
                             if (value.eventId == userProfileManager.geteUserId()){
                                 VStack(spacing: 5) {
                                     Text("Name: \(value.nameOfReserver)")

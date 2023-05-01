@@ -10,7 +10,11 @@ import SwiftUI
 struct FoodsideView: View {
     @EnvironmentObject var eventsManager: EventsManager
     @EnvironmentObject var reservationsManager: ReservationsManager
+    @EnvironmentObject var userProfileManager: UserProfilesManager
+    @EnvironmentObject var profileImagesManager: ProfileImagesManager
     @State private var doesExist = false
+    @State private var showPersonalizedReservationsView = false
+    @State private var showPeopleReservationsView = false
   
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -89,9 +93,27 @@ struct FoodsideView: View {
                 .frame(width: geometry.size.width, height: geometry.size.height)
             }
         }
+        .sheet(isPresented: $showPersonalizedReservationsView, content: {
+            ReservationsView()
+                .environmentObject(userProfileManager)
+                .environmentObject(reservationsManager)
+                .environmentObject(profileImagesManager)
+        })
+        .sheet(isPresented: $showPeopleReservationsView, content: {
+            AttendeesRoasterView()
+                .environmentObject(userProfileManager)
+                .environmentObject(reservationsManager)
+                .environmentObject(profileImagesManager)
+        })
         .navigationTitle("Foodside")
         .onAppear{
             doesExist = eventsManager.checkExistence(eventId: eventsManager.geteUserId())
+            if !reservationsManager.personalizedReservation.isEmpty{
+                showPersonalizedReservationsView = true
+            }
+            if !reservationsManager.peopleReservation.isEmpty{
+                showPeopleReservationsView = true
+            }
         }
         
     }
@@ -101,5 +123,7 @@ struct FoodsideView_Previews: PreviewProvider {
     static var previews: some View {
         FoodsideView().environmentObject(EventsManager())
             .environmentObject(ReservationsManager())
+            .environmentObject(UserProfilesManager())
+            .environmentObject(ProfileImagesManager())
     }
 }

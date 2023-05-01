@@ -13,6 +13,10 @@ class ReservationsManager: ObservableObject{
     //@EnvironmentObject var eventManager: EventsManager
     @Published var reservations: [String:Reservation] = [:]
     @Published var eventIdToReservationId:[String:String] = [:]
+    // This is for the user's reservation to other people events
+    @Published var personalizedReservation:[String:Reservation] = [:] // This is just for the user's reservation
+    // This is for other people's reservation to the user's event
+    @Published var peopleReservation:[String:Reservation] = [:]
     init() {
         let db = Firestore.firestore()
         _ = db.collection("Reservations").addSnapshotListener({ snapshot, error in
@@ -29,6 +33,8 @@ class ReservationsManager: ObservableObject{
     func fetchReservations() {
         reservations.removeAll()
         eventIdToReservationId.removeAll()
+        personalizedReservation.removeAll()
+        peopleReservation.removeAll()
         let db = Firestore.firestore()
         db.collection("Reservations").getDocuments() { (querySnapshot, err) in
             if let err = err {
@@ -50,6 +56,16 @@ class ReservationsManager: ObservableObject{
                     let reservation = Reservation(id: id,eventId: eventId,reserverId: reserverId, nameOfReserver: nameOfReserver, emailOfReserver: emailOfReserver, eventOrganizerName: eventOrganizerName, eventOrganizerEmail: eventOrganizerEmail, eventTime: eventTime)
                     self.reservations[id] = reservation
                     self.eventIdToReservationId[eventId] = id
+                    // this will collect the respective user's reservations
+                    if (reserverId == self.geteUserId()){
+                        self.personalizedReservation[reservation.id] = reservation // this will collect the respective user's reservations
+                    }
+                    // this will collect the people reservation to the user's event
+                    if (eventId == self.geteUserId()){
+                        self.peopleReservation[id] = reservation
+                    }
+                    
+                    
                     
                 }
             }
@@ -123,10 +139,14 @@ class ReservationsManager: ObservableObject{
         let randomId = UUID.init().uuidString
         let reservation = Reservation(id: randomId, eventId: event.id, reserverId: self.geteUserId(), nameOfReserver: self.getUserName(), emailOfReserver: self.getUserEmail(), eventOrganizerName: event.name, eventOrganizerEmail: event.email, eventTime: event.time)
         
-        //add reservation to the list to exchange between the view controller
+        //add reservation to the dictionary to exchange between the view controller
         self.reservations[reservation.id] = reservation
         //add the reservation to the database
         self.addReservation(reservation: reservation)
+        //adding to the collection of personalized reservtion
+        if (reservation.reserverId == self.geteUserId()){
+            personalizedReservation[reservation.id] = reservation // this will collect the respective user's reservations
+        }
         
         //update in the database
         let eventManager = EventsManager()
@@ -139,8 +159,10 @@ class ReservationsManager: ObservableObject{
             return
         }
         //if there is reservation then remove it from reservations and update the event
-        reservations[reservation.id] = nil
-        
+        reservations[reservation.id] = nil // this will not throw or return any error even if there is no value associated with it.
+        //also remove it form the personalizes reservation dictionary
+        personalizedReservation[reservation.id] = nil
+
         //delete the reservation from the database
         self.deleteReservation(reservation: reservation)
         

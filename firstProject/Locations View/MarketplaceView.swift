@@ -10,7 +10,11 @@ import SwiftUI
 struct MarketplaceView: View {
     @EnvironmentObject var eventsManager: EventsManager
     @EnvironmentObject var reservationsManager: ReservationsManager
+    @EnvironmentObject var userProfileManager: UserProfilesManager
+    @EnvironmentObject var profileImagesManager: ProfileImagesManager
     @State private var doesExist = false
+    @State private var showPersonalizedReservationsView = false
+    @State private var showPeopleReservationsView = false
   
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -60,7 +64,7 @@ struct MarketplaceView: View {
                                 .frame(maxWidth: .infinity)
                                 .padding()
                                 .background(Color.teal)//cyan/ mint/indigo
-                                .cornerRadius(10)
+                                .cornerRadius(20)
                             }
                         }
                         
@@ -95,9 +99,28 @@ struct MarketplaceView: View {
     
         
         }
+        .sheet(isPresented: $showPersonalizedReservationsView, content: {
+            ReservationsView()
+                .environmentObject(userProfileManager)
+                .environmentObject(reservationsManager)
+                .environmentObject(profileImagesManager)
+        })
+        .sheet(isPresented: $showPeopleReservationsView, content: {
+            AttendeesRoasterView()
+                .environmentObject(userProfileManager)
+                .environmentObject(reservationsManager)
+                .environmentObject(profileImagesManager)
+        })
         .navigationTitle("Marketplace")
         .onAppear{
             doesExist = eventsManager.checkExistence(eventId: eventsManager.geteUserId())
+            if !reservationsManager.personalizedReservation.isEmpty{
+                showPersonalizedReservationsView = true
+            }
+            if !reservationsManager.peopleReservation.isEmpty{
+                showPeopleReservationsView = true
+            }
+            
         }
         
     }
@@ -109,5 +132,7 @@ struct MarketplaceView_Previews: PreviewProvider {
         MarketplaceView()
             .environmentObject(EventsManager())
             .environmentObject(ReservationsManager())
+            .environmentObject(UserProfilesManager())
+            .environmentObject(ProfileImagesManager())
     }
 }

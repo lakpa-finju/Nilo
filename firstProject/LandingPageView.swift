@@ -30,6 +30,8 @@ struct LandingPageView: View {
                         LocationView()
                             .environmentObject(eventsManager)
                             .environmentObject(reservationsManager)
+                            .environmentObject(userProfileManager)
+                            .environmentObject(profileImagesManager)
                     }label: {
                         Text("Dining swipe(s)")
                             .font(.headline)

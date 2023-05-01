@@ -21,10 +21,11 @@ struct ReservationsView: View {
     
     var body: some View {
         VStack {
+            Text("your reservations")
             GeometryReader { geometry in
                 ScrollView(.vertical, showsIndicators: true) {
                     VStack(spacing: 10) {
-                        ForEach(reservationsManager.reservations.sorted(by: {$0.key<$1.key}), id: \.key) {key, reservation in
+                        ForEach(reservationsManager.personalizedReservation.sorted(by: {$0.key<$1.key}), id: \.key) {key, reservation in
                             if (reservation.reserverId == userProfileManager.geteUserId()){
                                 VStack(spacing: 5) {
                                     Text("Name: \(reservation.eventOrganizerName)")

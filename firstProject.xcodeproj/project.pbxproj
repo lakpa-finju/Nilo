@@ -202,8 +202,8 @@
 				25FD34EC29FB362F00306C32 /* NoticesManager.swift */,
 				25FD34F229FB6B7B00306C32 /* Notice Views */,
 				25C3241029F4822700D97ABA /* UserProfilesManager.swift */,
-				25FD34E829FAC78600306C32 /* LandingPageView.swift */,
 				2524F5AA29F2E1DE009D4BCF /* ReservationsManager.swift */,
+				25FD34E829FAC78600306C32 /* LandingPageView.swift */,
 				25E1B33A29EC629600CD9D69 /* Assets.xcassets */,
 				25E1B33C29EC629600CD9D69 /* Preview Content */,
 			);

@@ -74,13 +74,13 @@ struct TravelPlansView: View {
                                     
                                     if let days = timeDiff.day, let hours = timeDiff.hour {
                                         if days == 0 {
-                                            Text("Happening in \(hours) hours at \(dateFormatter2.string(from:value.travelDate))")
+                                            Text("Travelling in \(hours) hours at \(dateFormatter2.string(from:value.travelDate))")
                                                 .foregroundColor(Color.white)
                                         } else if days == 1 {
-                                            Text("Happening tomorrow in \(hours) hours at \(dateFormatter2.string(from:value.travelDate))")
+                                            Text("Travelling tomorrow in \(hours) hours at \(dateFormatter2.string(from:value.travelDate))")
                                                 .foregroundColor(Color.white)
                                         } else {
-                                            Text("Happening on \(dateFormatter.string(from: value.travelDate))")
+                                            Text("Travelling on \(dateFormatter.string(from: value.travelDate))")
                                                 .foregroundColor(Color.white)
                                         }
                                     }
