@@ -12,6 +12,7 @@ struct LoginView: View {
     @State private var password = ""
     @State private var userIsLoggedIn = false
     @State private var userIsVerified = false
+    @StateObject private var userProfilesManager = UserProfilesManager()
     
     
     var body: some View {
@@ -89,6 +90,7 @@ struct LoginView: View {
                 //create a navigation link to go to singupView
                 NavigationLink{
                     SignupView()
+                        .environmentObject(userProfilesManager)
                 }label: {
                     Text("Sign up")
                         .bold()

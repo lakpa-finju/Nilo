@@ -14,19 +14,20 @@ struct SignupView: View {
     @State private var userIsLoggedIn = false
     @State private var name = ""
     @StateObject private var eventManager = EventsManager()
+    @EnvironmentObject private var userProfilesManager : UserProfilesManager
     @State private var userIsVerified = false
     
     var body: some View {
-            //if user is logged in send to locationView else sign in
-            //may be implement isVarified option for email verification when creating a new user for the first time.
-            if (userIsLoggedIn && userIsVerified){
-                LandingPageView()
-                
-            } else{
-                //content
-                content
-            }
-       
+        //if user is logged in send to locationView else sign in
+        //may be implement isVarified option for email verification when creating a new user for the first time.
+        if (userIsLoggedIn && userIsVerified){
+            LandingPageView()
+            
+        } else{
+            //content
+            content
+        }
+        
     }
     
     var content: some View{
@@ -50,7 +51,7 @@ struct SignupView: View {
                     .textFieldStyle(.plain)
                     .customPlaceholder("Name", text: $name)
                 
-                //This is for line below Name
+                //This is for line below interests
                 Rectangle()
                     .frame(width: 350,height: 1)
                     .foregroundColor(.black)
@@ -80,7 +81,7 @@ struct SignupView: View {
                 Button{
                     //sign up
                     Task{
-                         await register()
+                        await register()
                         name = ""
                         email = ""
                         password = ""
@@ -122,18 +123,22 @@ struct SignupView: View {
             changeRequest.displayName = name
             try await changeRequest.commitChanges()
             
+            //add user profile details to the database
+            let userProfile = UserProfile(id: user.uid, name: name, email: email, interests: [])
+            userProfilesManager.addUserProfile(userProfile: userProfile)
+            
             try await user.sendEmailVerification()
             userIsVerified = user.isEmailVerified
             print("Verification email sent to \(email)")
             let alert = UIAlertController(title: "Verify your email", message: "A verification email has been sent to \(email). Please check your inbox and follow the instructions to verify your account.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-                    if user.isEmailVerified{
-                        userIsLoggedIn = true
-                        userIsVerified = true
-                    }
-                    self.presentationMode.wrappedValue.dismiss()
-                    
-                }))
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                if user.isEmailVerified{
+                    userIsLoggedIn = true
+                    userIsVerified = true
+                }
+                self.presentationMode.wrappedValue.dismiss()
+                
+            }))
             
             if let viewController = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController {
                 viewController.present(alert, animated: true, completion: nil)
@@ -144,6 +149,7 @@ struct SignupView: View {
             print("Error creating user: \(error.localizedDescription)")
         }
     }
+    
 }
 
 
@@ -151,6 +157,7 @@ struct SignupView: View {
 struct SignupView_Previews: PreviewProvider {
     static var previews: some View {
         SignupView()
+            .environmentObject(UserProfilesManager())
     }
 }
 
