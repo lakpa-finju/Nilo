@@ -69,41 +69,28 @@ struct TravelPlansView: View {
                                             }
                                         }
                                     }
-                                    
-                                    let timeDiff = calendar.dateComponents([.day, .hour, .minute], from: Date(), to: value.travelDate)
-                                    if let days = timeDiff.day, let hours = timeDiff.hour, let minutes = timeDiff.minute {
-                                        if days == 0 {
-                                            if hours == 0 {
-                                                Text("Travelling in \(minutes) minutes at \(dateFormatter2.string(from:value.travelDate))")
+                                    HStack{
+                                        let timeDiff = calendar.dateComponents([.day, .hour, .minute], from: Date(), to: value.travelDate)
+                                        if let days = timeDiff.day, let hours = timeDiff.hour, let minutes = timeDiff.minute {
+                                            Spacer()
+                                            if days == 0 {
+                                                if hours == 0 {
+                                                    Text("Travelling in \(minutes) minutes at \(dateFormatter2.string(from:value.travelDate))")
+                                                        .foregroundColor(Color.white)
+                                                } else {
+                                                    Text("Travelling in \(hours) hours and \(minutes) minutes at \(dateFormatter2.string(from:value.travelDate))")
+                                                        .foregroundColor(Color.white)
+                                                }
+                                            } else if days == 1 {
+                                                Text("Travelling tomorrow in \(hours) hours at \(dateFormatter2.string(from:value.travelDate))")
                                                     .foregroundColor(Color.white)
                                             } else {
-                                                Text("Travelling in \(hours) hours and \(minutes) minutes at \(dateFormatter2.string(from:value.travelDate))")
+                                                Text("Travelling on \(dateFormatter.string(from: value.travelDate))")
                                                     .foregroundColor(Color.white)
                                             }
-                                        } else if days == 1 {
-                                            Text("Travelling tomorrow in \(hours) hours at \(dateFormatter2.string(from:value.travelDate))")
-                                                .foregroundColor(Color.white)
-                                        } else {
-                                            Text("Travelling on \(dateFormatter.string(from: value.travelDate))")
-                                                .foregroundColor(Color.white)
+                                            Spacer()
                                         }
                                     }
-
-
-                                   /* if let days = timeDiff.day, let hours = timeDiff.hour {
-                                        if days == 0 {
-                                            Text("Travelling in \(hours) hours at \(dateFormatter2.string(from:value.travelDate))")
-                                                .foregroundColor(Color.white)
-                                        } else if days == 1 {
-                                            Text("Travelling tomorrow in \(hours) hours at \(dateFormatter2.string(from:value.travelDate))")
-                                                .foregroundColor(Color.white)
-                                        } else {
-                                            Text("Travelling on \(dateFormatter.string(from: value.travelDate))")
-                                                .foregroundColor(Color.white)
-                                        }
-                                    }*/
-                                    
-                                    
                                     //for phone number and name
                                     HStack{
                                         Spacer()
@@ -118,7 +105,8 @@ struct TravelPlansView: View {
                                             .cornerRadius(5)
                                         Spacer()
                                     }
-                                    
+                                    HStack{
+                                        Spacer()
                                     Text(isExpanded ? value.message : String(value.message.prefix(50)))
                                         .foregroundColor(Color.white)
                                     //read more option
@@ -129,14 +117,15 @@ struct TravelPlansView: View {
                                                 isExpanded = true
                                             }
                                     }
-                                    
+                                        Spacer()
+                                }
                                     
                                 }
                                 /*.frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Color.teal)
-                                .cornerRadius(20)
-                                .font(.system(size: 14))*/
+                                 .padding()
+                                 .background(Color.teal)
+                                 .cornerRadius(20)
+                                 .font(.system(size: 14))*/
                                 
                             }
                             

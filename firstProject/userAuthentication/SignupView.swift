@@ -34,8 +34,8 @@ struct SignupView: View {
         ZStack{
             Color.white
             RoundedRectangle(cornerRadius: 30,style: .continuous)
-                .foregroundStyle(.linearGradient(colors: [.white,.blue], startPoint: .topLeading, endPoint: .bottomTrailing))
-                .frame(width: 1000, height: 400)
+                .foregroundStyle(.linearGradient(colors: [.cyan,.blue], startPoint: .topLeading, endPoint: .bottomTrailing))
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .rotationEffect(.degrees(135))
                 .offset(y:-35)
             VStack{
