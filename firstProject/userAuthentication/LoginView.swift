@@ -11,7 +11,7 @@ struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var userIsLoggedIn = false
-    @State private var userIsVerified = false
+    @State private var userIsVerified = true //make it defual false in production
     @StateObject private var userProfilesManager = UserProfilesManager()
     
     
@@ -115,8 +115,8 @@ struct LoginView: View {
             .onAppear{
                 Auth.auth().addStateDidChangeListener { auth, user in
                     if user != nil {
-                       //userIsLoggedIn = true
-                       // userIsVerified = true
+                       userIsLoggedIn = true
+                        userIsVerified = true
                     }
                 }
             }

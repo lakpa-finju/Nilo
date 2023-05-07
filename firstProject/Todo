@@ -1,9 +1,15 @@
-one think can be implemented is to not be able to click offer swipe when you are in the reservation's list
-if I change email it should change in the event details as well
-the Image is not displaying as soon as it is update, look into it might be just preview thing
-implement cancel reservations btn
-implement cancel even btn most likly swiping right should delete it from the databse
+
+implement a user profile view
+implement a add interest option undre profile view (make it optional )
+implement image caching such that it will only get the image for those who are organizing events in other words only those that are in the local cache dictionary (Make sure not to load the image of entire database in the cache memory I believe SDWeb image does that but double check.)
+
+Long Term additional features
+look for travel confirmation dates to dc and airport shuttle
 
 
 
-Implemente travel buddy navigation in the locations
+
+may 6
+make the database connection more secure( implement the feature that only admin can access the database and change it.)
+make the final decision on the user profile view and see if there is anything alternative I can implement.
+add relationship status in the sign up section

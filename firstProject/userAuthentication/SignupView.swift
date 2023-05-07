@@ -124,7 +124,7 @@ struct SignupView: View {
             try await changeRequest.commitChanges()
             
             //add user profile details to the database
-            let userProfile = UserProfile(id: user.uid, name: name, email: email, interests: [])
+            let userProfile = UserProfile(id: user.uid, name: name, email: email, relationshipStatus: "", interests: [])
             userProfilesManager.addUserProfile(userProfile: userProfile)
             
             try await user.sendEmailVerification()
