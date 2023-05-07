@@ -49,9 +49,9 @@ struct SignupView: View {
                     .bold()
                     .foregroundColor(.black)
                     .textFieldStyle(.plain)
-                    .customPlaceholder("Name", text: $name)
+                    .customPlaceholder("Full Name", text: $name)
                 
-                //This is for line below interests
+                //This is for line below name
                 Rectangle()
                     .frame(width: 350,height: 1)
                     .foregroundColor(.black)
@@ -62,11 +62,13 @@ struct SignupView: View {
                     .foregroundColor(.black)
                     .textFieldStyle(.plain)
                     .customPlaceholder("Email", text: $email)
-                //This is for line below emial
+                
+                //This is for line below email
                 Rectangle()
                     .frame(width: 350,height: 1)
                     .foregroundColor(.black)
                 
+                //For password
                 SecureField("", text: $password)
                     .foregroundColor(.black)
                     .textFieldStyle(.plain)
@@ -123,7 +125,7 @@ struct SignupView: View {
             changeRequest.displayName = name
             try await changeRequest.commitChanges()
             
-            //add user profile details to the database
+            //add user profile details to the database 
             let userProfile = UserProfile(id: user.uid, name: name, email: email, relationshipStatus: "", interests: [])
             userProfilesManager.addUserProfile(userProfile: userProfile)
             

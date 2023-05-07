@@ -17,7 +17,7 @@ struct ReservationsView: View {
     
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "EEEE, MMM d, yyyy 'at' h:mm a zzz"
+        formatter.dateFormat = "EEEE, MMM d, yyyy 'at' h:mm a"
         return formatter
     }()
     
@@ -29,11 +29,11 @@ struct ReservationsView: View {
                         ForEach(reservationsManager.personalizedReservation.sorted(by: {$0.key<$1.key}), id: \.key) {key, reservation in
                             if (reservation.reserverId == userProfileManager.geteUserId()){
                                 VStack(spacing: 5) {
-                                    Text("Name: \(reservation.eventOrganizerName)")
+                                    Text(reservation.eventOrganizerName)
                                         .font(.system(.title))
-                                    Text("Email: \(reservation.eventOrganizerEmail)")
+                                    Text(reservation.eventOrganizerEmail)
                                         .font(.system(.title3))
-                                    Text("Time:  \(dateFormatter.string(from: reservation.eventTime))")
+                                    Text(dateFormatter.string(from: reservation.eventTime))
                                     
                                     if let profileImage = profileImagesManager.loadProfileImage(profileImageId: reservation.eventId){
                                         Image(uiImage: profileImage)
@@ -41,7 +41,7 @@ struct ReservationsView: View {
                                             .aspectRatio(contentMode: .fill)
                                             .frame(width: 150,height: 150)
                                             .clipShape(Circle())
-                                            .onTapGesture {
+                                            /*.onTapGesture {
                                                 Task.init {
                                                         isFetchingUserProfile = true
                                                         if let userProfile = await userProfileManager.getUserDetails(userProfileId: reservation.eventId) {
@@ -53,16 +53,11 @@ struct ReservationsView: View {
                                                             print("Failed to get user profile")
                                                         }
                                                     }
-                                                /*
-                                                let userProfile =  userProfileManager.getUserDetails(userProfileId: reservation.eventId)
-                                                selectedUserProfile = userProfile
-                                                showUserProfile.toggle()
-                                                 */
                                             }
                                         if isFetchingUserProfile{
                                             ProgressView()
                                         }
-                                        
+                                        */
                                     }else{
                                         Image(systemName: "person.circle.fill")
                                             .resizable()
@@ -98,7 +93,7 @@ struct ReservationsView: View {
                         Spacer() //to push the data to the top when there is only one data
                         
                     }
-                    .sheet(isPresented: $showUserProfile) {
+                    /*.sheet(isPresented: $showUserProfile) {
                         if let userProfile = selectedUserProfile{
                             PublicUserProfileView(userProfile: userProfile)
                                 .environmentObject(userProfileManager)
@@ -110,7 +105,7 @@ struct ReservationsView: View {
                                 .environmentObject(profileImagesManager)
                         }
                         
-                    }
+                    }*/
                     .frame(width: geometry.size.width, height: geometry.size.height)
                 }
                 .navigationTitle("Reservations")
