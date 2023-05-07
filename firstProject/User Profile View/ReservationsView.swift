@@ -12,8 +12,6 @@ struct ReservationsView: View {
     @EnvironmentObject var userProfileManager: UserProfilesManager
     @EnvironmentObject var profileImagesManager: ProfileImagesManager
     @State var selectedUserProfile: UserProfile?
-    @State var showUserProfile = false
-    @State var isFetchingUserProfile = false
     
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -41,23 +39,6 @@ struct ReservationsView: View {
                                             .aspectRatio(contentMode: .fill)
                                             .frame(width: 150,height: 150)
                                             .clipShape(Circle())
-                                            /*.onTapGesture {
-                                                Task.init {
-                                                        isFetchingUserProfile = true
-                                                        if let userProfile = await userProfileManager.getUserDetails(userProfileId: reservation.eventId) {
-                                                            selectedUserProfile = userProfile
-                                                            showUserProfile.toggle()
-                                                            isFetchingUserProfile = false
-                                                            
-                                                        } else {
-                                                            print("Failed to get user profile")
-                                                        }
-                                                    }
-                                            }
-                                        if isFetchingUserProfile{
-                                            ProgressView()
-                                        }
-                                        */
                                     }else{
                                         Image(systemName: "person.circle.fill")
                                             .resizable()
@@ -93,19 +74,6 @@ struct ReservationsView: View {
                         Spacer() //to push the data to the top when there is only one data
                         
                     }
-                    /*.sheet(isPresented: $showUserProfile) {
-                        if let userProfile = selectedUserProfile{
-                            PublicUserProfileView(userProfile: userProfile)
-                                .environmentObject(userProfileManager)
-                                .environmentObject(profileImagesManager)
-                        }
-                        else{
-                            PublicUserProfileView(userProfile: UserProfile(id: "dog", name: "dodfadsa", email: "", relationshipStatus: "single", interests: []))
-                                .environmentObject(userProfileManager)
-                                .environmentObject(profileImagesManager)
-                        }
-                        
-                    }*/
                     .frame(width: geometry.size.width, height: geometry.size.height)
                 }
                 .navigationTitle("Reservations")
