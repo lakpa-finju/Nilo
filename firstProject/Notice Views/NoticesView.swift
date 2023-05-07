@@ -44,7 +44,7 @@ struct NoticesView: View {
                                                     Text("Happening in \(minutes) minutes at \(dateFormatter2.string(from:value.eventDate))")
                                                         .foregroundColor(Color.white)
                                                 }else{
-                                                    Text("Happening in \(hours) minutes at \(dateFormatter2.string(from:value.eventDate))")
+                                                    Text("Happening in \(hours) hours at \(dateFormatter2.string(from:value.eventDate))")
                                                         .foregroundColor(Color.white)
                                                 }
                                             } else if days == 1 {

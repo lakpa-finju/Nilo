@@ -126,15 +126,6 @@ struct LocationView: View {
                             .cornerRadius(10)
                     }
                    
-                    //Foot note
-                    HStack {
-                        Spacer()
-                        Text("© 2023 - Created by Lakpa F. Sherpa")
-                            .font(.footnote)
-                            .foregroundColor(.black)
-                            .offset(y:190)
-                        Spacer()
-                    }
                     
                 }
                 .offset(y:-70)
