@@ -35,14 +35,21 @@ struct NoticesView: View {
                         ForEach(noticesManager.notices.sorted(by: {$0.value.eventDate < $1.value.eventDate}), id:\.key) { key, value in
                             if (Date() <= value.eventDate){
                                 VStack{
-                                    let timeDiff = calendar.dateComponents([.day, .hour], from: Date(), to: value.eventDate)
+                                    let timeDiff = calendar.dateComponents([.day, .hour, .minute], from: Date(), to: value.eventDate)
                                     HStack{
                                         Spacer()
-                                        if let days = timeDiff.day, let hours = timeDiff.hour {
+                                        if let days = timeDiff.day, let hours = timeDiff.hour, let minutes = timeDiff.minute {
                                             if days == 0 {
-                                                Text("Happening in \(hours) hours")
+                                                if hours == 0 {
+                                                    Text("Happening in \(minutes) minutes at \(dateFormatter2.string(from:value.eventDate))")
+                                                        .foregroundColor(Color.white)
+                                                }else{
+                                                    Text("Happening in \(hours) minutes at \(dateFormatter2.string(from:value.eventDate))")
+                                                        .foregroundColor(Color.white)
+                                                }
                                             } else if days == 1 {
-                                                Text("Happening tomorrow in \(hours) hours")
+                                                Text("Happening tomorrow in \(hours) hours at \(dateFormatter2.string(from:value.eventDate))")
+                                                    .foregroundColor(Color.white)
                                             } else {
                                                 Text("Happening on \(dateFormatter.string(from: value.eventDate))")
                                             }

@@ -11,7 +11,6 @@ struct AttendeesRoasterView: View {
     @EnvironmentObject var reservationsManager: ReservationsManager
     @EnvironmentObject var userProfileManager: UserProfilesManager
     @EnvironmentObject var profileImagesManager: ProfileImagesManager
-    @State var selectedUserProfile: UserProfile?
     
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()

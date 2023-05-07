@@ -44,6 +44,12 @@ struct AddTravelPlanView: View {
                         let travelPlan = TravelPlan(id: UUID.init().uuidString, publisherId: userProfilesmanager.geteUserId(), publisherName: userProfilesmanager.getUserName(), phoneNo: phoneNo, from: from, to: to, hasCar: hasCar, travelDate: travelDate, message: message)
                         
                         travelPlansManager.addTravelPlan(travelPlan: travelPlan)
+                        travelDate = Date()
+                        from = ""
+                        to = ""
+                        message = "Thanks you travel dates should be up and posted!"
+                        hasCar = false
+                        phoneNo = ""
                     }
                     .disabled(from.isEmpty || to.isEmpty || phoneNo.isEmpty || message.isEmpty)
                 }

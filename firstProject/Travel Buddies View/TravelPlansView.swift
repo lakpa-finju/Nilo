@@ -70,9 +70,27 @@ struct TravelPlansView: View {
                                         }
                                     }
                                     
-                                    let timeDiff = calendar.dateComponents([.day, .hour], from: Date(), to: value.travelDate)
-                                    
-                                    if let days = timeDiff.day, let hours = timeDiff.hour {
+                                    let timeDiff = calendar.dateComponents([.day, .hour, .minute], from: Date(), to: value.travelDate)
+                                    if let days = timeDiff.day, let hours = timeDiff.hour, let minutes = timeDiff.minute {
+                                        if days == 0 {
+                                            if hours == 0 {
+                                                Text("Travelling in \(minutes) minutes at \(dateFormatter2.string(from:value.travelDate))")
+                                                    .foregroundColor(Color.white)
+                                            } else {
+                                                Text("Travelling in \(hours) hours and \(minutes) minutes at \(dateFormatter2.string(from:value.travelDate))")
+                                                    .foregroundColor(Color.white)
+                                            }
+                                        } else if days == 1 {
+                                            Text("Travelling tomorrow in \(hours) hours at \(dateFormatter2.string(from:value.travelDate))")
+                                                .foregroundColor(Color.white)
+                                        } else {
+                                            Text("Travelling on \(dateFormatter.string(from: value.travelDate))")
+                                                .foregroundColor(Color.white)
+                                        }
+                                    }
+
+
+                                   /* if let days = timeDiff.day, let hours = timeDiff.hour {
                                         if days == 0 {
                                             Text("Travelling in \(hours) hours at \(dateFormatter2.string(from:value.travelDate))")
                                                 .foregroundColor(Color.white)
@@ -83,7 +101,7 @@ struct TravelPlansView: View {
                                             Text("Travelling on \(dateFormatter.string(from: value.travelDate))")
                                                 .foregroundColor(Color.white)
                                         }
-                                    }
+                                    }*/
                                     
                                     
                                     //for phone number and name

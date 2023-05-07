@@ -11,7 +11,6 @@ struct ReservationsView: View {
     @EnvironmentObject var reservationsManager: ReservationsManager
     @EnvironmentObject var userProfileManager: UserProfilesManager
     @EnvironmentObject var profileImagesManager: ProfileImagesManager
-    @State var selectedUserProfile: UserProfile?
     
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -21,6 +20,7 @@ struct ReservationsView: View {
     
     var body: some View {
         VStack {
+            Text("Reservations")
             GeometryReader { geometry in
                 ScrollView(.vertical, showsIndicators: true) {
                     VStack(spacing: 10) {
@@ -76,9 +76,10 @@ struct ReservationsView: View {
                     }
                     .frame(width: geometry.size.width, height: geometry.size.height)
                 }
-                .navigationTitle("Reservations")
+                
             }
         }
+        .navigationTitle("Reservations")
      
         
     }
