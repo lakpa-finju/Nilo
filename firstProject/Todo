@@ -1,15 +1,4 @@
 
-implement a user profile view
-implement a add interest option undre profile view (make it optional )
-implement image caching such that it will only get the image for those who are organizing events in other words only those that are in the local cache dictionary (Make sure not to load the image of entire database in the cache memory I believe SDWeb image does that but double check.)
-
-Long Term additional features
-look for travel confirmation dates to dc and airport shuttle
-
-
-
-
-may 6
-make the database connection more secure( implement the feature that only admin can access the database and change it.)
-make the final decision on the user profile view and see if there is anything alternative I can implement.
-add relationship status in the sign up section
+Implement a travel notice filter option with date
+Implement image resize or more compressin option
+implement account delete option.
