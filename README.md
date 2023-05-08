@@ -15,16 +15,16 @@ and Analytics.
 
 ## Screen shots of the Nilo UI
 ### Landing page UI, different dining locations for dining, and list of reservations 
-<p float="middle">
-<img src="/UI images/LandingPageView.png" width="33%"/>
-<img src="/UI images/swipeNetworkingView.png" width="33%"/>
-<img src="/UI images/ReservationView.png" width="33%"/>
+<p float="center">
+<img src="/UI images/LandingPageView.png" width="32%"/>
+<img src="/UI images/swipeNetworkingView.png" width="32%"/>
+<img src="/UI images/ReservationView.png" width="32%"/>
 </p>
 
 ### User Profile View with user details and settings view for different settings related to the user profile
-<p float="middle">
-<img src="/UI images/UserProfileView.png" width="50%"/>
-<img src="/UI images/userProfileSettingView.png" width="50%"/>
+<p float="center">
+<img src="/UI images/UserProfileView.png" width="300"/>
+<img src="/UI images/userProfileSettingView.png" width="300"/>
 </p>
 
 ### Trave plans view implemented using scroll view style and add travel plan view
