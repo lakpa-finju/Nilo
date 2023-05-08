@@ -14,4 +14,4 @@ Nilo uses firebase as a backend service, and uses different features offered by 
 and Analytics. 
 
 ## Screen shots of the Nilo UI
-![Landing Page View](/UI images/LandingPageView.png)
+![Landing Page View]("UI images/LandingPageView.png")
