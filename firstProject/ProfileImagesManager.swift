@@ -13,7 +13,8 @@ class ProfileImagesManager: ObservableObject {
     // Function to Upload UserFile in the database
     func uploadProfileImage(profileImage: ProfileImage) {
         let uploadRef = Storage.storage().reference(withPath: "Profile images/\(profileImage.id).jpg")
-        guard let imageData = profileImage.image.jpegData(compressionQuality: 0.5) else {
+        let resizedProfileImage = resizeImage(image: profileImage.image)
+        guard let imageData = resizedProfileImage?.jpegData(compressionQuality: 0.75) else {
             print("Failed to convert image in uploadProFileImage method")
             return
         }
@@ -27,6 +28,15 @@ class ProfileImagesManager: ObservableObject {
         }
     }
     
+    //This function resizes the image before uploading into 200 x 200 pixels
+    func resizeImage(image: UIImage) -> UIImage? {
+        let size = CGSize(width: 200, height: 200)
+        let renderer = UIGraphicsImageRenderer(size: size)
+        return renderer.image { (context) in
+            image.draw(in: CGRect(origin: .zero, size: size))
+        }
+    }
+
     
     //Load profile picture for logged in user
     func loadProfileImage(profileImageId: String) -> UIImage? {
