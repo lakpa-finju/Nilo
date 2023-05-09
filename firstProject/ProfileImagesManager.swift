@@ -30,7 +30,7 @@ class ProfileImagesManager: ObservableObject {
     
     //This function resizes the image before uploading into 200 x 200 pixels
     func resizeImage(image: UIImage) -> UIImage? {
-        let size = CGSize(width: 200, height: 200)
+        let size = CGSize(width: 100, height: 100)// using 100 x 100 because the profile image frame is 100 x by 100 across the application
         let renderer = UIGraphicsImageRenderer(size: size)
         return renderer.image { (context) in
             image.draw(in: CGRect(origin: .zero, size: size))
