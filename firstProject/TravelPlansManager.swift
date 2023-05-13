@@ -11,7 +11,8 @@ import FirebaseAuth
 
 class TravelPlansManager: ObservableObject{
     @Published var travelPlans: [String:TravelPlan] = [:]
-
+    //Initially the message of the items will only be show to 50 char and given option of read more. Based on the below status.
+    @Published var travelMessageExapand: [String: Bool] = [:]
     
     init() {
         let db = Firestore.firestore()
@@ -48,6 +49,7 @@ class TravelPlansManager: ObservableObject{
                     
                     let travelPlan = TravelPlan(id: id, publisherId: publisherId, publisherName: publisherName, phoneNo: phoneNo, from: from, to: to, hasCar: hasCar, travelDate: travelDate, message: message)
                     self.travelPlans[id] = travelPlan
+                    self.travelMessageExapand[id] = false
                 }
             }
         }
