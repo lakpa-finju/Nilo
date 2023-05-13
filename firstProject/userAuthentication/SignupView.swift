@@ -27,7 +27,7 @@ struct SignupView: View {
             RoundedRectangle(cornerRadius: 30,style: .continuous)
                 .foregroundStyle(.linearGradient(colors: [.cyan,.blue], startPoint: .topLeading, endPoint: .bottomTrailing))
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .rotationEffect(.degrees(135))
+                .rotationEffect(.degrees(125))
                 .offset(y:-35)
             VStack{
                 Text("Welcome")

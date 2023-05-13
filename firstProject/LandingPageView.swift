@@ -71,7 +71,7 @@ struct LandingPageView: View {
                     //Foot note
                     HStack {
                         Spacer()
-                        Text("© 2023 - created by Lakpa & Zhengyi")
+                        Text("© 2023 - created by Lakpa Sherpa")
                             .font(.footnote)
                             .foregroundColor(.black)
                             .offset(y:190)
