@@ -9,8 +9,10 @@ import Firebase
 import FirebaseAuth
 
 class NoticesManager: ObservableObject{
+    //This is for caching the message to the local device
     @Published var notices: [String:Notice] = [:]
-
+    //Initially the notice of the items will only be show to 50 char and given option of read more. Based on the below status.
+    @Published var noticeIsExpanded: [String: Bool] = [:]
     
     init() {
         let db = Firestore.firestore()
@@ -27,6 +29,7 @@ class NoticesManager: ObservableObject{
     //function to fetch notices from the database
     func fetchNotices() {
         notices.removeAll()
+        noticeIsExpanded.removeAll()
         let db = Firestore.firestore()
         db.collection("Notices").getDocuments() { (querySnapshot, err) in
             if let err = err {
@@ -45,6 +48,7 @@ class NoticesManager: ObservableObject{
                     
                     let notice = Notice(id: id, publisherId: publisherId, studentOrganziationName:StudentOrganizationName , publisherEmail: publisherEmail, eventDate: eventDate, noticeDescription: noticeDescription, eventLocation: eventLocation)
                     self.notices[id] = notice
+                    self.noticeIsExpanded[id] = false
                 }
             }
         }

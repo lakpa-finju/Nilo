@@ -257,6 +257,22 @@ struct TravelPlansView: View {
         .navigationTitle("Travel Plans")
         .toolbar{
             ToolbarItem(placement: .navigationBarTrailing, content: {
+                HStack{
+                    NavigationLink{
+                        AddTravelPlanView()
+                            .environmentObject(travelPlansManager)
+                            .environmentObject(userProfilesManager)
+                    }label: {
+                        HStack{
+                            Text("Add Travel Plan")
+                            Image(systemName: "car.circle.fill")
+                        }
+                    }
+                }
+                
+            })
+            
+/*            ToolbarItem(placement: .navigationBarTrailing, content: {
                 NavigationLink{
                     AddTravelPlanView()
                         .environmentObject(travelPlansManager)
@@ -268,7 +284,7 @@ struct TravelPlansView: View {
                     }
                 }
                 
-            })
+            })*/
         }
         //.navigationBarItems(trailing: filterToggle) // This is the toggle
         

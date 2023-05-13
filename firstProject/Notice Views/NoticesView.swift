@@ -9,6 +9,7 @@ import SwiftUI
 struct NoticesView: View {
     @EnvironmentObject private var noticesManager: NoticesManager
     @EnvironmentObject private var userProfilesManager: UserProfilesManager
+    @State private var itemStates: [String:Bool] = [:]
     //This is for readmore option
     @State private var isExpanded = false
     @State private var showingConfirmation = false
@@ -41,17 +42,17 @@ struct NoticesView: View {
                                         if let days = timeDiff.day, let hours = timeDiff.hour, let minutes = timeDiff.minute {
                                             if days == 0 {
                                                 if hours == 0 {
-                                                    Text("Happening in \(minutes) minutes at \(dateFormatter2.string(from:value.eventDate))")
+                                                    Text("In \(minutes) minutes at \(dateFormatter2.string(from:value.eventDate))")
                                                         .foregroundColor(Color.white)
                                                 }else{
-                                                    Text("Happening in \(hours) hours at \(dateFormatter2.string(from:value.eventDate))")
+                                                    Text("In \(hours) hours at \(dateFormatter2.string(from:value.eventDate))")
                                                         .foregroundColor(Color.white)
                                                 }
                                             } else if days == 1 {
-                                                Text("Happening tomorrow in \(hours) hours at \(dateFormatter2.string(from:value.eventDate))")
+                                                Text("Tomorrow in \(hours) hours at \(dateFormatter2.string(from:value.eventDate))")
                                                     .foregroundColor(Color.white)
                                             } else {
-                                                Text("Happening on \(dateFormatter.string(from: value.eventDate))")
+                                                Text("\(dateFormatter.string(from: value.eventDate))")
                                             }
                                         }
                                         Spacer()
@@ -76,23 +77,28 @@ struct NoticesView: View {
                                                 secondaryButton: .cancel())
                                         }
                                     }
-                                        //Image(systemName: "trash")
                                     }
                                     .bold()
                                     .font(.title3)
                                     .foregroundColor(Color.white)
                                     
                                     //This expands the message and give the read more option if a user wants to read more about the event.
-                                    Text(isExpanded ? value.noticeDescription : String(value.noticeDescription.prefix(50)))
-                                        .foregroundColor(Color.white)
-                                    if !isExpanded {
-                                        Text("Read more")
-                                            .foregroundColor(.blue)
-                                            .onTapGesture {
-                                                isExpanded = true
-                                                                }
+                                    HStack{
+                                        Spacer()
+                                        Text(itemStates[value.id] == true ? value.noticeDescription : String(value.noticeDescription.prefix(50)))
+                                            .foregroundColor(Color.white)
+                                        Spacer()
                                     }
-                                    
+                                    //read more option
+                                    HStack{
+                                        Spacer()
+                                        Button(itemStates[value.id] == true ? "Read less" : "Read more") {
+                                                itemStates[value.id]?.toggle()
+                                            }
+                                        .foregroundColor(Color.blue)
+                                        Spacer()
+                                    }
+                                    //event location and organization
                                     HStack{
                                         Spacer()
                                         Text("\(value.eventLocation)")
@@ -108,8 +114,6 @@ struct NoticesView: View {
                                             .cornerRadius(10)
                                         Spacer()
                                     }
-                                
-                                    
                                 }
                                 
                             }
@@ -117,7 +121,7 @@ struct NoticesView: View {
                         }
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.primary)//cyan/ mint/indigo
+                        .background(Color.primary)
                         .cornerRadius(40)
                         
                     }
@@ -140,6 +144,9 @@ struct NoticesView: View {
                     
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)
+                .onAppear{
+                    itemStates = noticesManager.noticeIsExpanded
+                }
             }
         }
         .navigationTitle("Campus Events")
