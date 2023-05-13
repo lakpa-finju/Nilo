@@ -11,7 +11,7 @@ struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var userIsLoggedIn = false
-    @State private var userIsVerified = true //make it defual false in production
+    @State private var userIsVerified = false //make it defual false in production
     @StateObject private var userProfilesManager = UserProfilesManager()
     
     
@@ -19,14 +19,12 @@ struct LoginView: View {
         NavigationStack{
             //if user is logged in the send to locationView else login
             if (userIsLoggedIn && userIsVerified){
-                //ListView().environmentObject(dataManager)
                 LandingPageView()
                 
             } else{
                 //content
                 content
             }
-            //LocationView().environmentObject(userManager)
         }.accentColor(Color(.label))
             
         
@@ -115,8 +113,11 @@ struct LoginView: View {
             .onAppear{
                 Auth.auth().addStateDidChangeListener { auth, user in
                     if user != nil {
-                       userIsLoggedIn = true
-                        userIsVerified = true
+                        let isVerified = user?.isEmailVerified ?? false
+                        if (isVerified){
+                            userIsLoggedIn.toggle()
+                            userIsVerified.toggle()
+                        }
                     }
                 }
             }

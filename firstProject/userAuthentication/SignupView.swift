@@ -14,20 +14,11 @@ struct SignupView: View {
     @State private var userIsLoggedIn = false
     @State private var name = ""
     @StateObject private var eventManager = EventsManager()
-    @EnvironmentObject private var userProfilesManager : UserProfilesManager
     @State private var userIsVerified = false
     
     var body: some View {
-        //if user is logged in send to locationView else sign in
-        //may be implement isVarified option for email verification when creating a new user for the first time.
-        if (userIsLoggedIn && userIsVerified){
-            LandingPageView()
-            
-        } else{
-            //content
-            content
-        }
-        
+        //loading the content view
+        content
     }
     
     var content: some View{
@@ -104,15 +95,6 @@ struct SignupView: View {
                 
             }
             .frame(width: 350)
-            .onAppear{
-                Auth.auth().addStateDidChangeListener { auth, user in
-                    if user != nil {
-                        //userIsLoggedIn = true
-                        //userisVerified = true
-                    }
-                }
-            }
-            
         }.ignoresSafeArea()
     }
     
@@ -120,29 +102,23 @@ struct SignupView: View {
         do {
             let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
             let user = authResult.user
-            
             let changeRequest = user.createProfileChangeRequest()
             changeRequest.displayName = name
             try await changeRequest.commitChanges()
-                        
             try await user.sendEmailVerification()
-            userIsVerified = user.isEmailVerified
-            print("Verification email sent to \(email)")
             let alert = UIAlertController(title: "Verify your email", message: "A verification email has been sent to \(email). Please check your inbox and follow the instructions to verify your account.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-                if user.isEmailVerified{
-                    userIsLoggedIn = true
-                    userIsVerified = true
-                }
                 self.presentationMode.wrappedValue.dismiss()
                 
             }))
             
-            if let viewController = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController {
-                viewController.present(alert, animated: true, completion: nil)
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+               let viewController = windowScene.windows.first?.rootViewController {
+                   viewController.present(alert, animated: true, completion: nil)
             } else {
-                print("Error: no key window available")
+                   print("Error: no key window available")
             }
+
         } catch {
             print("Error creating user: \(error.localizedDescription)")
         }
