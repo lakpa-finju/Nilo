@@ -10,11 +10,8 @@ import SwiftUI
 struct TravelPlansView: View {
     @EnvironmentObject private var travelPlansManager: TravelPlansManager
     @EnvironmentObject private var userProfilesManager: UserProfilesManager
-    
-    @State private var isExpanded = false
     @State private var itemStates: [String:Bool] = [:]
     @State private var showingConfirmation = false
-    // for filtering the search results.
     @State var selectedDate: Date = Date()
     @State private var filterByDate = false
     let calendar = Calendar.current
@@ -35,12 +32,6 @@ struct TravelPlansView: View {
     var body: some View {
         
         VStack{
-            VStack {
-                Toggle("Filter by date", isOn: $filterByDate)
-                if filterByDate {
-                    DatePicker("select Date", selection: $selectedDate, displayedComponents: [.date])
-                }
-            }
             GeometryReader { geometry in
                 ScrollView(.vertical, showsIndicators: true) {
                     VStack(spacing: 10) {
@@ -130,14 +121,14 @@ struct TravelPlansView: View {
                                             HStack{
                                                 Spacer()
                                                 Button(itemStates[value.id] == true ? "Read less" : "Read more") {
-                                                                        itemStates[value.id]?.toggle() // Toggle state variable when button is tapped
-                                                                    }
+                                                    itemStates[value.id]?.toggle() // Toggle state variable when button is tapped
+                                                }
                                                 .foregroundColor(Color.blue)
                                                 Spacer()
                                             }
                                         }
                                     }
-                                   
+                                    
                                 }
                                 .frame(maxWidth: .infinity)
                                 .padding()
@@ -229,8 +220,8 @@ struct TravelPlansView: View {
                                             HStack{
                                                 Spacer()
                                                 Button(itemStates[value.id] == true ? "Read less" : "Read more") {
-                                                                        itemStates[value.id]?.toggle() // Toggle state variable when button is tapped
-                                                                    }
+                                                    itemStates[value.id]?.toggle() // Toggle state variable when button is tapped
+                                                }
                                                 .foregroundColor(Color.blue)
                                                 Spacer()
                                             }
@@ -268,29 +259,17 @@ struct TravelPlansView: View {
                             Image(systemName: "car.circle.fill")
                         }
                     }
+                    //This is the filter by date option
+                    filterToggle
+                    
                 }
                 
             })
             
-/*            ToolbarItem(placement: .navigationBarTrailing, content: {
-                NavigationLink{
-                    AddTravelPlanView()
-                        .environmentObject(travelPlansManager)
-                        .environmentObject(userProfilesManager)
-                }label: {
-                    HStack{
-                        Text("Add Travel Plan")
-                        Image(systemName: "car.circle.fill")
-                    }
-                }
-                
-            })*/
         }
-        //.navigationBarItems(trailing: filterToggle) // This is the toggle
-        
         Spacer()
     }
-        
+    
     
     var filterToggle: some View {
         Toggle(isOn: $filterByDate) {
