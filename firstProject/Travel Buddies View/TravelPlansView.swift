@@ -123,29 +123,18 @@ struct TravelPlansView: View {
                                             HStack{
                                                 Spacer()
                                                 Text(itemStates[value.id] == true ? value.message : String(value.message.prefix(50)))
-                                                //Text(isExpanded ? value.message : String(value.message.prefix(50)))
-                                                    //.foregroundColor(Color.white)
-                                                //read more option
-                                                /*if !isExpanded {
-                                                    Text("Read more")
-                                                        .foregroundColor(.blue)
-                                                        .onTapGesture {
-                                                        isExpanded.toggle()
-                                                        }
-                                                }else {
-                                                    Text("Read less")
-                                                        .foregroundColor(.blue)
-                                                        .onTapGesture {
-                                                        isExpanded.toggle()
-                                                        }
-                                                }*/
+                                                    .foregroundColor(Color.white)
                                                 Spacer()
                                             }
                                             // read more button
-                                            Button(itemStates[value.id] == true ? "Read less" : "Read more") {
-                                                                    itemStates[value.id]?.toggle() // Toggle state variable when button is tapped
-                                                                }
-                                            
+                                            HStack{
+                                                Spacer()
+                                                Button(itemStates[value.id] == true ? "Read less" : "Read more") {
+                                                                        itemStates[value.id]?.toggle() // Toggle state variable when button is tapped
+                                                                    }
+                                                .foregroundColor(Color.blue)
+                                                Spacer()
+                                            }
                                         }
                                     }
                                    
@@ -229,18 +218,20 @@ struct TravelPlansView: View {
                                                     .cornerRadius(5)
                                                 Spacer()
                                             }
+                                            //For text expansion
                                             HStack{
                                                 Spacer()
-                                                Text(isExpanded ? value.message : String(value.message.prefix(50)))
+                                                Text(itemStates[value.id] == true ? value.message : String(value.message.prefix(50)))
                                                     .foregroundColor(Color.white)
-                                                //read more option
-                                                if !isExpanded {
-                                                    Text("Read more")
-                                                        .foregroundColor(.blue)
-                                                        .onTapGesture {
-                                                            isExpanded.toggle()
-                                                        }
-                                                }
+                                                Spacer()
+                                            }
+                                            // read more button
+                                            HStack{
+                                                Spacer()
+                                                Button(itemStates[value.id] == true ? "Read less" : "Read more") {
+                                                                        itemStates[value.id]?.toggle() // Toggle state variable when button is tapped
+                                                                    }
+                                                .foregroundColor(Color.blue)
                                                 Spacer()
                                             }
                                             
