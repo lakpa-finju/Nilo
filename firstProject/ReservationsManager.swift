@@ -202,6 +202,36 @@ class ReservationsManager: ObservableObject{
         
     }
     
+    //function to delete reservation from the database using condition
+    func deleteReservationsWithCondition(eventId: String) {
+        let db = Firestore.firestore() // Initialize Firestore
+        
+        let collectionRef = db.collection("Reservations") // Replace "your_collection" with the actual collection name
+        
+        // Build the query
+        let query = collectionRef.whereField("Event Id", isEqualTo: eventId) // Replace "field" and "value" with the actual field and value you want to query
+        
+        // Execute the query
+        query.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+                return
+            }
+            
+            // Delete documents that match the query condition
+            for document in querySnapshot!.documents {
+                document.reference.delete { error in
+                    if let error = error {
+                        print("Error deleting document: \(error)")
+                    } else {
+                        print("Document deleted successfully")
+                    }
+                }
+            }
+        }
+    }
+
+    
     //function to delete event from the database
     func deleteReservation(reservationId: String){
         let db = Firestore.firestore()

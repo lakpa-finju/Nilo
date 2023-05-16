@@ -35,8 +35,7 @@ struct CancelEventView: View {
                                     
                                     Button(action: {
                                         eventsManager.deleteEvent(event: event)
-                                        let reservationId = reservationsManager.eventIdToReservationId[event.id]
-                                        reservationsManager.deleteReservation(reservationId: reservationId ?? "")
+                                        reservationsManager.deleteReservationsWithCondition(eventId: event.id)
                                     }, label: {
                                         Text("Cancel Offer")
                                             .foregroundColor(Color.white)
