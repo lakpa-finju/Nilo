@@ -15,7 +15,14 @@ struct MarketplaceView: View {
     @State private var doesExist = false
     @State private var showPersonalizedReservationsView = false
     @State private var showPeopleReservationsView = false
-  
+    let calendar = Calendar.current
+    
+    private let dateFormatter2: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a"
+        return formatter
+    }()
+    
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "EEEE, MMM d, yyyy 'at' h:mm a zzz"
@@ -28,17 +35,47 @@ struct MarketplaceView: View {
                 ScrollView(.vertical, showsIndicators: true) {
                     VStack(spacing: 10) {
                         ForEach(eventsManager.events.sorted(by: {$0.key < $1.key}), id:\.key) { key, event in
-                            if (event.location == "Marketplace" && event.numberOfSwipes > 0){
+                            if (event.location == "Marketplace" && event.numberOfSwipes > 0 && Date() <= event.time){
                                 VStack(spacing: 10) {
-                                    
-                                    Text("\(event.name) is eating on \(dateFormatter.string(from: event.time))")
-                                            .font(.system(.title3))
-                                            .foregroundColor(Color.black)
-                                            .bold()
-                                    
-                                    if (event.message != ""){
-                                        Text("Message: \(event.message)")
+                                    //This is for timing
+                                    HStack{
+                                        Spacer()
+                                        let timeDiff = calendar.dateComponents([.day, .hour, .minute], from: Date(), to: event.time)
+                                        if let days = timeDiff.day, let hours = timeDiff.hour, let minutes = timeDiff.minute {
                                             
+                                            if days == 0 {
+                                                if hours == 0 {
+                                                    Text("\(event.name) is eating in \(minutes) minutes at \(dateFormatter2.string(from:event.time))")
+                                                        .foregroundColor(Color.black)
+                                                        .font(.system(.title3))
+                                                        .bold()
+                                                } else {
+                                                    Text("\(event.name) is eating in \(hours) hours and \(minutes) minutes at \(dateFormatter2.string(from:event.time))")
+                                                        .foregroundColor(Color.black)
+                                                        .font(.system(.title3))
+                                                        .bold()
+                                                }
+                                            } else if days == 1 {
+                                                Text("\(event.name) is eating tomorrow in \(hours) hours at \(dateFormatter2.string(from:event.time))")
+                                                    .foregroundColor(Color.black)
+                                                    .font(.system(.title3))
+                                                    .bold()
+                                            } else {
+                                                Text("\(event.name) is eating on \(dateFormatter.string(from:event.time))")
+                                                    .foregroundColor(Color.black)
+                                                    .font(.system(.title3))
+                                                    .bold()
+                                            }
+                                        }
+                                        Spacer()
+                                    }
+                                    //message block
+                                    HStack{
+                                        
+                                        if (event.message != ""){
+                                            Text("Message: \(event.message)")
+                                        }
+                                        
                                     }
                                     
                                     HStack {
@@ -69,7 +106,7 @@ struct MarketplaceView: View {
                         }
                         
                     }
-                    .padding()
+                    .padding(10)
                     .toolbar{
                         ToolbarItem(placement: .navigationBarTrailing, content: {
                             if (doesExist == false){
@@ -96,8 +133,8 @@ struct MarketplaceView: View {
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)
             }
-    
-        
+            
+            
         }
         .sheet(isPresented: $showPersonalizedReservationsView, content: {
             ReservationsView()
