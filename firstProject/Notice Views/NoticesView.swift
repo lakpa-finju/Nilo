@@ -43,16 +43,17 @@ struct NoticesView: View {
                                             if days == 0 {
                                                 if hours == 0 {
                                                     Text("In \(minutes) minutes at \(dateFormatter2.string(from:value.eventDate))")
-                                                        .foregroundColor(Color.white)
+                                                        .foregroundColor(Color("AdaptiveBackgroundColor"))
                                                 }else{
                                                     Text("In \(hours) hours at \(dateFormatter2.string(from:value.eventDate))")
-                                                        .foregroundColor(Color.white)
+                                                        .foregroundColor(Color("AdaptiveBackgroundColor"))
                                                 }
                                             } else if days == 1 {
                                                 Text("Tomorrow in \(hours) hours at \(dateFormatter2.string(from:value.eventDate))")
-                                                    .foregroundColor(Color.white)
+                                                    .foregroundColor(Color("AdaptiveBackgroundColor"))
                                             } else {
                                                 Text("\(dateFormatter.string(from: value.eventDate))")
+                                                    .foregroundColor(Color("AdaptiveBackgroundColor"))
                                             }
                                         }
                                         Spacer()
@@ -86,7 +87,7 @@ struct NoticesView: View {
                                     HStack{
                                         Spacer()
                                         Text(itemStates[value.id] == true ? value.noticeDescription : String(value.noticeDescription.prefix(50)))
-                                            .foregroundColor(Color.white)
+                                            .foregroundColor(Color("AdaptiveBackgroundColor"))
                                         Spacer()
                                     }
                                     //read more option
@@ -121,7 +122,7 @@ struct NoticesView: View {
                         }
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.primary)
+                        .background(Color.accentColor)
                         .cornerRadius(40)
                         
                     }
