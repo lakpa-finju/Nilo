@@ -45,7 +45,7 @@ struct TravelPlansView: View {
                                                 Text("\(value.from) to \(value.to)")
                                                     .bold()
                                                     .font(.headline)
-                                                    .foregroundColor(.white)
+                                                    .foregroundColor(Color("AdaptiveBackgroundColor"))
                                                     .padding(5)
                                                     .background(Color.green)
                                                     .cornerRadius(10)
@@ -56,7 +56,7 @@ struct TravelPlansView: View {
                                                         showingConfirmation = true
                                                     }) {
                                                         Image(systemName: "trash")
-                                                            .foregroundColor(.white)
+                                                            .foregroundColor(Color("AdaptiveBackgroundColor"))
                                                             .padding(5)
                                                             .background(Color.red)
                                                             .clipShape(Circle())
@@ -81,17 +81,17 @@ struct TravelPlansView: View {
                                                     if days == 0 {
                                                         if hours == 0 {
                                                             Text("Travelling in \(minutes) minutes at \(dateFormatter2.string(from:value.travelDate))")
-                                                                .foregroundColor(Color.white)
+                                                                .foregroundColor(Color("AdaptiveBackgroundColor"))
                                                         } else {
                                                             Text("Travelling in \(hours) hours and \(minutes) minutes at \(dateFormatter2.string(from:value.travelDate))")
-                                                                .foregroundColor(Color.white)
+                                                                .foregroundColor(Color("AdaptiveBackgroundColor"))
                                                         }
                                                     } else if days == 1 {
                                                         Text("Travelling tomorrow in \(hours) hours at \(dateFormatter2.string(from:value.travelDate))")
-                                                            .foregroundColor(Color.white)
+                                                            .foregroundColor(Color("AdaptiveBackgroundColor"))
                                                     } else {
                                                         Text("Travelling on \(dateFormatter.string(from: value.travelDate))")
-                                                            .foregroundColor(Color.white)
+                                                            .foregroundColor(Color("AdaptiveBackgroundColor"))
                                                     }
                                                     Spacer()
                                                 }
@@ -100,12 +100,12 @@ struct TravelPlansView: View {
                                             HStack{
                                                 Spacer()
                                                 Text("\(value.publisherName)")
-                                                    .foregroundColor(Color.white)
+                                                    .foregroundColor(Color("AdaptiveBackgroundColor"))
                                                     .background(Color.blue)
                                                     .cornerRadius(5)
                                                 Spacer()
                                                 Text("\(value.phoneNo)")
-                                                    .foregroundColor(Color.white)
+                                                    .foregroundColor(Color("AdaptiveBackgroundColor"))
                                                     .background(Color.purple)
                                                     .cornerRadius(5)
                                                 Spacer()
@@ -114,7 +114,7 @@ struct TravelPlansView: View {
                                             HStack{
                                                 Spacer()
                                                 Text(itemStates[value.id] == true ? value.message : String(value.message.prefix(50)))
-                                                    .foregroundColor(Color.white)
+                                                    .foregroundColor(Color("AdaptiveBackgroundColor"))
                                                 Spacer()
                                             }
                                             // read more button
@@ -132,7 +132,7 @@ struct TravelPlansView: View {
                                 }
                                 .frame(maxWidth: .infinity)
                                 .padding()
-                                .background(Color.black)
+                                .background(Color.accentColor)
                                 .cornerRadius(40)
                             
                             
@@ -146,7 +146,7 @@ struct TravelPlansView: View {
                                                 Text("\(value.from) to \(value.to)")
                                                     .bold()
                                                     .font(.headline)
-                                                    .foregroundColor(.white)
+                                                    .foregroundColor(Color("AdaptiveFontColor"))
                                                     .padding(5)
                                                     .background(Color.green)
                                                     .cornerRadius(10)
@@ -156,7 +156,7 @@ struct TravelPlansView: View {
                                                         showingConfirmation = true
                                                     }) {
                                                         Image(systemName: "trash")
-                                                            .foregroundColor(.white)
+                                                            .foregroundColor(Color("AdaptiveFontColor"))
                                                             .padding(5)
                                                             .background(Color.red)
                                                             .clipShape(Circle())
@@ -180,17 +180,17 @@ struct TravelPlansView: View {
                                                     if days == 0 {
                                                         if hours == 0 {
                                                             Text("Travelling in \(minutes) minutes at \(dateFormatter2.string(from:value.travelDate))")
-                                                                .foregroundColor(Color.white)
+                                                                .foregroundColor(Color("AdaptiveFontColor"))
                                                         } else {
                                                             Text("Travelling in \(hours) hours and \(minutes) minutes at \(dateFormatter2.string(from:value.travelDate))")
-                                                                .foregroundColor(Color.white)
+                                                                .foregroundColor(Color("AdaptiveFontColor"))
                                                         }
                                                     } else if days == 1 {
                                                         Text("Travelling tomorrow in \(hours) hours at \(dateFormatter2.string(from:value.travelDate))")
-                                                            .foregroundColor(Color.white)
+                                                            .foregroundColor(Color("AdaptiveFontColor"))
                                                     } else {
                                                         Text("Travelling on \(dateFormatter.string(from: value.travelDate))")
-                                                            .foregroundColor(Color.white)
+                                                            .foregroundColor(Color("AdaptiveFontColor"))
                                                     }
                                                     Spacer()
                                                 }
@@ -199,12 +199,12 @@ struct TravelPlansView: View {
                                             HStack{
                                                 Spacer()
                                                 Text("\(value.publisherName)")
-                                                    .foregroundColor(Color.white)
+                                                    .foregroundColor(Color("AdaptiveFontColor"))
                                                     .background(Color.blue)
                                                     .cornerRadius(5)
                                                 Spacer()
                                                 Text("\(value.phoneNo)")
-                                                    .foregroundColor(Color.white)
+                                                    .foregroundColor(Color("AdaptiveFontColor"))
                                                     .background(Color.purple)
                                                     .cornerRadius(5)
                                                 Spacer()
@@ -213,7 +213,7 @@ struct TravelPlansView: View {
                                             HStack{
                                                 Spacer()
                                                 Text(itemStates[value.id] == true ? value.message : String(value.message.prefix(50)))
-                                                    .foregroundColor(Color.white)
+                                                    .foregroundColor(Color("AdaptiveFontColor"))
                                                 Spacer()
                                             }
                                             // read more button
@@ -222,7 +222,7 @@ struct TravelPlansView: View {
                                                 Button(itemStates[value.id] == true ? "Read less" : "Read more") {
                                                     itemStates[value.id]?.toggle() // Toggle state variable when button is tapped
                                                 }
-                                                .foregroundColor(Color.blue)
+                                                .foregroundColor(Color("AdaptiveFontColor"))
                                                 Spacer()
                                             }
                                             
@@ -231,7 +231,7 @@ struct TravelPlansView: View {
                                 }
                                 .frame(maxWidth: .infinity)
                                 .padding()
-                                .background(Color.black)
+                                .background(Color.accentColor)
                                 .cornerRadius(40)
                             
                             
@@ -276,8 +276,6 @@ struct TravelPlansView: View {
             Image(systemName: "line.horizontal.3.decrease.circle")
         }
         .toggleStyle(.button)
-        //.disabled(!filterByDate && selectedDate == nil)
-        //.animation(.default)
         .sheet(isPresented: $filterByDate) {
             VStack {
                 DatePicker(

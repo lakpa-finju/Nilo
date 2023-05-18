@@ -19,7 +19,8 @@ struct LandingPageView: View {
         NavigationStack{
             ZStack{
                 //for Background effect
-                Color.white
+                //Color.white
+                Color("AdaptiveFontColor")
                 RoundedRectangle(cornerRadius: 30,style: .continuous)
                     .foregroundStyle(.linearGradient(colors: [.blue,.green], startPoint: .topLeading, endPoint: .bottomTrailing))
                     .frame(width: 1000, height: 1000)
@@ -35,9 +36,9 @@ struct LandingPageView: View {
                     }label: {
                         Text("Dining swipe(s)")
                             .font(.headline)
-                            .foregroundColor(.white)
+                            .foregroundColor(Color("AdaptiveFontColor"))
                             .padding()
-                            .background(Color.primary)
+                            .background(Color("AdaptiveBackgroundColor"))
                             .cornerRadius(10)
                     }
                     
@@ -49,9 +50,9 @@ struct LandingPageView: View {
                     }label: {
                         Text("Find Travel Buddies")
                             .font(.headline)
-                            .foregroundColor(.white)
+                            .foregroundColor(Color("AdaptiveFontColor"))
                             .padding()
-                            .background(Color.primary)
+                            .background(Color("AdaptiveBackgroundColor"))
                             .cornerRadius(10)
                     }
                     
@@ -63,9 +64,9 @@ struct LandingPageView: View {
                     }label: {
                         Text("Campus Events")
                             .font(.headline)
-                            .foregroundColor(.white)
+                            .foregroundColor(Color("AdaptiveFontColor"))
                             .padding()
-                            .background(Color.primary)
+                            .background(Color("AdaptiveBackgroundColor"))
                             .cornerRadius(10)
                     }
                     //Foot note
@@ -73,7 +74,7 @@ struct LandingPageView: View {
                         Spacer()
                         Text("© 2023 - created by Lakpa Sherpa")
                             .font(.footnote)
-                            .foregroundColor(.black)
+                            .foregroundColor(Color("AdaptiveFontColor"))
                             .offset(y:190)
                         Spacer()
                     }
@@ -117,7 +118,6 @@ struct LandingPageView: View {
             .onAppear{
                 profileImage = profileImagesManager.loadProfileImage(profileImageId: eventsManager.geteUserId())
             }
-            .accentColor(Color(.label))
             .navigationTitle("Home")
             
         }
