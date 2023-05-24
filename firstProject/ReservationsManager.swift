@@ -54,15 +54,21 @@ class ReservationsManager: ObservableObject{
                     
                     
                     let reservation = Reservation(id: id,eventId: eventId,reserverId: reserverId, nameOfReserver: nameOfReserver, emailOfReserver: emailOfReserver, eventOrganizerName: eventOrganizerName, eventOrganizerEmail: eventOrganizerEmail, eventTime: eventTime)
-                    self.reservations[id] = reservation
-                    self.eventIdToReservationId[eventId] = id
-                    // this will collect the respective user's reservations
-                    if (reserverId == self.geteUserId()){
-                        self.personalizedReservation[reservation.id] = reservation // this will collect the respective user's reservations
-                    }
-                    // this will collect the people reservation to the user's event
-                    if (eventId == self.geteUserId()){
-                        self.peopleReservation[id] = reservation
+                    if reservation.eventTime < Date(){
+                        self.addReservationToHistory(reservation: reservation)
+                        self.deleteReservation(reservation: reservation)
+                    }else{
+                        self.reservations[id] = reservation
+                        self.eventIdToReservationId[eventId] = id
+                        // this will collect the respective user's reservations
+                        if (reserverId == self.geteUserId()){
+                            self.personalizedReservation[reservation.id] = reservation // this will collect the respective user's reservations
+                        }
+                        // this will collect the people reservation to the user's event
+                        if (eventId == self.geteUserId()){
+                            self.peopleReservation[id] = reservation
+                        }
+                        
                     }
                     
                     
@@ -76,6 +82,19 @@ class ReservationsManager: ObservableObject{
     
     //function to add resevations to the database
     private func addReservation(reservation: Reservation){
+        let db = Firestore.firestore()
+        let ref = db.collection("Reservations").document(reservation.id)
+        ref.setData(["Id":reservation.id,"Event Id":reservation.eventId,"Reserver Id":reservation.reserverId,"Name of reserver":reservation.nameOfReserver,"Email of Reserver":reservation.emailOfReserver, "Event organizer name": reservation.eventOrganizerName,"Event organizer email":reservation.eventOrganizerEmail,"Event time":reservation.eventTime]){
+            error in
+            if let error = error{
+                print(error.localizedDescription)
+            }
+        }
+        
+    }
+    
+    //function to add resevations to the database in the history collection as the reservation passes the current date
+    private func addReservationToHistory(reservation: Reservation){
         let db = Firestore.firestore()
         let ref = db.collection("Reservations").document(reservation.id)
         ref.setData(["Id":reservation.id,"Event Id":reservation.eventId,"Reserver Id":reservation.reserverId,"Name of reserver":reservation.nameOfReserver,"Email of Reserver":reservation.emailOfReserver, "Event organizer name": reservation.eventOrganizerName,"Event organizer email":reservation.eventOrganizerEmail,"Event time":reservation.eventTime]){
