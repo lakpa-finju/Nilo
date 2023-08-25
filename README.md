@@ -1,4 +1,4 @@
-# first-swift-project ( Nilo) 
+# Nilo 
 Nilo is an IOS app build with swift, Xcode and firebase as a backend. Nilo offers a platform for students studying in Washington and Lee to 
 find travel buddies, get informed about events happenign on Campus, find dining buddies, and an opportunity to give away swipes that they
 are not using to connect with students within W&L community. 
